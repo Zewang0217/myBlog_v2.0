@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${isEdit ? '编辑文章' : '发布文章'} + ' - 我的博客'">发布文章 - 我的博客</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #7209b7;
+      --danger: #e63946;
+      --danger-dark: #d00000;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --border-radius: 12px;
+      --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .form-container {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 40px;
+      box-shadow: var(--box-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-container::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      top: 0;
+      left: 0;
+    }
+
+    .page-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: var(--dark);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-title i {
+      margin-right: 15px;
+      color: var(--primary);
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 1rem;
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+      z-index: 1;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 15px 15px 15px 45px;
+      border: 2px solid var(--light-gray);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 300px;
+      resize: vertical;
+      padding-top: 15px;
+    }
+
+    input[type="text"]:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+    }
+
+    .char-count {
+      text-align: right;
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 5px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      box-shadow: 0 4px 15px rgba(114, 9, 183, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: #650a9e;
+      box-shadow: 0 6px 20px rgba(114, 9, 183, 0.4);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: var(--danger-dark);
+      box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gray);
+      border: 2px solid var(--light-gray);
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: var(--light-gray);
+      color: var(--dark);
+      transform: translateY(-2px);
+    }
+
+    .btn i {
+      margin-right: 8px;
+    }
+
+    .message {
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+
+    .error {
+      background-color: #ffe6e6;
+      color: var(--danger);
+      border-left: 4px solid var(--danger);
+    }
+
+    .success {
+      background-color: #e6f7e6;
+      color: #28a745;
+      border-left: 4px solid #28a745;
+    }
+
+    .delete-confirm {
+      display: none;
+      background: #fff3f3;
+      border: 1px solid #ffcdd2;
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    .delete-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .form-container {
+        padding: 25px;
+      }
+
+      .page-title {
+        font-size: 1.8rem;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="form-container">
+    <h1 class="page-title">
+      <i class="fas fa-edit"></i>
+      <span th:text="${isEdit ? '编辑文章' : '发布新文章'}">发布新文章</span>
+    </h1>
+
+    <!-- 错误消息 -->
+    <div th:if="${error}" class="message error">
+      <i class="fas fa-exclamation-circle"></i>
+      <span th:text="${error}">错误消息</span>
+    </div>
+
+    <!-- 成功消息 -->
+    <div th:if="${success}" class="message success">
+      <i class="fas fa-check-circle"></i>
+      <span th:text="${success}">成功消息</span>
+    </div>
+
+    <!-- 文章表单 -->
+    <form th:action="@{${isEdit ? '/article/edit/' + articleId : '/article/new'}}"
+          th:object="${article}"
+          method="post">
+      <div class="form-group">
+        <label for="title">文章标题</label>
+        <div class="input-with-icon">
+          <i class="fas fa-heading input-icon"></i>
+          <input type="text" id="title" th:field="*{title}" placeholder="请输入吸引人的标题">
+        </div>
+        <div class="char-count">
+          <span id="titleCount">0</span>/100
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="author">作者名称</label>
+        <div class="input-with-icon">
+          <i class="fas fa-user input-icon"></i>
+          <input type="text" id="author" th:field="*{author}" placeholder="请输入您的姓名">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="content">文章内容</label>
+        <div class="input-with-icon">
+          <i class="fas fa-align-left input-icon"></i>
+          <textarea id="content" th:field="*{content}" placeholder="请开始撰写您的文章..."></textarea>
+        </div>
+        <div class="char-count">
+          <span id="contentCount">0</span>/5000
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn">
+          <i class="fas fa-paper-plane"></i>
+          <span th:text="${isEdit ? '更新文章' : '发布文章'}">发布文章</span>
+        </button>
+        <a href="/article/list" class="btn btn-outline">
+          <i class="fas fa-times"></i> 取消
+        </a>
+
+        <!-- 编辑模式下的删除按钮 -->
+        <div th:if="${isEdit}">
+          <form th:action="@{'/article/delete/' + ${articleId}}" method="post" style="display: inline;">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('确定要删除这篇文章吗？此操作不可撤销。')">
+              <i class="fas fa-trash"></i> 删除文章
+            </button>
+          </form>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 字符计数
+    const titleInput = document.getElementById('title');
+    const contentInput = document.getElementById('content');
+    const titleCount = document.getElementById('titleCount');
+    const contentCount = document.getElementById('contentCount');
+
+    function updateCount() {
+      if (titleInput && titleCount) {
+        titleCount.textContent = titleInput.value.length;
+      }
+      if (contentInput && contentCount) {
+        contentCount.textContent = contentInput.value.length;
+      }
+    }
+
+    if (titleInput) {
+      titleInput.addEventListener('input', updateCount);
+    }
+    if (contentInput) {
+      contentInput.addEventListener('input', updateCount);
+    }
+    updateCount();
+
+    // 按钮点击效果
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        // 避免删除确认对话框被干扰
+        if (!this.classList.contains('btn-danger') || confirm(this.getAttribute('data-confirm') || '确定要执行此操作吗？')) {
+          this.style.transform = 'scale(0.98)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 150);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

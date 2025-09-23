@@ -1,0 +1,17 @@
+spring:
+  application:
+    name:myBlog
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
+    username: blog_user
+    password: Blog123!@#
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  thymeleaf:
+    cache: false # 开发时关闭缓存，方便修改
+    mode: HTML
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration: # 配置mybatis
+    map-underscore-to-camel-case: true # 下划线转驼峰

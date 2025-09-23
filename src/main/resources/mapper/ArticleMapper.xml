@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.Zewang.myBlog.dao.ArticleMapper">
+
+  <resultMap id="ArticleResultMap" type="org.Zewang.myBlog.model.Article">
+    <id property="id" column="id"/>
+    <result property="title" column="title"/>
+    <result property="content" column="content"/>
+    <result property="author" column="author"/>
+    <result property="createdAt" column="created_at"/>
+    <result property="updatedAt" column="updated_at"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="ArticleResultMap">
+    SELECT id, title, content, author, created_at, updated_at
+    FROM article
+    ORDER BY created_at DESC
+  </select>
+
+  <select id="findById" resultMap="ArticleResultMap">
+    SELECT id, title, content, author, created_at, updated_at
+    FROM article
+    WHERE id = #{id}
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO article (title, content, author, created_at, updated_at)
+    VALUES (#{title}, #{content}, #{author}, NOW(), NOW())
+  </insert>
+
+  <update id="update">
+    UPDATE article
+    SET title = #{title}, content = #{content}, author = #{author}, updated_at = NOW()
+    WHERE id = #{id}
+  </update>
+
+  <delete id="deleteById">
+    DELETE FROM article WHERE id = #{id}
+  </delete>
+
+</mapper>
