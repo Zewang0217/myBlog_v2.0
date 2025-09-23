@@ -1,0 +1,17 @@
+// blog-frontend/src/types/api.ts
+// 项目中使用的全局类型定义
+
+// API 响应的基本结构
+export interface ApiResponse<T> {
+  code: number
+  message: string
+  data: T
+}
+
+// 分页响应结构
+export interface PageResponse<T> {
+  content: T[]
+  totalElements: number
+  totalPages: number
+  currentPage: number
+}

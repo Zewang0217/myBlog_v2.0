@@ -1,8 +1,9 @@
 package org.Zewang.myBlog.controller;
 
-import org.springframework.stereotype.Controller;
+import org.Zewang.myBlog.common.ApiResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
@@ -13,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2025/09/21 21:56
  */
 
-@Controller // 表示这个类是一个控制器
-@RequestMapping("/") // 表示这个控制器处理的请求路径，所有以/开头的请求都会由它处理
+@RestController
+@RequestMapping("/")
 public class HomeController {
-    @GetMapping // 表示这个方法处理GET请求
+    @GetMapping
     public String index() {
-        return "index"; // 返回模板名字，对应 templates/index.html
+        return "欢迎访问我的博客API服务！请使用前端应用来访问博客功能。";
+    }
+
+    @GetMapping("/test")
+    public ApiResponse<String> test() {
+        return ApiResponse.success("后端服务正常运行");
     }
 
 }

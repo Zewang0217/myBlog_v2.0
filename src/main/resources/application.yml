@@ -2,16 +2,35 @@ spring:
   application:
     name:myBlog
   datasource:
-    url: jdbc:mysql://localhost:3306/blog?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/blog_v2?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
     username: blog_user
     password: Blog123!@#
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-  thymeleaf:
-    cache: false # 开发时关闭缓存，方便修改
-    mode: HTML
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration: # 配置mybatis
     map-underscore-to-camel-case: true # 下划线转驼峰
+
+logging:
+  level:
+    root: INFO
+    org.Zewang.myBlog: DEBUG
+    org.springframework: WARN
+    org.mybatis: DEBUG
+  file:
+    name: logs/application.log # 日志文件路径
+    max-size: 10MB # 日志文件大小
+    max-history: 10
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Jackson配置
+spring.jackson:
+  serialization:
+    write-dates-as-timestamps: false
+  deserialization:
+    fail-on-unknown-properties: false
+  default-property-inclusion: non_null

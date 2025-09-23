@@ -1,18 +1,22 @@
 package org.Zewang.myBlog.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+@Schema(description = "创建或更新文章的数据传输对象")
 public record CreateArticleDTO(
     @NotBlank(message = "标题不能为空")
-    @Size(max = 100, message = "标题长度不能超过100个字符")
+    @Size(max = 200, message = "标题长度不能超过200个字符")
+    @Schema(description = "文章标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "我的第一篇文章")
     String title,
 
     @NotBlank(message = "内容不能为空")
-    @Size(max = 5000, message = "内容长度不能超过5000个字符")
+    @Schema(description = "文章内容", requiredMode = Schema.RequiredMode.REQUIRED)
     String content,
 
     @NotBlank(message = "作者不能为空")
     @Size(max = 50, message = "作者名长度不能超过50个字符")
+    @Schema(description = "作者", example = "Zewang")
     String author
-) { }
+) {}
