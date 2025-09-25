@@ -31,6 +31,8 @@
 
       <div class="article-actions">
         <button @click="goBack" class="back-btn">返回列表</button>
+        <button @click="editArticle" class="edit-btn">编辑文章</button>
+        <button @click="deleteArticle" class="delete-btn">删除文章</button>
       </div>
     </div>
 
@@ -58,6 +60,26 @@ const formatDate = (dateString: string) => {
 // 返回文章列表
 const goBack = () => {
   router.push('/articles')
+}
+
+// 编辑文章
+const editArticle = () => {
+  if (article.value) {
+    router.push(`/article/edit/${article.value.id}`)
+  }
+}
+
+// 删除文章
+const deleteArticle = async () => {
+  if (article.value && confirm('确定要删除这篇文章吗？此操作不可恢复！')) {
+    const result = await deleteArticleById(article.value.id)
+    if (result.success) {
+      alert('文章删除成功')
+      router.push('/articles')
+    } else {
+      alert(`删除失败: ${result.error}`)
+    }
+  }
 }
 
 // 组件挂载时获取文章详情
@@ -123,14 +145,22 @@ onMounted(() => {
 .article-actions {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
 }
 
-.back-btn {
+.back-btn, .edit-btn {
   padding: 8px 16px;
-  background-color: #666;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.back-btn {
+  background-color: #666;
+}
+
+.edit-btn {
+  background-color: #42b983;
 }
 </style>

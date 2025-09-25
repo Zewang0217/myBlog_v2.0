@@ -37,4 +37,8 @@ public interface ArticleService {
      */
     void deleteArticle(Long id);
 
+    /**
+     * 发布文章
+     */
+    Article publishArticle(Long id);
 }

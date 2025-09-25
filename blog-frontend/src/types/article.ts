@@ -12,4 +12,11 @@ export interface CreateArticleDTO {
   title: string
   content: string
   author: string
+  status?: number
+}
+
+export enum ArticleStatus {
+  DRAFT = 0,
+  PUBLISHED = 1,
+  OFFLINE = 2
 }

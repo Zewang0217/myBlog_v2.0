@@ -3,6 +3,7 @@ package org.Zewang.myBlog.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.Zewang.myBlog.model.enums.ArticleStatus;
 
 @Schema(description = "创建或更新文章的数据传输对象")
 public record CreateArticleDTO(
@@ -18,5 +19,8 @@ public record CreateArticleDTO(
     @NotBlank(message = "作者不能为空")
     @Size(max = 50, message = "作者名长度不能超过50个字符")
     @Schema(description = "作者", example = "Zewang")
-    String author
+    String author,
+
+    @Schema(description = "文章状态")
+    ArticleStatus status
 ) {}

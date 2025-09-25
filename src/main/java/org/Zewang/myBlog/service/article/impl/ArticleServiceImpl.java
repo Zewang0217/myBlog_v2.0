@@ -76,6 +76,10 @@ public class ArticleServiceImpl implements ArticleService {
             throw new BusinessException("文章标题已存在");
         }
 
+        if (dto == null) {// 参数校验
+            throw new IllegalArgumentException("文章信息不能为空");
+      }
+
         try {
             // 构建文章对象
             Article article = new Article()
@@ -84,7 +88,7 @@ public class ArticleServiceImpl implements ArticleService {
                 .setAuthor(dto.author())
                 .setCreateTime(LocalDateTime.now())
                 .setUpdateTime(LocalDateTime.now())
-                .setStatus(ArticleStatus.DRAFT);  // 默认草稿状态
+                .setStatus(dto.status() != null ? dto.status() : ArticleStatus.DRAFT);  // 默认草稿状态
 
             // 保存文章
             int result = articleMapper.insert(article);
@@ -116,6 +120,7 @@ public class ArticleServiceImpl implements ArticleService {
         try {
             // 检查文章是否存在
             Article existingArticle = articleMapper.findById(id);
+
             if (existingArticle == null) {
                 log.warn("更新失败，文章不存在, ID: {}", id);
                 throw new BusinessException("文章不存在或已被删除");
@@ -147,6 +152,44 @@ public class ArticleServiceImpl implements ArticleService {
         } catch (Exception e) {
             log.error("更新文章失败, ID: " + id, e);
             throw new BusinessException("更新文章失败: " + e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Article publishArticle(Long id) {
+        log.info("发布文章，ID：{}", id);
+
+        // 参数校验
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("无效的文章ID");
+        }
+
+        try {
+            // 检查文章是否存在
+            Article existingArticle = articleMapper.findById(id);
+            if (existingArticle == null) {
+                log.warn("发布失败，文章不存在, ID: {}", id);
+                throw new BusinessException("文章不存在或已被删除");
+            }
+
+            // 更新文章状态
+            existingArticle.setStatus(ArticleStatus.PUBLISHED)
+                .setUpdateTime(LocalDateTime.now());
+
+            // 更新
+            int result = articleMapper.update(existingArticle);
+            if (result <= 0) {
+                throw new BusinessException("发布文章失败");
+            }
+
+            log.info("发布文章成功，ID：{}");
+            return existingArticle;
+        } catch (BusinessException e) {
+            throw e;
+        } catch (Exception e) {
+            log.error("发布文章失败, ID: " + id, e);
+            throw new BusinessException("发布文章失败: " + e.getMessage());
         }
     }
 

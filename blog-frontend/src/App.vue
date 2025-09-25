@@ -11,17 +11,29 @@ import { RouterLink, RouterView } from 'vue-router'
           <h1 class="app-title">
             <RouterLink to="/articles" class="title-link">我的博客</RouterLink>
           </h1>
-          <nav class="main-nav">
-            <RouterLink to="/articles" class="nav-link">文章列表</RouterLink>
-          </nav>
         </div>
       </div>
     </header>
 
     <!-- 主要内容区域 -->
-    <main class="app-main">
-      <RouterView />
-    </main>
+    <div class="app-main-container">
+      <!-- 左侧导航栏 -->
+      <nav class="side-nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <RouterLink to="/articles" class="nav-link" active-class="active">文章列表</RouterLink>
+          </li>
+          <li class="nav-item">
+            <RouterLink to="/articles/drafts" class="nav-link" active-class="active">草稿箱</RouterLink>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- 主内容区 -->
+      <main class="app-main">
+        <RouterView />
+      </main>
+    </div>
 
     <!-- 底部信息 -->
     <footer class="app-footer">
@@ -75,29 +87,52 @@ import { RouterLink, RouterView } from 'vue-router'
   color: var(--primary-color);
 }
 
-.main-nav {
+/* 主容器布局 */
+.app-main-container {
   display: flex;
-  gap: var(--spacing-medium);
+  flex: 1;
+}
+
+/* 左侧导航栏 */
+.side-nav {
+  width: 200px;
+  background-color: var(--background-color-base);
+  padding: 20px 0;
+  border-right: 1px solid var(--border-color-light);
+  min-height: calc(100vh - 60px - 56px); /* 减去头部和底部高度 */
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin-bottom: 5px;
 }
 
 .nav-link {
+  display: block;
+  padding: 12px 20px;
   color: var(--text-color-regular);
   text-decoration: none;
   font-weight: 500;
-  padding: var(--spacing-small) var(--spacing-base);
-  border-radius: var(--border-radius-base);
   transition: all 0.3s;
+  border-left: 3px solid transparent;
 }
 
 .nav-link:hover,
-.nav-link.router-link-exact-active {
+.nav-link.active {
   color: var(--primary-color);
-  background-color: var(--background-color-base);
+  background-color: var(--background-color-white);
+  border-left-color: var(--primary-color);
 }
 
+/* 主内容区 */
 .app-main {
   flex: 1;
-  padding: var(--spacing-large) 0;
+  padding: var(--spacing-large);
 }
 
 .app-footer {
@@ -127,17 +162,40 @@ import { RouterLink, RouterView } from 'vue-router'
     font-size: var(--font-size-base);
   }
 
-  .main-nav {
-    gap: var(--spacing-small);
+  .app-main-container {
+    flex-direction: column;
+  }
+
+  .side-nav {
+    width: 100%;
+    min-height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color-light);
+  }
+
+  .nav-list {
+    display: flex;
+  }
+
+  .nav-item {
+    flex: 1;
+    margin-bottom: 0;
   }
 
   .nav-link {
-    padding: var(--spacing-small);
-    font-size: var(--font-size-small);
+    text-align: center;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    border-left: none;
+    border-bottom-color: var(--primary-color);
   }
 
   .app-main {
-    padding: var(--spacing-medium) 0;
+    padding: var(--spacing-medium);
   }
 }
 </style>

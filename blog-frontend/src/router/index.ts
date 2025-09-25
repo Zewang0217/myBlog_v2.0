@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const BlogArticles = () => import('../views/BlogArticles.vue')
 const BlogArticleDetail = () => import('../views/BlogArticleDetail.vue')
 const BlogArticleCreate = () => import('../views/BlogArticleCreate.vue')
+const BlogArticleDrafts = () => import('../views/BlogArticleDrafts.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,12 @@ const router = createRouter({
       name: 'articles',
       component: BlogArticles
     },
+    // 草稿箱页面
+    {
+      path: '/articles/drafts',
+      name: 'drafts',
+      component: BlogArticleDrafts
+    },
     // 博客文章详情页面
     {
       path: '/article/:id',
@@ -31,6 +38,13 @@ const router = createRouter({
       path: '/article/create',
       name: 'article-create',
       component: BlogArticleCreate
+    },
+    // 编辑文章页面
+    {
+      path: '/article/edit/:id',
+      name: 'article-edit',
+      component: BlogArticleCreate,
+      props: true
     }
   ]
 })

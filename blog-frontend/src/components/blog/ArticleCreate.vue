@@ -40,12 +40,31 @@
         ></textarea>
       </div>
 
+      <div class="form-group">
+        <label>
+          <input
+            type="radio"
+            v-model="form.status"
+            :value="ArticleStatus.DRAFT"
+            :disabled="loading"
+          /> 保存为草稿
+        </label>
+        <label>
+          <input
+            type="radio"
+            v-model="form.status"
+            :value="ArticleStatus.PUBLISHED"
+            :disabled="loading"
+          /> 直接发布
+        </label>
+      </div>
+
       <div class="form-actions">
         <button type="button" @click="goBack" :disabled="loading" class="btn-secondary">
           取消
         </button>
         <button type="submit" :disabled="loading" class="btn-primary">
-          {{ loading ? '创建中...' : '创建文章' }}
+          {{ loading ? '处理中...' : '保存文章' }}
         </button>
       </div>
 
@@ -58,7 +77,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { useArticle } from '@/composables/useArticles'
+import { useArticle, ArticleStatus } from '@/composables/useArticles'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -68,14 +87,19 @@ const { loading, error, create } = useArticle()
 const form = reactive({
   title: '',
   content: '',
-  author: ''
+  author: '',
+  status: ArticleStatus.DRAFT
 })
 
 // 提交表单
 const handleSubmit = async () => {
   const result = await create(form)
   if (result.success) {
-    alert('文章创建成功!')
+    if (form.status === ArticleStatus.PUBLISHED) {
+      alert('文章已成功发布!')
+    } else {
+      alert('文章已保存为草稿!')
+    }
     router.push('/articles')
   }
 }

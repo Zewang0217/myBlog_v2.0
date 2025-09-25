@@ -3,10 +3,12 @@ package org.Zewang.myBlog.controller.admin;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.Zewang.myBlog.common.ApiResponse;
 import org.Zewang.myBlog.dto.CreateArticleDTO;
 import org.Zewang.myBlog.model.Article;
+import org.Zewang.myBlog.model.enums.ArticleStatus;
 import org.Zewang.myBlog.service.article.ArticleService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +53,29 @@ public class ArticleController {
     }
 
     /**
+     * 显示已发布的文章列表
+     */
+    @GetMapping("/published")
+    public ApiResponse<List<Article>> publishedList() {
+        List<Article> articles = articleService.getAllArticles().stream()
+            .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
+            .collect(Collectors.toList());
+        return ApiResponse.success(articles);
+    }
+
+
+    /**
+     * 显示草稿列表
+     */
+    @GetMapping("/drafts")
+    public ApiResponse<List<Article>> draftList() {
+        List<Article> articles = articleService.getAllArticles().stream()
+            .filter(article -> article.getStatus() == ArticleStatus.DRAFT)
+            .collect(Collectors.toList());
+        return ApiResponse.success(articles);
+    }
+
+    /**
      *  参数： @PathVariable("id")：从 URL 中提取 {id} 的值
      */
 
@@ -67,11 +92,24 @@ public class ArticleController {
      * @param dto 创建文章的参数
      * @return 创建的文章
      */
-
     @PostMapping("/new")
     public ApiResponse<Article> createArticle(
         @Valid @RequestBody CreateArticleDTO dto) {
         Article article = articleService.createArticle(dto);
+        return ApiResponse.success(article);
+    }
+
+    /**
+     * 发布文章
+     * @param id 文章的ID
+     * @return 发布的文章
+     */
+    @PostMapping("/{id}/publish")
+    public ApiResponse<Article> publishArticle(@PathVariable("id") Long id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("无效的文章ID：" + id);
+        }
+        Article article = articleService.publishArticle(id);
         return ApiResponse.success(article);
     }
 
