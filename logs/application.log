@@ -824,3 +824,306 @@
 2025-09-25 21:17:25.513 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@957ad5c]
 2025-09-25 21:17:25.513 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@957ad5c]
 2025-09-25 21:17:25.513 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@957ad5c]
+2025-09-25 21:32:10.301 [http-nio-8080-exec-6] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:32:10.302 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:32:10.302 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b8fb224]
+2025-09-25 21:32:10.302 [http-nio-8080-exec-6] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1153635541 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:32:10.302 [http-nio-8080-exec-6] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:32:10.303 [http-nio-8080-exec-6] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:32:10.306 [http-nio-8080-exec-6] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 9
+2025-09-25 21:32:10.306 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b8fb224]
+2025-09-25 21:32:10.306 [http-nio-8080-exec-6] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 9 篇文章
+2025-09-25 21:32:10.306 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b8fb224]
+2025-09-25 21:32:10.306 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b8fb224]
+2025-09-25 21:32:10.306 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b8fb224]
+2025-09-25 21:33:09.030 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 创建文章, 标题: 实时预览测试
+2025-09-25 21:33:09.030 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:33:09.030 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1843516d]
+2025-09-25 21:33:09.030 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@327562255 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:33:09.030 [http-nio-8080-exec-7] DEBUG o.Z.m.d.ArticleMapper.existsByTitle - ==>  Preparing: SELECT COUNT(1) > 0 FROM article WHERE title = ?
+2025-09-25 21:33:09.031 [http-nio-8080-exec-7] DEBUG o.Z.m.d.ArticleMapper.existsByTitle - ==> Parameters: 实时预览测试(String)
+2025-09-25 21:33:09.032 [http-nio-8080-exec-7] DEBUG o.Z.m.d.ArticleMapper.existsByTitle - <==      Total: 1
+2025-09-25 21:33:09.033 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1843516d]
+2025-09-25 21:33:09.033 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1843516d] from current transaction
+2025-09-25 21:33:09.033 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.insert - ==>  Preparing: INSERT INTO article (title, content, author, create_time, update_time, status) VALUES (?, ?, ?, ?, ?, ?)
+2025-09-25 21:33:09.034 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.insert - ==> Parameters: 实时预览测试(String), 真的假的
+## 实时预览？
+> 震惊长安第一拳(String), Zewang(String), 2025-09-25T21:33:09.033067800(LocalDateTime), 2025-09-25T21:33:09.033067800(LocalDateTime), 1(Integer)
+2025-09-25 21:33:09.035 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.insert - <==    Updates: 1
+2025-09-25 21:33:09.036 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1843516d]
+2025-09-25 21:33:09.036 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 文章创建成功, ID: 10
+2025-09-25 21:33:09.036 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1843516d]
+2025-09-25 21:33:09.036 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1843516d]
+2025-09-25 21:33:09.036 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1843516d]
+2025-09-25 21:33:10.542 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:33:10.543 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:33:10.543 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@69145119]
+2025-09-25 21:33:10.543 [http-nio-8080-exec-5] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1214589406 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:33:10.543 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:33:10.544 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:33:10.546 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:33:10.547 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@69145119]
+2025-09-25 21:33:10.547 [http-nio-8080-exec-5] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:33:10.547 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@69145119]
+2025-09-25 21:33:10.547 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@69145119]
+2025-09-25 21:33:10.547 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@69145119]
+2025-09-25 21:35:23.502 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:35:23.503 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:35:23.503 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7adbdf70]
+2025-09-25 21:35:23.503 [http-nio-8080-exec-2] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1447066211 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:35:23.503 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:35:23.503 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:35:23.504 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:35:23.504 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7adbdf70]
+2025-09-25 21:35:23.504 [http-nio-8080-exec-2] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:35:23.504 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7adbdf70]
+2025-09-25 21:35:23.504 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7adbdf70]
+2025-09-25 21:35:23.504 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7adbdf70]
+2025-09-25 21:35:28.279 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-25 21:35:28.279 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:35:28.279 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2471c057]
+2025-09-25 21:35:28.279 [http-nio-8080-exec-3] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1020061177 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:35:28.280 [http-nio-8080-exec-3] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-25 21:35:28.282 [http-nio-8080-exec-3] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-25 21:35:28.284 [http-nio-8080-exec-3] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-25 21:35:28.284 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2471c057]
+2025-09-25 21:35:28.284 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2471c057]
+2025-09-25 21:35:28.284 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2471c057]
+2025-09-25 21:35:28.284 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2471c057]
+2025-09-25 21:35:30.541 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:35:30.541 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:35:30.541 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2520df96]
+2025-09-25 21:35:30.541 [http-nio-8080-exec-8] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1399014180 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:35:30.541 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:35:30.542 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:35:30.545 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:35:30.545 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2520df96]
+2025-09-25 21:35:30.545 [http-nio-8080-exec-8] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:35:30.545 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2520df96]
+2025-09-25 21:35:30.545 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2520df96]
+2025-09-25 21:35:30.545 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2520df96]
+2025-09-25 21:35:32.419 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:35:32.420 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:35:32.420 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29c4b51]
+2025-09-25 21:35:32.420 [http-nio-8080-exec-9] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@330228766 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:35:32.420 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:35:32.420 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:35:32.421 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:35:32.422 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29c4b51]
+2025-09-25 21:35:32.422 [http-nio-8080-exec-9] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:35:32.422 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29c4b51]
+2025-09-25 21:35:32.422 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29c4b51]
+2025-09-25 21:35:32.422 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29c4b51]
+2025-09-25 21:35:34.154 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:35:34.154 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:35:34.154 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e88e024]
+2025-09-25 21:35:34.154 [http-nio-8080-exec-10] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1087729374 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:35:34.154 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:35:34.155 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:35:34.156 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:35:34.156 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e88e024]
+2025-09-25 21:35:34.156 [http-nio-8080-exec-10] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:35:34.156 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e88e024]
+2025-09-25 21:35:34.157 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e88e024]
+2025-09-25 21:35:34.157 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e88e024]
+2025-09-25 21:36:17.210 [http-nio-8080-exec-1] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-25 21:36:17.211 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:36:17.211 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49b96606]
+2025-09-25 21:36:17.211 [http-nio-8080-exec-1] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1738186792 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:36:17.211 [http-nio-8080-exec-1] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-25 21:36:17.211 [http-nio-8080-exec-1] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-25 21:36:17.212 [http-nio-8080-exec-1] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-25 21:36:17.212 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49b96606]
+2025-09-25 21:36:17.212 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49b96606]
+2025-09-25 21:36:17.212 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49b96606]
+2025-09-25 21:36:17.212 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@49b96606]
+2025-09-25 21:36:18.420 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-25 21:36:18.420 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:36:18.420 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b062eb0]
+2025-09-25 21:36:18.420 [http-nio-8080-exec-4] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1862262312 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:36:18.420 [http-nio-8080-exec-4] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-25 21:36:18.421 [http-nio-8080-exec-4] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-25 21:36:18.422 [http-nio-8080-exec-4] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-25 21:36:18.422 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b062eb0]
+2025-09-25 21:36:18.422 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b062eb0]
+2025-09-25 21:36:18.422 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b062eb0]
+2025-09-25 21:36:18.422 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b062eb0]
+2025-09-25 21:36:22.052 [http-nio-8080-exec-6] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-25 21:36:22.052 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:36:22.052 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b866c09]
+2025-09-25 21:36:22.052 [http-nio-8080-exec-6] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1566132253 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:36:22.052 [http-nio-8080-exec-6] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-25 21:36:22.053 [http-nio-8080-exec-6] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-25 21:36:22.055 [http-nio-8080-exec-6] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-25 21:36:22.056 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b866c09]
+2025-09-25 21:36:22.056 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b866c09]
+2025-09-25 21:36:22.056 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b866c09]
+2025-09-25 21:36:22.056 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b866c09]
+2025-09-25 21:36:22.829 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:36:22.829 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:36:22.829 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1262ebdb]
+2025-09-25 21:36:22.830 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1206126788 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:36:22.830 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:36:22.830 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:36:22.834 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:36:22.834 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1262ebdb]
+2025-09-25 21:36:22.834 [http-nio-8080-exec-7] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:36:22.834 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1262ebdb]
+2025-09-25 21:36:22.834 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1262ebdb]
+2025-09-25 21:36:22.834 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1262ebdb]
+2025-09-25 21:37:57.121 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:37:57.121 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:37:57.121 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4dab0ff2]
+2025-09-25 21:37:57.121 [http-nio-8080-exec-5] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1845146575 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:37:57.121 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:37:57.122 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:37:57.123 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:37:57.123 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4dab0ff2]
+2025-09-25 21:37:57.123 [http-nio-8080-exec-5] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:37:57.123 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4dab0ff2]
+2025-09-25 21:37:57.123 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4dab0ff2]
+2025-09-25 21:37:57.123 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4dab0ff2]
+2025-09-25 21:38:23.853 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:38:23.853 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:38:23.853 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31a3fc1]
+2025-09-25 21:38:23.853 [http-nio-8080-exec-2] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@444686580 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:38:23.853 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:38:23.853 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:38:23.855 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:38:23.856 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31a3fc1]
+2025-09-25 21:38:23.856 [http-nio-8080-exec-2] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:38:23.856 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31a3fc1]
+2025-09-25 21:38:23.856 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31a3fc1]
+2025-09-25 21:38:23.856 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@31a3fc1]
+2025-09-25 21:38:25.030 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:38:25.030 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:38:25.030 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36175c96]
+2025-09-25 21:38:25.030 [http-nio-8080-exec-3] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@733669706 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:38:25.030 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:38:25.032 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:38:25.033 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:38:25.034 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36175c96]
+2025-09-25 21:38:25.034 [http-nio-8080-exec-3] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:38:25.034 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36175c96]
+2025-09-25 21:38:25.034 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36175c96]
+2025-09-25 21:38:25.034 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@36175c96]
+2025-09-25 21:39:06.215 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:39:06.215 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:39:06.215 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@28d264f8]
+2025-09-25 21:39:06.215 [http-nio-8080-exec-8] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@505668778 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:39:06.215 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:39:06.216 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:39:06.218 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:39:06.218 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@28d264f8]
+2025-09-25 21:39:06.218 [http-nio-8080-exec-8] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:39:06.219 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@28d264f8]
+2025-09-25 21:39:06.219 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@28d264f8]
+2025-09-25 21:39:06.219 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@28d264f8]
+2025-09-25 21:39:07.364 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:39:07.364 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:39:07.364 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b72ffc]
+2025-09-25 21:39:07.364 [http-nio-8080-exec-9] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1502564679 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:39:07.364 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:39:07.364 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:39:07.366 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:39:07.366 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b72ffc]
+2025-09-25 21:39:07.366 [http-nio-8080-exec-9] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:39:07.366 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b72ffc]
+2025-09-25 21:39:07.366 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b72ffc]
+2025-09-25 21:39:07.366 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b72ffc]
+2025-09-25 21:41:13.696 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:41:13.696 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:41:13.696 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@158bd6bc]
+2025-09-25 21:41:13.697 [http-nio-8080-exec-10] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1828250677 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:41:13.697 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:41:13.697 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:41:13.699 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:41:13.699 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@158bd6bc]
+2025-09-25 21:41:13.699 [http-nio-8080-exec-10] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:41:13.699 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@158bd6bc]
+2025-09-25 21:41:13.699 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@158bd6bc]
+2025-09-25 21:41:13.699 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@158bd6bc]
+2025-09-25 21:41:24.630 [http-nio-8080-exec-1] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:41:24.630 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:41:24.630 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39691fd5]
+2025-09-25 21:41:24.630 [http-nio-8080-exec-1] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@787505239 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:41:24.631 [http-nio-8080-exec-1] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:41:24.631 [http-nio-8080-exec-1] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:41:24.632 [http-nio-8080-exec-1] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:41:24.633 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39691fd5]
+2025-09-25 21:41:24.633 [http-nio-8080-exec-1] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:41:24.633 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39691fd5]
+2025-09-25 21:41:24.633 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39691fd5]
+2025-09-25 21:41:24.633 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39691fd5]
+2025-09-25 21:41:25.232 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 21:41:25.232 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 21:41:25.232 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1126879d]
+2025-09-25 21:41:25.232 [http-nio-8080-exec-4] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@174409295 wrapping com.mysql.cj.jdbc.ConnectionImpl@615efd1c] will be managed by Spring
+2025-09-25 21:41:25.232 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 21:41:25.234 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 21:41:25.236 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 21:41:25.236 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1126879d]
+2025-09-25 21:41:25.237 [http-nio-8080-exec-4] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 21:41:25.237 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1126879d]
+2025-09-25 21:41:25.237 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1126879d]
+2025-09-25 21:41:25.237 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1126879d]
+2025-09-25 22:12:42.851 [http-nio-8080-exec-6] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-25 22:12:42.852 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 22:12:42.852 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66dbf8cd]
+2025-09-25 22:12:42.852 [http-nio-8080-exec-6] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1056318242 wrapping com.mysql.cj.jdbc.ConnectionImpl@10d3fc87] will be managed by Spring
+2025-09-25 22:12:42.852 [http-nio-8080-exec-6] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-25 22:12:42.853 [http-nio-8080-exec-6] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-25 22:12:42.854 [http-nio-8080-exec-6] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-25 22:12:42.855 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66dbf8cd]
+2025-09-25 22:12:42.855 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66dbf8cd]
+2025-09-25 22:12:42.855 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66dbf8cd]
+2025-09-25 22:12:42.855 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66dbf8cd]
+2025-09-25 22:12:44.206 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-25 22:12:44.206 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 22:12:44.206 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4603fa84]
+2025-09-25 22:12:44.206 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@961101459 wrapping com.mysql.cj.jdbc.ConnectionImpl@10d3fc87] will be managed by Spring
+2025-09-25 22:12:44.206 [http-nio-8080-exec-7] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-25 22:12:44.206 [http-nio-8080-exec-7] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-25 22:12:44.207 [http-nio-8080-exec-7] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-25 22:12:44.208 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4603fa84]
+2025-09-25 22:12:44.208 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4603fa84]
+2025-09-25 22:12:44.208 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4603fa84]
+2025-09-25 22:12:44.208 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4603fa84]
+2025-09-25 22:12:53.192 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-25 22:12:53.192 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 22:12:53.192 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e74afb4]
+2025-09-25 22:12:53.192 [http-nio-8080-exec-5] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@680792857 wrapping com.mysql.cj.jdbc.ConnectionImpl@10d3fc87] will be managed by Spring
+2025-09-25 22:12:53.193 [http-nio-8080-exec-5] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-25 22:12:53.193 [http-nio-8080-exec-5] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-25 22:12:53.195 [http-nio-8080-exec-5] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-25 22:12:53.195 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e74afb4]
+2025-09-25 22:12:53.195 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e74afb4]
+2025-09-25 22:12:53.195 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e74afb4]
+2025-09-25 22:12:53.195 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e74afb4]
+2025-09-25 22:12:54.191 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 22:12:54.191 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 22:12:54.191 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47d50ab4]
+2025-09-25 22:12:54.191 [http-nio-8080-exec-2] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@309569376 wrapping com.mysql.cj.jdbc.ConnectionImpl@10d3fc87] will be managed by Spring
+2025-09-25 22:12:54.191 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 22:12:54.191 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 22:12:54.193 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 22:12:54.193 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47d50ab4]
+2025-09-25 22:12:54.193 [http-nio-8080-exec-2] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 22:12:54.193 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47d50ab4]
+2025-09-25 22:12:54.193 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47d50ab4]
+2025-09-25 22:12:54.193 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47d50ab4]
+2025-09-25 22:46:14.495 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-25 22:46:14.496 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-25 22:46:14.496 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2a82a7d1]
+2025-09-25 22:46:14.496 [http-nio-8080-exec-3] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1701048726 wrapping com.mysql.cj.jdbc.ConnectionImpl@2e367fd2] will be managed by Spring
+2025-09-25 22:46:14.496 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-25 22:46:14.497 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-25 22:46:14.499 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-25 22:46:14.499 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2a82a7d1]
+2025-09-25 22:46:14.499 [http-nio-8080-exec-3] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-25 22:46:14.499 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2a82a7d1]
+2025-09-25 22:46:14.499 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2a82a7d1]
+2025-09-25 22:46:14.499 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2a82a7d1]
+2025-09-25 22:46:17.233 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m48s515ms541µs400ns).
+2025-09-25 22:46:18.459 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-25 22:46:18.463 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

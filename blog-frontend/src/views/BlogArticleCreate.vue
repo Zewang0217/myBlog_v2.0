@@ -55,7 +55,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group editor-section">
         <label for="content">内容</label>
         <div class="editor-container">
           <div class="editor-toolbar">
@@ -71,23 +71,24 @@
             <button type="button" @click="insertText('[链接文字](url)', '')" title="链接">🔗</button>
             <button type="button" @click="insertText('![描述](图片URL)', '')" title="图片">🖼️</button>
           </div>
-          <textarea
-            id="content"
-            ref="editor"
-            v-model="form.content"
-            required
-            :disabled="loading"
-            rows="15"
-            placeholder="在这里输入文章内容，支持Markdown格式..."
-            class="editor"
-            @input="updatePreview"
-          ></textarea>
+          <div class="editor-preview-container">
+            <div class="editor-wrapper">
+              <textarea
+                id="content"
+                ref="editor"
+                v-model="form.content"
+                required
+                :disabled="loading"
+                placeholder="在这里输入文章内容，支持Markdown格式..."
+                class="editor"
+                @input="updatePreview"
+              ></textarea>
+            </div>
+            <div class="preview-wrapper">
+              <div class="preview" v-html="previewContent"></div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="form-group">
-        <label>预览</label>
-        <div class="preview" v-html="previewContent"></div>
       </div>
 
       <div class="form-actions">
@@ -219,7 +220,7 @@ onMounted(() => {
 
 <style scoped>
 .article-editor {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -275,7 +276,16 @@ onMounted(() => {
   margin: 0;
 }
 
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+}
+
 .editor-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
   overflow: hidden;
@@ -310,15 +320,32 @@ onMounted(() => {
   border-color: #c0c4cc;
 }
 
+.editor-preview-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.editor-wrapper,
+.preview-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editor-wrapper {
+  border-right: 1px solid #e4e7ed;
+}
+
 .editor {
-  width: 100%;
-  min-height: 300px;
+  flex: 1;
   padding: 12px;
   border: none;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 14px;
   line-height: 1.6;
-  resize: vertical;
+  resize: none;
   background-color: #fafafa;
 }
 
@@ -327,13 +354,16 @@ onMounted(() => {
   background-color: white;
 }
 
+.preview-wrapper {
+  overflow-y: auto;
+}
+
 .preview {
-  min-height: 100px;
+  flex: 1;
   padding: 12px;
-  border: 1px solid #e4e7ed;
-  border-radius: 4px;
   background-color: white;
   line-height: 1.6;
+  overflow-y: auto;
 }
 
 .preview :deep(h1),
@@ -438,6 +468,15 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
+  .editor-preview-container {
+    flex-direction: column;
+  }
+  
+  .editor-wrapper {
+    border-right: none;
+    border-bottom: 1px solid #e4e7ed;
+  }
+  
   .form-actions {
     flex-direction: column;
   }

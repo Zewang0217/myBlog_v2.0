@@ -26,7 +26,7 @@
       </div>
 
       <div class="article-body">
-        <p class="content">{{ article.content }}</p>
+        <div class="content" v-html="renderedContent"></div>
       </div>
 
       <div class="article-actions">
@@ -44,13 +44,22 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useArticle } from '@/composables/useArticles'
 import { useRouter, useRoute } from 'vue-router'
+import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 const router = useRouter()
 const route = useRoute()
-const { article, loading, error, fetchArticle } = useArticle()
+const { article, loading, error, fetchArticle, deleteArticle: deleteArticleById } = useArticle()
+
+// 渲染Markdown内容
+const renderedContent = computed(() => {
+  if (!article.value) return ''
+  // 使用marked将Markdown转换为HTML，并使用DOMPurify净化HTML防止XSS攻击
+  return DOMPurify.sanitize(marked(article.value.content || ''))
+})
 
 // 格式化日期显示
 const formatDate = (dateString: string) => {
@@ -137,9 +146,53 @@ onMounted(() => {
 }
 
 .content {
-  white-space: pre-wrap;
   line-height: 1.6;
   color: #444;
+}
+
+.content :deep(h1),
+.content :deep(h2),
+.content :deep(h3) {
+  margin: 1.2em 0 0.8em;
+  color: #2c3e50;
+}
+
+.content :deep(p) {
+  margin: 1em 0;
+}
+
+.content :deep(a) {
+  color: #42b983;
+  text-decoration: none;
+}
+
+.content :deep(a:hover) {
+  text-decoration: underline;
+}
+
+.content :deep(code) {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 0.9em;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.content :deep(pre) {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  padding: 16px;
+  overflow: auto;
+  margin: 1em 0;
+}
+
+.content :deep(blockquote) {
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  border-left: 4px solid #42b983;
+  background-color: #f9f9f9;
+  color: #666;
 }
 
 .article-actions {
@@ -148,7 +201,7 @@ onMounted(() => {
   gap: 10px;
 }
 
-.back-btn, .edit-btn {
+.back-btn, .edit-btn, .delete-btn {
   padding: 8px 16px;
   color: white;
   border: none;
@@ -162,5 +215,21 @@ onMounted(() => {
 
 .edit-btn {
   background-color: #42b983;
+}
+
+.delete-btn {
+  background-color: #e53935;
+}
+
+.back-btn:hover {
+  background-color: #555;
+}
+
+.edit-btn:hover {
+  background-color: #359c6d;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
 }
 </style>

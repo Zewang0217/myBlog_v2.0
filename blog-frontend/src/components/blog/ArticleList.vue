@@ -43,10 +43,12 @@
           发布时间: {{ formatDate(article.createTime) }} |
           状态: {{ getStatusText(article.status) }}
         </p>
+        <!-- 文章内容预览 -->
+        <div class="article-preview" v-html="renderPreview(article.content)"></div>
         <div class="article-actions">
           <button @click="viewArticle(article.id)" class="view-btn">查看</button>
           <button
-            v-if="article.status === ArticleStatus.DRAFT"
+            v-if="article.status === 0 /* DRAFT */"
             @click="publishArticle(article.id)"
             class="publish-btn"
           >
@@ -65,8 +67,11 @@
 
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
-import { useArticles, useArticle, ArticleStatus } from '@/composables/useArticles'
+import { useArticles, useArticle } from '@/composables/useArticles'
+import { ArticleStatus } from '@/types/article'
 import { useRouter } from 'vue-router'
+import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 // 使用文章列表组合式函数
 const { articles, loading, error, fetchArticles, fetchPublishedArticles, fetchDraftArticles } = useArticles()
@@ -87,6 +92,16 @@ const listTitle = computed(() => {
       return '全部文章'
   }
 })
+
+// 渲染文章预览内容（截取前200个字符）
+const renderPreview = (content: string) => {
+  if (!content) return ''
+  // 截取前200个字符作为预览
+  const previewText = content.length > 200 ? content.substring(0, 200) + '...' : content
+  // 使用marked将Markdown转换为HTML，并使用DOMPurify净化HTML防止XSS攻击
+  const html = marked(previewText)
+  return DOMPurify.sanitize(html)
+}
 
 // 获取文章列表（根据筛选条件）
 const loadArticles = async () => {
@@ -259,6 +274,42 @@ onMounted(() => {
   margin: 0 0 16px 0;
   color: #666;
   font-size: 14px;
+}
+
+.article-preview {
+  margin-bottom: 16px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  max-height: 100px;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.article-preview :deep(p) {
+  margin: 0.5em 0;
+}
+
+.article-preview :deep(h1),
+.article-preview :deep(h2),
+.article-preview :deep(h3) {
+  margin: 0.5em 0;
+  font-size: 1.1em;
+}
+
+.article-preview :deep(code) {
+  padding: 0.2em 0.4em;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.85em;
+}
+
+.article-preview :deep(blockquote) {
+  margin: 0.5em 0;
+  padding: 0 1em;
+  border-left: 3px solid #42b983;
+  color: #666;
 }
 
 .article-actions {
