@@ -4,15 +4,15 @@
 
 ## 效果展示
 
-![blog1](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog1.png)
+![blog1](https://github.com/Zewang0217/myBlog_v2.0/blob/master/photos/blog1.png)
 
-![blog2](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog2.png)
+![blog2](https://github.com/Zewang0217/myBlog_v2.0/blob/master/photos/blog2.png)
 
-![blog3](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog3.png)
+![blog3](https://github.com/Zewang0217/myBlog_v2.0/blob/master/photos/blog3.png)
 
-![blog4](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog4.png)
+![blog4](https://github.com/Zewang0217/myBlog_v2.0/blob/master/photos/blog4.png)
 
-![blog5](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog5.png)
+![blog5](https://github.com/Zewang0217/myBlog_v2.0/blob/master/photos/blog5.png)
 
 ## 🎯 项目概述
 
