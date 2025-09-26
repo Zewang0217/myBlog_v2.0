@@ -1,154 +1,161 @@
-# MyBLog
+# 个人博客系统
 
-> 这是我的博客2.0版本。采用java21，结合新的java技术完成
+一个基于前后端分离架构的现代化博客系统，展示了全栈开发能力与工程实践。
 
-[TOC]
+## 效果展示
 
+![blog1](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog1.png)
 
+![blog2](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog2.png)
 
-# MyBlog 2.0
+![blog3](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog3.png)
 
-## 结构：
+![blog4](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog4.png)
+
+![blog5](https://github.com/Zewang0217/myBlog_v2.0/blob/main/photos/blog5.png)
+
+## 🎯 项目概述
+
+这是一个功能完整的个人博客平台，支持文章的创建、编辑、发布和管理。项目采用现代化的技术栈，遵循良好的软件工程实践，旨在展示我在全栈开发中的技术能力和架构思维。
+
+## 🛠 技术栈
+
+### 前端技术栈
+- **Vue 3** + **TypeScript** - 渐进式JavaScript框架，提供类型安全和现代化开发体验
+- **Vue Router** - 单页面应用路由管理
+- **Pinia** - Vue 3官方推荐的状态管理库
+- **Vite** - 极速的构建工具，提供热模块替换(HMR)
+- **Axios** - 基于Promise的HTTP客户端
+- **Marked** + **DOMPurify** - Markdown解析与XSS防护
+- **ESLint** + **Prettier** - 代码质量与格式化工具
+
+### 后端技术栈
+- **Spring Boot 3** - 简化Spring应用的快速开发框架
+- **MyBatis** - 持久层框架，提供SQL映射
+- **MySQL** - 关系型数据库
+- **Lombok** - 简化Java代码的工具库
+- **Jakarta Validation** - Java Bean验证框架
+- **JUnit 5** + **Mockito** - 单元测试框架
+
+### 开发实践
+- 前后端分离架构
+- RESTful API设计
+- 统一响应格式和异常处理
+- 数据传输对象(DTO)模式
+- 日志记录和监控
+- CORS跨域支持
+- 输入验证和安全防护
+
+## 🔧 核心功能
+
+- ✅ 文章创建与实时Markdown预览
+- ✅ 文章发布与状态管理(草稿/已发布)
+- ✅ 文章列表展示与详情查看
+- ✅ 文章编辑与删除
+- ✅ 响应式UI设计
+- ✅ 草稿箱管理
+- ✅ 代码质量保证(ESLint/Prettier/单元测试)
+
+## 🏗 项目架构
+
+```text
+blog-frontend/ # 前端项目 
+├── src/
+│ ├── api/ # API客户端封装
+│ ├── components/ # 可复用组件 
+│ ├── composables/ # Vue组合式函数 
+│ ├── router/ # 路由配置 
+│ ├── views/ # 页面组件 
+│ └── types/ # TypeScript类型定义 
+└── ...
+myBlog-backend/ # 后端项目 
+├── src/main/java/ 
+│ ├── controller/ # 控制器层 
+│ ├── service/ # 业务逻辑层 
+│ ├── dao/ # 数据访问层 
+│ ├── model/ # 实体模型 
+│ ├── dto/ # 数据传输对象 
+│ └── common/ # 通用工具类 
+└── ...
+```
+
+## 💡 技术亮点
+
+### 前端亮点
+1. **组合式API架构** - 使用Vue 3 Composition API实现可复用逻辑
+2. **类型安全** - 完整的TypeScript类型定义，提升代码可靠性
+3. **实时预览功能** - Markdown编辑器支持实时渲染预览
+4. **响应式设计** - 适配不同屏幕尺寸的现代化UI
+5. **状态管理** - 使用Pinia进行全局状态管理
+
+### 后端亮点
+1. **分层架构** - Controller-Service-DAO三层架构，职责清晰
+2. **统一异常处理** - 全局异常处理器，统一错误响应格式
+3. **数据验证** - 使用Jakarta Validation进行输入验证
+4. **枚举模式** - 文章状态使用枚举类型，提高代码可读性
+5. **事务管理** - 使用Spring声明式事务保证数据一致性
+6. **日志记录** - 完整的日志体系，便于问题排查
+
+## 📈 性能优化
+
+- 前端使用Vite构建，提供极速的开发体验
+- 后端使用MyBatis优化SQL查询
+- 前端实现组件懒加载，减少初始包体积
+- 后端接口使用分页查询(可扩展)
+- 前端实现防抖处理，优化用户输入体验
+
+## 🔮 未来改进计划
+
+### 短期目标
+1. **用户认证系统** - 添加JWT认证和权限控制
+2. **文章分类和标签** - 支持文章分类管理和标签系统
+3. **搜索功能** - 实现全文搜索和过滤功能
+4. **图片上传** - 集成文件上传服务，支持文章插图
+5. **评论系统** - 添加文章评论功能
+
+### 中期目标
+1. **服务端渲染(SSR)** - 使用Nuxt.js提升SEO和首屏加载性能
+2. **微服务架构** - 将单体应用拆分为微服务
+3. **缓存优化** - 集成Redis缓存热点数据
+4. **消息队列** - 使用RabbitMQ/Kafka处理异步任务
+5. **容器化部署** - 使用Docker和Kubernetes进行容器编排
+
+### 长期目标
+1. **多语言支持** - 国际化(i18n)支持
+2. **数据分析** - 集成Google Analytics等分析工具
+3. **PWA支持** - 渐进式Web应用，提供原生应用体验
+4. **API文档** - 集成Swagger/OpenAPI自动生成接口文档
+5. **微前端架构** - 采用微前端方案支持团队协作开发
+
+## 🧪 测试策略(还未执行)
+
+- 前端单元测试：使用Vitest和Vue Test Utils
+- 端到端测试：使用Cypress进行E2E测试
+- 后端单元测试：使用JUnit 5和Mockito
+- API测试：使用Postman集合进行接口测试
+
+## 🚀 部署方案
+
+可以使用以下技术栈进行生产环境部署：
+- **Nginx** - 反向代理和静态资源服务
+- **Docker** - 容器化部署
+- **Jenkins/GitHub Actions** - CI/CD自动化部署
+- **云服务** - 阿里云/AWS等云平台部署
+
+## 📊 项目亮点总结
+
+| 方面     | 技术实现              | 优势               |
+| -------- | --------------------- | ------------------ |
+| 架构设计 | 前后端分离            | 易于维护和扩展     |
+| 开发效率 | Vite + Spring Boot    | 快速开发和热更新   |
+| 代码质量 | TypeScript + ESLint   | 类型安全和代码规范 |
+| 测试覆盖 | 单元测试 + E2E测试    | 保证代码质量       |
+| 用户体验 | 响应式设计 + 实时预览 | 现代化交互体验     |
+
+## 📞 联系方式
+
+- 邮箱: Zewang0217@outlook.com
+- GitHub: [Zewang0217](https://github.com/Zewang0217)
 
 ---
-
-> Record
->
-> Record 是 Java 14 引入的一个新特性（在 Java 16 中成为正式特性），它是一种更简洁的方式来创建不可变的数据载体类。
-> Record 简介
-> 1. 什么是 Record？
-> Record 是一种特殊的类，主要用于存储不可变的数据。它自动为你生成：
-> + 构造器
-> + getter 方法
-> + equals() 方法
-> + hashCode() 方法
-> + toString() 方法
-
-
-
-## 前端知识简介
-
-### 1. 主入口文件
-- [main.ts](cci:7://file:///D:/Zewang/PROJECTS/myBlog_v2/blog-frontend/src/main.ts:0:0-0:0) - 这是Vue应用的入口文件，负责初始化Vue应用、注册全局组件和插件。
-- [App.vue](cci:7://file:///D:/Zewang/PROJECTS/myBlog_v2/blog-frontend/src/App.vue:0:0-0:0) - 根组件，所有其他组件的容器，通常包含应用的布局结构。
-
-### 2. API 相关
-- `api/` 目录包含与后端通信的代码：
-  - `apiClient.ts` - 配置了HTTP客户端（如axios）的实例，设置基础URL、请求/响应拦截器等。
-  - 其他API模块文件 - 按功能模块组织的API请求函数。
-
-### 3. 资源文件
-- `assets/` - 存放静态资源文件，如图片、字体、全局CSS等。
-
-### 4. 组件 (Components)
-- `components/` 目录包含可复用的UI组件：
-  - `blog/` - 博客相关组件
-    - `ArticleDetail.vue` - 显示单篇文章详情的组件
-    - 可能还有其他如文章列表、评论等组件
-
-### 5. 组合式函数 (Composables)
-- `composables/` - 存放Vue 3的组合式API函数，用于封装和复用状态逻辑。
-  - 例如：`usePosts.ts` 可能包含获取和管理文章数据的逻辑
-
-### 6. 路由 (Router)
-- `router/` - 包含路由配置文件，定义URL路径与Vue组件的映射关系。
-  - `index.ts` - 定义所有路由规则
-
-### 7. 状态管理 (Stores)
-- `stores/` - 使用Pinia进行状态管理，存放全局状态和业务逻辑。
-  - 例如：`userStore.ts` 管理用户登录状态
-
-### 8. 类型定义
-- `types/` - 包含TypeScript类型定义文件
-  - 定义接口和类型，如文章、用户等数据结构
-
-### 9. 视图 (Views)
-- `views/` - 包含页面级组件
-  - `BlogArticleCreate.vue` - 创建博客文章的页面
-  - 其他页面如首页、登录页等
-
-### 10. 配置文件
-- 根目录下的配置文件：
-  - `package.json` - 项目依赖和脚本配置
-  - `tsconfig.json` - TypeScript配置
-  - `vite.config.ts` - Vite构建工具配置
-
-### 技术栈说明：
-- **Vue 3** - 前端框架
-- **TypeScript** - 类型安全的JavaScript超集
-- **Pinia** - 状态管理
-- **Vite** - 构建工具
-- **Vue Router** - 路由管理
-
----
-
-## 新增功能：草稿箱
-
----
-
-## 新增功能：日志管理
-
-+ 工作原理：
-
-+ Spring Boot 使用了 Logback 作为默认的日志框架（通过 spring-boot-starter-web 依赖引入）。其工作原理如下：
-
-+ 自动配置：Spring Boot 启动时会自动读取 application.yml 中的 logging 配置
-
-+ 日志收集：应用程序中的各种组件（Spring、MyBatis、自定义代码等）产生日志
-
-+ 过滤处理：根据配置的日志级别进行过滤，只输出符合级别的日志
-
-+ 格式化输出：按照指定的格式输出到控制台和文件
-
-+ 文件管理：当日志文件达到 10MB 时自动创建新文件，并保留最近的 10 个文件
-
-+ 日志系统的作用
-
-  + 日志级别控制：
-    + 根日志级别设置为 INFO
-    + 您的自定义包 org.Zewang.myBlog 设置为 DEBUG 级别，便于开发调试
-    + Spring 框架日志级别设置为 WARN，减少不必要的信息输出
-    + MyBatis 日志设置为 DEBUG，方便查看 SQL 执行情况
-  + 日志输出：
-    + 控制台输出：显示实时日志信息
-    + 文件输出：将日志写入 logs/application.log 文件，便于后续分析
-  + 日志格式：
-    + 时间戳：精确到毫秒
-    + 线程信息：便于排查并发问题
-    + 日志级别：区分信息重要程度
-    + 日志来源：显示哪个类输出的日志
-    + 日志内容：具体的日志信息
-  + 日志文件管理：
-    + 单个日志文件最大为 10MB
-    + 最多保留 10 个历史日志文件
-    + 自动滚动，防止日志文件过大
-
-  
-
-  
-
-  Spring Boot 使用了 Logback 作为默认的日志框架（通过 spring-boot-starter-web 依赖引入）。其工作原理如下：
-  自动配置：Spring Boot 启动时会自动读取 application.yml 中的 logging 配置
-  日志收集：应用程序中的各种组件（Spring、MyBatis、自定义代码等）产生日志
-  过滤处理：根据配置的日志级别进行过滤，只输出符合级别的日志
-  格式化输出：按照指定的格式输出到控制台和文件
-  文件管理：当日志文件达到 10MB 时自动创建新文件，并保留最近的 10 个文件
-
-
-
-> 可优化方向
->
-> ### 功能增强
->
-> 1. **内容管理**
->    - [x] 添加文章草稿功能 
->    - [x] 支持 Markdown 实时预览
->    - [ ] 添加标签和分类管理
-> 2. **社交功能**
->    - 评论系统
->    - 文章分享功能
->    - 用户收藏和点赞
-> 3. **搜索功能**
->    - 实现全文搜索
->    - 添加搜索建议
->    - 支持按标签/分类筛选
+*该项目为个人技术展示项目，旨在体现全栈开发能力和工程实践经验*
