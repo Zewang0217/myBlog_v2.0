@@ -1,52 +1,63 @@
+// src/router/index.ts
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
-// 导入博客页面组件
-const BlogArticles = () => import('../views/BlogArticles.vue')
-const BlogArticleDetail = () => import('../views/BlogArticleDetail.vue')
-const BlogArticleCreate = () => import('../views/BlogArticleCreate.vue')
-const BlogArticleDrafts = () => import('../views/BlogArticleDrafts.vue')
+const routes = [
+  {
+    path: '/',
+    redirect: '/articles'
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login.vue')
+  },
+  {
+    path: '/articles',
+    name: 'Articles',
+    component: () => import('@/views/BlogArticles.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/article/:id',
+    name: 'ArticleDetail',
+    component: () => import('@/views/BlogArticleDetail.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/article/create',
+    name: 'ArticleCreate',
+    component: () => import('@/views/BlogArticleCreate.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/article/edit/:id',
+    name: 'ArticleEdit',
+    component: () => import('@/views/BlogArticleCreate.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/drafts',
+    name: 'Drafts',
+    component: () => import('@/views/BlogArticleDrafts.vue'),
+    meta: { requiresAuth: true }
+  }
+]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      redirect: '/articles' // 默认重定向到文章列表
-    },
-    // 博客文章列表页面
-    {
-      path: '/articles',
-      name: 'articles',
-      component: BlogArticles
-    },
-    // 草稿箱页面
-    {
-      path: '/articles/drafts',
-      name: 'drafts',
-      component: BlogArticleDrafts
-    },
-    // 博客文章详情页面
-    {
-      path: '/article/:id',
-      name: 'article-detail',
-      component: BlogArticleDetail,
-      props: true
-    },
-    // 创建文章页面
-    {
-      path: '/article/create',
-      name: 'article-create',
-      component: BlogArticleCreate
-    },
-    // 编辑文章页面
-    {
-      path: '/article/edit/:id',
-      name: 'article-edit',
-      component: BlogArticleCreate,
-      props: true
-    }
-  ]
+  history: createWebHistory(),
+  routes
+})
+
+// 添加路由守卫
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router

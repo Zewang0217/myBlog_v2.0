@@ -23,10 +23,11 @@ public class WebConfig {
         @Override
             public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/api/**")
-                .allowedOrigins("http://localhost:3000", "http://localhost:8080")
+                .allowedOriginPatterns("*") // 允许所有源
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(true)
+                .maxAge(3600);
             }
         };
     }

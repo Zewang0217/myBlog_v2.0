@@ -34,3 +34,8 @@ spring.jackson:
   deserialization:
     fail-on-unknown-properties: false
   default-property-inclusion: non_null
+
+# JWT认证
+jwt:
+  secret: mySecretKey12345MySecretKey12345MySecretKey123456789012
+  expiration: 86400  # 24小时 (秒)

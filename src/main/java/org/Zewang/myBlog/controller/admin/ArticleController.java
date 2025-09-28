@@ -10,6 +10,7 @@ import org.Zewang.myBlog.dto.CreateArticleDTO;
 import org.Zewang.myBlog.model.Article;
 import org.Zewang.myBlog.model.enums.ArticleStatus;
 import org.Zewang.myBlog.service.article.ArticleService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,8 +38,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/api/article") // 修改为API路径
+@RequestMapping("/api/article")// 修改为API路径
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')") // 添加权限控制
 public class ArticleController {
 
     private final ArticleService articleService; // 注入ArticleService
@@ -47,6 +49,7 @@ public class ArticleController {
      * 显示文章列表
      */
     @GetMapping("/list") // 表示这个方法处理GET请求
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')") // 列表查看权限放宽到普通
     public ApiResponse<List<Article>> list() { // 返回文章列表
         List<Article> articles = articleService.getAllArticles();
         return ApiResponse.success(articles); // 静态方法可以直接调用
@@ -56,6 +59,7 @@ public class ArticleController {
      * 显示已发布的文章列表
      */
     @GetMapping("/published")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')") // 列表查看权限放宽到普通
     public ApiResponse<List<Article>> publishedList() {
         List<Article> articles = articleService.getAllArticles().stream()
             .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
@@ -80,6 +84,7 @@ public class ArticleController {
      */
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')") // 文章查看权限放宽到普通
     public ApiResponse<Article> viewArticle(@PathVariable("id") Long id) {
         Article article = articleService.getById(id)
             .orElseThrow(() -> new RuntimeException("文章不存在或已经被删除"));

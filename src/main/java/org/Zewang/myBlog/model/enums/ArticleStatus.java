@@ -20,7 +20,7 @@ public enum ArticleStatus {
         this.description = description;
     }
 
-    public static ArticleStatus fromCode(int code) {
+    public static ArticleStatus fromCode(int code) { // fromCode: 从代码获取状态
         for (ArticleStatus status : values()) {
             if (status.code == code) { // 匹配状态代码，返回状态
                 return status;
