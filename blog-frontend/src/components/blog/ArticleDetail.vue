@@ -49,10 +49,12 @@ import { useArticle } from '@/composables/useArticles'
 import { useRouter, useRoute } from 'vue-router'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
+import {useAuthStore} from "@/stores/auth.ts";
 
 const router = useRouter()
 const route = useRoute()
-const { article, loading, error, fetchArticle, deleteArticle: deleteArticleById } = useArticle()
+const authStore = useAuthStore()
+const { article, loading, error, fetchArticle, deleteArticleById: deleteArticleById } = useArticle()
 
 // 渲染Markdown内容
 const renderedContent = computed(() => {
@@ -80,6 +82,21 @@ const editArticle = () => {
 
 // 删除文章
 const deleteArticle = async () => {
+  if (!authStore.isAuthenticated) {
+    // 未登录则跳转到登录页
+    router.push('/login')
+    return
+  }
+
+  // 检查是否有管理员权限（这里假设管理员角色为'ADMIN'）
+  const hasAdminRole = authStore.user?.role === 'ADMIN'
+
+  if (!hasAdminRole) {
+    // 权限不足提示
+    alert('权限不足，只有管理员可以删除文章')
+    return
+  }
+
   if (article.value && confirm('确定要删除这篇文章吗？此操作不可恢复！')) {
     const result = await deleteArticleById(article.value.id)
     if (result.success) {

@@ -516,3 +516,547 @@
 2025-09-29 17:17:19.392 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7c66430f]
 2025-09-29 17:17:19.392 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7c66430f]
 2025-09-29 17:17:19.392 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7c66430f]
+2025-09-29 17:51:46.654 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 17:51:46.655 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 17:51:46.655 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c650d62]
+2025-09-29 17:51:46.655 [http-nio-8080-exec-5] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1240845585 wrapping com.mysql.cj.jdbc.ConnectionImpl@5ed0b4e3] will be managed by Spring
+2025-09-29 17:51:46.655 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 17:51:46.656 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 17:51:46.659 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 17:51:46.660 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c650d62]
+2025-09-29 17:51:46.660 [http-nio-8080-exec-5] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 17:51:46.660 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c650d62]
+2025-09-29 17:51:46.660 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c650d62]
+2025-09-29 17:51:46.660 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c650d62]
+2025-09-29 17:51:57.351 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m5s259ms750µs700ns).
+2025-09-29 17:59:01.496 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.controller.AuthController - Attempting authentication for user: admin
+2025-09-29 17:59:01.616 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.controller.AuthController - Authentication successful for user: admin
+2025-09-29 17:59:01.617 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.controller.AuthController - User details loaded: admin
+2025-09-29 18:12:08.124 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.controller.AuthController - Attempting authentication for user: admin
+2025-09-29 18:12:08.294 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.controller.AuthController - Authentication successful for user: admin
+2025-09-29 18:12:08.294 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.controller.AuthController - User details loaded: admin
+2025-09-29 18:15:16.395 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.controller.AuthController - Attempting authentication for user: admin
+2025-09-29 18:15:16.572 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.controller.AuthController - Authentication successful for user: admin
+2025-09-29 18:15:16.573 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.controller.AuthController - User details loaded: admin
+2025-09-29 18:20:44.607 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.controller.AuthController - Attempting authentication for user: admin
+2025-09-29 18:20:44.678 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.controller.AuthController - Authentication successful for user: admin
+2025-09-29 18:20:44.678 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.controller.AuthController - User details loaded: admin
+2025-09-29 18:23:57.776 [http-nio-8080-exec-10] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+java.lang.NullPointerException: Cannot invoke "java.util.Date.before(java.util.Date)" because the return value of "org.Zewang.myBlog.util.JwtUtil.extractExpiration(String)" is null
+	at org.Zewang.myBlog.util.JwtUtil.isTokenExpired(JwtUtil.java:71)
+	at org.Zewang.myBlog.util.JwtUtil.validateToken(JwtUtil.java:94)
+	at org.Zewang.myBlog.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-09-29 18:26:32.880 [http-nio-8080-exec-2] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+java.lang.NullPointerException: Cannot invoke "java.util.Date.before(java.util.Date)" because the return value of "org.Zewang.myBlog.util.JwtUtil.extractExpiration(String)" is null
+	at org.Zewang.myBlog.util.JwtUtil.isTokenExpired(JwtUtil.java:71)
+	at org.Zewang.myBlog.util.JwtUtil.validateToken(JwtUtil.java:94)
+	at org.Zewang.myBlog.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-09-29 18:29:42.306 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.controller.AuthController - Attempting authentication for user: admin
+2025-09-29 18:29:42.464 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.controller.AuthController - Authentication successful for user: admin
+2025-09-29 18:29:42.464 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.controller.AuthController - User details loaded: admin
+2025-09-29 18:30:15.539 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.controller.AuthController - Attempting authentication for user: admin
+2025-09-29 18:30:15.715 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.controller.AuthController - Authentication successful for user: admin
+2025-09-29 18:30:15.715 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.controller.AuthController - User details loaded: admin
+2025-09-29 18:30:57.026 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.controller.AuthController - Attempting authentication for user: admin
+2025-09-29 18:30:57.205 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.controller.AuthController - Authentication successful for user: admin
+2025-09-29 18:30:57.206 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.controller.AuthController - User details loaded: admin
+2025-09-29 18:31:10.579 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 18:31:10.580 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 18:31:10.581 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f7a668d]
+2025-09-29 18:31:10.583 [http-nio-8080-exec-4] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1644327986 wrapping com.mysql.cj.jdbc.ConnectionImpl@289ff137] will be managed by Spring
+2025-09-29 18:31:10.583 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 18:31:10.586 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 18:31:10.593 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 18:31:10.594 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f7a668d]
+2025-09-29 18:31:10.594 [http-nio-8080-exec-4] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 18:31:10.594 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f7a668d]
+2025-09-29 18:31:10.594 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f7a668d]
+2025-09-29 18:31:10.594 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6f7a668d]
+2025-09-29 18:31:17.665 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 18:31:17.665 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 18:31:17.665 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@f78c8e4]
+2025-09-29 18:31:17.665 [http-nio-8080-exec-5] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1382363207 wrapping com.mysql.cj.jdbc.ConnectionImpl@289ff137] will be managed by Spring
+2025-09-29 18:31:17.665 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 18:31:17.665 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 18:31:17.668 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 18:31:17.669 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@f78c8e4]
+2025-09-29 18:31:17.669 [http-nio-8080-exec-5] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 18:31:17.669 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@f78c8e4]
+2025-09-29 18:31:17.669 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@f78c8e4]
+2025-09-29 18:31:17.669 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@f78c8e4]
+2025-09-29 18:59:37.176 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 18:59:37.177 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 18:59:37.177 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34400f44]
+2025-09-29 18:59:37.177 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@405291824 wrapping com.mysql.cj.jdbc.ConnectionImpl@4e1fc6bb] will be managed by Spring
+2025-09-29 18:59:37.177 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 18:59:37.178 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 18:59:37.184 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 18:59:37.184 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34400f44]
+2025-09-29 18:59:37.184 [http-nio-8080-exec-7] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 18:59:37.185 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34400f44]
+2025-09-29 18:59:37.185 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34400f44]
+2025-09-29 18:59:37.185 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34400f44]
+2025-09-29 19:02:18.210 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:02:18.210 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:02:18.210 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55b9521b]
+2025-09-29 19:02:18.211 [http-nio-8080-exec-8] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@392480626 wrapping com.mysql.cj.jdbc.ConnectionImpl@4e1fc6bb] will be managed by Spring
+2025-09-29 19:02:18.211 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:02:18.212 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:02:18.218 [http-nio-8080-exec-8] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:02:18.218 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55b9521b]
+2025-09-29 19:02:18.218 [http-nio-8080-exec-8] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:02:18.218 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55b9521b]
+2025-09-29 19:02:18.218 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55b9521b]
+2025-09-29 19:02:18.218 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@55b9521b]
+2025-09-29 19:02:20.834 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:02:20.835 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:02:20.835 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56f5522e]
+2025-09-29 19:02:20.835 [http-nio-8080-exec-9] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@806245972 wrapping com.mysql.cj.jdbc.ConnectionImpl@4e1fc6bb] will be managed by Spring
+2025-09-29 19:02:20.835 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:02:20.836 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:02:20.840 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:02:20.840 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56f5522e]
+2025-09-29 19:02:20.840 [http-nio-8080-exec-9] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:02:20.840 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56f5522e]
+2025-09-29 19:02:20.840 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56f5522e]
+2025-09-29 19:02:20.840 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@56f5522e]
+2025-09-29 19:02:22.274 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:02:22.275 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:02:22.275 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@bf42ad1]
+2025-09-29 19:02:22.275 [http-nio-8080-exec-10] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@26540129 wrapping com.mysql.cj.jdbc.ConnectionImpl@4e1fc6bb] will be managed by Spring
+2025-09-29 19:02:22.275 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:02:22.276 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:02:22.279 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:02:22.280 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@bf42ad1]
+2025-09-29 19:02:22.280 [http-nio-8080-exec-10] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:02:22.280 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@bf42ad1]
+2025-09-29 19:02:22.280 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@bf42ad1]
+2025-09-29 19:02:22.280 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@bf42ad1]
+2025-09-29 19:14:14.944 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-29 19:14:14.948 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-29 19:14:19.284 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 30888 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-09-29 19:14:19.285 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-09-29 19:14:19.286 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-29 19:14:20.051 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleMapper.class]
+2025-09-29 19:14:20.052 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleMapper' and 'org.Zewang.myBlog.dao.ArticleMapper' mapperInterface
+2025-09-29 19:14:20.053 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleMapper'.
+2025-09-29 19:14:20.480 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-29 19:14:20.481 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-09-29 19:14:20.545 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-29 19:14:20.596 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-09-29 19:14:20.673 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-29 19:14:20.804 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@21f9c6ea
+2025-09-29 19:14:20.806 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-29 19:14:20.842 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-29 19:14:20.902 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-09-29 19:14:20.941 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-29 19:14:21.535 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-29 19:14:21.736 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleMapper.xml]'
+2025-09-29 19:14:22.013 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-29 19:14:22.651 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 3.806 seconds (process running for 4.515)
+2025-09-29 19:14:26.946 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-29 19:14:37.739 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.controller.AuthController - Attempting authentication for user: admin
+2025-09-29 19:14:38.128 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.controller.AuthController - Authentication successful for user: admin
+2025-09-29 19:14:38.129 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.controller.AuthController - User details loaded: admin
+2025-09-29 19:14:38.446 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:14:38.456 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:14:38.469 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d5c2c5b]
+2025-09-29 19:14:38.490 [http-nio-8080-exec-4] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@951833857 wrapping com.mysql.cj.jdbc.ConnectionImpl@21f9c6ea] will be managed by Spring
+2025-09-29 19:14:38.495 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:14:38.532 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:14:38.574 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:14:38.576 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d5c2c5b]
+2025-09-29 19:14:38.577 [http-nio-8080-exec-4] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:14:38.578 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d5c2c5b]
+2025-09-29 19:14:38.579 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d5c2c5b]
+2025-09-29 19:14:38.580 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7d5c2c5b]
+2025-09-29 19:14:41.914 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:14:41.914 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:14:41.914 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45691520]
+2025-09-29 19:14:41.916 [http-nio-8080-exec-5] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1413847273 wrapping com.mysql.cj.jdbc.ConnectionImpl@21f9c6ea] will be managed by Spring
+2025-09-29 19:14:41.916 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:14:41.916 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:14:41.922 [http-nio-8080-exec-5] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:14:41.923 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45691520]
+2025-09-29 19:14:41.923 [http-nio-8080-exec-5] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:14:41.924 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45691520]
+2025-09-29 19:14:41.924 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45691520]
+2025-09-29 19:14:41.924 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45691520]
+2025-09-29 19:14:42.873 [http-nio-8080-exec-6] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:14:42.873 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:14:42.873 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@702c9002]
+2025-09-29 19:14:42.874 [http-nio-8080-exec-6] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1443305460 wrapping com.mysql.cj.jdbc.ConnectionImpl@21f9c6ea] will be managed by Spring
+2025-09-29 19:14:42.874 [http-nio-8080-exec-6] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:14:42.875 [http-nio-8080-exec-6] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:14:42.878 [http-nio-8080-exec-6] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:14:42.879 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@702c9002]
+2025-09-29 19:14:42.879 [http-nio-8080-exec-6] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:14:42.879 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@702c9002]
+2025-09-29 19:14:42.879 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@702c9002]
+2025-09-29 19:14:42.879 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@702c9002]
+2025-09-29 19:15:10.207 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:15:10.208 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:15:10.208 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b2a2cb3]
+2025-09-29 19:15:10.208 [http-nio-8080-exec-9] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@684772886 wrapping com.mysql.cj.jdbc.ConnectionImpl@21f9c6ea] will be managed by Spring
+2025-09-29 19:15:10.208 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:15:10.209 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:15:10.214 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:15:10.214 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b2a2cb3]
+2025-09-29 19:15:10.214 [http-nio-8080-exec-9] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:15:10.215 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b2a2cb3]
+2025-09-29 19:15:10.216 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b2a2cb3]
+2025-09-29 19:15:10.216 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b2a2cb3]
+2025-09-29 19:15:22.443 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:15:22.444 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:15:22.444 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57684a1d]
+2025-09-29 19:15:22.444 [http-nio-8080-exec-10] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@433245449 wrapping com.mysql.cj.jdbc.ConnectionImpl@21f9c6ea] will be managed by Spring
+2025-09-29 19:15:22.444 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:15:22.444 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:15:22.451 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:15:22.451 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57684a1d]
+2025-09-29 19:15:22.451 [http-nio-8080-exec-10] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:15:22.452 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57684a1d]
+2025-09-29 19:15:22.452 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57684a1d]
+2025-09-29 19:15:22.452 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57684a1d]
+2025-09-29 19:15:51.766 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:15:51.766 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:15:51.766 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2281a482]
+2025-09-29 19:15:51.766 [http-nio-8080-exec-2] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1996557442 wrapping com.mysql.cj.jdbc.ConnectionImpl@21f9c6ea] will be managed by Spring
+2025-09-29 19:15:51.767 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:15:51.767 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:15:51.772 [http-nio-8080-exec-2] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:15:51.772 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2281a482]
+2025-09-29 19:15:51.772 [http-nio-8080-exec-2] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:15:51.772 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2281a482]
+2025-09-29 19:15:51.772 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2281a482]
+2025-09-29 19:15:51.772 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2281a482]
+2025-09-29 19:17:41.094 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-29 19:17:41.106 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-29 19:17:46.448 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 27168 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-09-29 19:17:46.450 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-09-29 19:17:46.451 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-29 19:17:47.621 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleMapper.class]
+2025-09-29 19:17:47.622 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleMapper' and 'org.Zewang.myBlog.dao.ArticleMapper' mapperInterface
+2025-09-29 19:17:47.624 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleMapper'.
+2025-09-29 19:17:48.278 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-29 19:17:48.279 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-09-29 19:17:48.363 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-29 19:17:48.440 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-09-29 19:17:48.557 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-29 19:17:48.728 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@783b3aa0
+2025-09-29 19:17:48.729 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-29 19:17:48.772 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-29 19:17:48.837 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-09-29 19:17:48.879 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-29 19:17:49.559 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-29 19:17:49.813 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleMapper.xml]'
+2025-09-29 19:17:50.155 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-29 19:17:50.996 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 5.09 seconds (process running for 5.86)
+2025-09-29 19:18:21.249 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-29 19:18:29.990 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:18:30.000 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:18:30.009 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@329f4a5]
+2025-09-29 19:18:30.029 [http-nio-8080-exec-3] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@90822464 wrapping com.mysql.cj.jdbc.ConnectionImpl@783b3aa0] will be managed by Spring
+2025-09-29 19:18:30.033 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:18:30.076 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:18:30.121 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:18:30.124 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@329f4a5]
+2025-09-29 19:18:30.125 [http-nio-8080-exec-3] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:18:30.126 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@329f4a5]
+2025-09-29 19:18:30.127 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@329f4a5]
+2025-09-29 19:18:30.127 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@329f4a5]
+2025-09-29 19:21:08.389 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-29 19:21:08.400 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-09-29 19:21:12.872 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 36436 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-09-29 19:21:12.874 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-09-29 19:21:12.875 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-09-29 19:21:13.971 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleMapper.class]
+2025-09-29 19:21:13.972 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleMapper' and 'org.Zewang.myBlog.dao.ArticleMapper' mapperInterface
+2025-09-29 19:21:13.973 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleMapper'.
+2025-09-29 19:21:14.533 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-29 19:21:14.533 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-09-29 19:21:14.640 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-09-29 19:21:14.727 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-09-29 19:21:14.862 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-09-29 19:21:15.050 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0
+2025-09-29 19:21:15.054 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-09-29 19:21:15.104 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-29 19:21:15.183 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-09-29 19:21:15.234 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-29 19:21:16.002 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-29 19:21:16.254 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleMapper.xml]'
+2025-09-29 19:21:16.617 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-29 19:21:17.471 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 5.146 seconds (process running for 5.803)
+2025-09-29 19:21:20.652 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-29 19:21:20.750 [http-nio-8080-exec-1] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:21:20.754 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:21:20.759 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2563dbd3]
+2025-09-29 19:21:20.768 [http-nio-8080-exec-1] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@770601120 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:21:20.770 [http-nio-8080-exec-1] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:21:20.788 [http-nio-8080-exec-1] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:21:20.807 [http-nio-8080-exec-1] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:21:20.808 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2563dbd3]
+2025-09-29 19:21:20.808 [http-nio-8080-exec-1] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:21:20.809 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2563dbd3]
+2025-09-29 19:21:20.809 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2563dbd3]
+2025-09-29 19:21:20.810 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2563dbd3]
+2025-09-29 19:21:26.649 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-29 19:21:26.653 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:21:26.653 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2aa54e52]
+2025-09-29 19:21:26.654 [http-nio-8080-exec-2] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@941965156 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:21:26.654 [http-nio-8080-exec-2] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-29 19:21:26.660 [http-nio-8080-exec-2] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-29 19:21:26.664 [http-nio-8080-exec-2] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-29 19:21:26.665 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2aa54e52]
+2025-09-29 19:21:26.665 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2aa54e52]
+2025-09-29 19:21:26.666 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2aa54e52]
+2025-09-29 19:21:26.666 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2aa54e52]
+2025-09-29 19:21:29.507 [http-nio-8080-exec-6] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-29 19:21:29.507 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:21:29.507 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19c08f21]
+2025-09-29 19:21:29.507 [http-nio-8080-exec-6] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@322495569 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:21:29.508 [http-nio-8080-exec-6] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-29 19:21:29.508 [http-nio-8080-exec-6] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-29 19:21:29.510 [http-nio-8080-exec-6] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-29 19:21:29.510 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19c08f21]
+2025-09-29 19:21:29.511 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19c08f21]
+2025-09-29 19:21:29.511 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19c08f21]
+2025-09-29 19:21:29.511 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19c08f21]
+2025-09-29 19:21:32.466 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:21:32.467 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:21:32.467 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78f8b11c]
+2025-09-29 19:21:32.467 [http-nio-8080-exec-4] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1912658540 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:21:32.467 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:21:32.467 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:21:32.472 [http-nio-8080-exec-4] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:21:32.473 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78f8b11c]
+2025-09-29 19:21:32.473 [http-nio-8080-exec-4] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:21:32.473 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78f8b11c]
+2025-09-29 19:21:32.473 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78f8b11c]
+2025-09-29 19:21:32.474 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@78f8b11c]
+2025-09-29 19:21:34.107 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-29 19:21:34.107 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:21:34.107 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5917288]
+2025-09-29 19:21:34.107 [http-nio-8080-exec-5] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@258546168 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:21:34.108 [http-nio-8080-exec-5] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-29 19:21:34.108 [http-nio-8080-exec-5] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-29 19:21:34.111 [http-nio-8080-exec-5] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-29 19:21:34.112 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5917288]
+2025-09-29 19:21:34.112 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5917288]
+2025-09-29 19:21:34.112 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5917288]
+2025-09-29 19:21:34.113 [http-nio-8080-exec-5] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5917288]
+2025-09-29 19:21:41.614 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:21:41.616 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:21:41.616 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5e710575]
+2025-09-29 19:21:41.616 [http-nio-8080-exec-3] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1418292741 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:21:41.616 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:21:41.616 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:21:41.622 [http-nio-8080-exec-3] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:21:41.622 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5e710575]
+2025-09-29 19:21:41.623 [http-nio-8080-exec-3] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:21:41.623 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5e710575]
+2025-09-29 19:21:41.623 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5e710575]
+2025-09-29 19:21:41.624 [http-nio-8080-exec-3] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5e710575]
+2025-09-29 19:21:45.009 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=8
+2025-09-29 19:21:45.009 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:21:45.009 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2856221e]
+2025-09-29 19:21:45.010 [http-nio-8080-exec-8] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@581847406 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:21:45.010 [http-nio-8080-exec-8] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-29 19:21:45.010 [http-nio-8080-exec-8] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 8(Long)
+2025-09-29 19:21:45.013 [http-nio-8080-exec-8] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-29 19:21:45.013 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2856221e]
+2025-09-29 19:21:45.013 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2856221e]
+2025-09-29 19:21:45.013 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2856221e]
+2025-09-29 19:21:45.013 [http-nio-8080-exec-8] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2856221e]
+2025-09-29 19:21:51.740 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:21:51.740 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:21:51.741 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37852337]
+2025-09-29 19:21:51.741 [http-nio-8080-exec-7] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1031620679 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:21:51.741 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:21:51.742 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:21:51.746 [http-nio-8080-exec-7] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:21:51.747 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37852337]
+2025-09-29 19:21:51.747 [http-nio-8080-exec-7] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:21:51.747 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37852337]
+2025-09-29 19:21:51.748 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37852337]
+2025-09-29 19:21:51.748 [http-nio-8080-exec-7] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37852337]
+2025-09-29 19:21:54.607 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:21:54.607 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:21:54.607 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2069a4fb]
+2025-09-29 19:21:54.607 [http-nio-8080-exec-9] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@714198923 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:21:54.608 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:21:54.608 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:21:54.612 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:21:54.612 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2069a4fb]
+2025-09-29 19:21:54.612 [http-nio-8080-exec-9] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:21:54.612 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2069a4fb]
+2025-09-29 19:21:54.612 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2069a4fb]
+2025-09-29 19:21:54.612 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2069a4fb]
+2025-09-29 19:32:01.890 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:32:01.891 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:32:01.891 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a5222a9]
+2025-09-29 19:32:01.891 [http-nio-8080-exec-10] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1084901849 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:32:01.891 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:32:01.891 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:32:01.895 [http-nio-8080-exec-10] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:32:01.895 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a5222a9]
+2025-09-29 19:32:01.895 [http-nio-8080-exec-10] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:32:01.896 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a5222a9]
+2025-09-29 19:32:01.896 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a5222a9]
+2025-09-29 19:32:01.896 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a5222a9]
+2025-09-29 19:32:02.837 [http-nio-8080-exec-1] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-29 19:32:02.838 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:32:02.838 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@471cd2b4]
+2025-09-29 19:32:02.838 [http-nio-8080-exec-1] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@107738331 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:32:02.838 [http-nio-8080-exec-1] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-29 19:32:02.838 [http-nio-8080-exec-1] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-29 19:32:02.840 [http-nio-8080-exec-1] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-29 19:32:02.841 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@471cd2b4]
+2025-09-29 19:32:02.841 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@471cd2b4]
+2025-09-29 19:32:02.841 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@471cd2b4]
+2025-09-29 19:32:02.841 [http-nio-8080-exec-1] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@471cd2b4]
+2025-09-29 19:32:05.385 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=10
+2025-09-29 19:32:05.385 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:32:05.385 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b47576e]
+2025-09-29 19:32:05.385 [http-nio-8080-exec-2] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@721528394 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:32:05.385 [http-nio-8080-exec-2] DEBUG o.Z.m.dao.ArticleMapper.findById - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article WHERE id = ?
+2025-09-29 19:32:05.386 [http-nio-8080-exec-2] DEBUG o.Z.m.dao.ArticleMapper.findById - ==> Parameters: 10(Long)
+2025-09-29 19:32:05.389 [http-nio-8080-exec-2] DEBUG o.Z.m.dao.ArticleMapper.findById - <==      Total: 1
+2025-09-29 19:32:05.389 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b47576e]
+2025-09-29 19:32:05.389 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b47576e]
+2025-09-29 19:32:05.390 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b47576e]
+2025-09-29 19:32:05.390 [http-nio-8080-exec-2] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b47576e]
+2025-09-29 19:32:07.418 [http-nio-8080-exec-6] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-09-29 19:32:07.418 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-09-29 19:32:07.418 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b1e5c33]
+2025-09-29 19:32:07.418 [http-nio-8080-exec-6] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@870846922 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a9b41a0] will be managed by Spring
+2025-09-29 19:32:07.419 [http-nio-8080-exec-6] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-09-29 19:32:07.419 [http-nio-8080-exec-6] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-09-29 19:32:07.423 [http-nio-8080-exec-6] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-09-29 19:32:07.423 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b1e5c33]
+2025-09-29 19:32:07.424 [http-nio-8080-exec-6] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-09-29 19:32:07.424 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b1e5c33]
+2025-09-29 19:32:07.424 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b1e5c33]
+2025-09-29 19:32:07.424 [http-nio-8080-exec-6] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4b1e5c33]
+2025-09-29 19:32:33.983 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-09-29 19:32:33.994 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

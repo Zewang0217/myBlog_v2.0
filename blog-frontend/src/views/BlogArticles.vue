@@ -1,21 +1,47 @@
-<!-- blog-frontend/src/views/BlogArticles.vue -->
-<!-- 博客文章列表页面 -->
+<!-- src/views/BlogArticles.vue -->
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue'
+import { useArticles } from '@/composables/useArticles'
+import { ArticleStatus } from '@/types/article'
+import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
+
+const { articles, loading, error, fetchPublishedArticles } = useArticles()
+const authStore = useAuthStore()
+const router = useRouter()
+
+// 组件挂载时获取已发布的文章列表
+onMounted(() => {
+  fetchArticles()
+})
+
+// 获取文章列表
+const fetchArticles = async () => {
+  await fetchPublishedArticles()
+}
+
+// 格式化日期显示
+const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString('zh-CN')
+}
+</script>
+
 <template>
   <div class="articles-container">
     <div class="header">
       <h2>文章列表</h2>
-      <div class="header-actions">
-        <router-link to="/article/create" class="create-btn">
-          创建新文章
-        </router-link>
+      <!-- 只有登录后才显示创建文章按钮 -->
+      <div v-if="authStore.isAuthenticated" class="header-actions">
+        <router-link to="/article/create" class="create-btn">创建文章</router-link>
       </div>
     </div>
 
-    <div v-if="loading" class="loading">加载中...</div>
+    <div v-if="loading" class="loading">
+      加载中...
+    </div>
 
     <div v-else-if="error" class="error">
-      加载文章失败: {{ error }}
-      <button @click="fetchArticles" class="retry-btn">重试</button>
+      错误: {{ error }}
     </div>
 
     <div v-else-if="articles.length === 0" class="no-articles">
@@ -35,35 +61,18 @@
         </div>
         <div class="article-actions">
           <router-link :to="`/article/${article.id}`" class="btn-view">阅读更多</router-link>
-          <router-link v-if="article.status === 0" :to="`/article/edit/${article.id}`" class="btn-edit">编辑</router-link>
+          <!-- 只有登录后才显示编辑按钮，且只能编辑自己创建的草稿 -->
+          <router-link
+            v-if="authStore.isAuthenticated && article.status === 0"
+            :to="`/article/edit/${article.id}`"
+            class="btn-edit">
+            编辑
+          </router-link>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useArticles } from '@/composables/useArticles'
-import { ArticleStatus } from '@/types/article'
-
-const { articles, loading, error, fetchPublishedArticles } = useArticles()
-
-// 组件挂载时获取已发布的文章列表
-onMounted(() => {
-  fetchArticles()
-})
-
-// 获取文章列表
-const fetchArticles = async () => {
-  await fetchPublishedArticles()
-}
-
-// 格式化日期
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleString('zh-CN')
-}
-</script>
 
 <style scoped>
 .articles-container {
@@ -76,53 +85,32 @@ const formatDate = (dateString: string) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .header h2 {
   margin: 0;
-  color: #333;
 }
 
 .create-btn {
   padding: 8px 16px;
   background-color: #42b983;
   color: white;
-  border: none;
-  border-radius: 4px;
   text-decoration: none;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  border-radius: 4px;
 }
 
 .create-btn:hover {
   background-color: #359c6d;
 }
 
-.loading,
-.no-articles {
+.loading, .error, .no-articles {
   text-align: center;
   padding: 40px;
-  color: #666;
 }
 
 .error {
-  text-align: center;
-  padding: 20px;
-  color: #f44336;
-  background-color: #ffebee;
-  border-radius: 4px;
-  margin: 20px 0;
-}
-
-.retry-btn {
-  margin-left: 10px;
-  padding: 5px 10px;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
+  color: #e53935;
 }
 
 .articles-list {
@@ -132,17 +120,11 @@ const formatDate = (dateString: string) => {
 }
 
 .article-item {
-  background: white;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.article-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .article-title {

@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/article")// 修改为API路径
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')") // 添加权限控制
+@PreAuthorize("permitAll()")
 public class ArticleController {
 
     private final ArticleService articleService; // 注入ArticleService
@@ -49,7 +49,7 @@ public class ArticleController {
      * 显示文章列表
      */
     @GetMapping("/list") // 表示这个方法处理GET请求
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')") // 列表查看权限放宽到普通
+    @PreAuthorize("permitAll()") // 列表查看权限放宽到普通
     public ApiResponse<List<Article>> list() { // 返回文章列表
         List<Article> articles = articleService.getAllArticles();
         return ApiResponse.success(articles); // 静态方法可以直接调用
@@ -59,7 +59,7 @@ public class ArticleController {
      * 显示已发布的文章列表
      */
     @GetMapping("/published")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')") // 列表查看权限放宽到普通
+    @PreAuthorize("permitAll()") // 列表查看权限放宽到普通
     public ApiResponse<List<Article>> publishedList() {
         List<Article> articles = articleService.getAllArticles().stream()
             .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
@@ -72,7 +72,7 @@ public class ArticleController {
      * 显示草稿列表
      */
     @GetMapping("/drafts")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ApiResponse<List<Article>> draftList() {
         List<Article> articles = articleService.getAllArticles().stream()
             .filter(article -> article.getStatus() == ArticleStatus.DRAFT)
@@ -84,8 +84,9 @@ public class ArticleController {
      *  参数： @PathVariable("id")：从 URL 中提取 {id} 的值
      */
 
+    // 获取文章详情
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')") // 文章查看权限放宽到普通
+    @PreAuthorize("permitAll()") // 文章查看权限放宽到普通
     public ApiResponse<Article> viewArticle(@PathVariable("id") Long id) {
         Article article = articleService.getById(id)
             .orElseThrow(() -> new RuntimeException("文章不存在或已经被删除"));
@@ -99,6 +100,7 @@ public class ArticleController {
      * @return 创建的文章
      */
     @PostMapping("/new")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ApiResponse<Article> createArticle(
         @Valid @RequestBody CreateArticleDTO dto) {
         Article article = articleService.createArticle(dto);
@@ -111,6 +113,7 @@ public class ArticleController {
      * @return 发布的文章
      */
     @PostMapping("/{id}/publish")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ApiResponse<Article> publishArticle(@PathVariable("id") Long id) {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("无效的文章ID：" + id);
@@ -119,14 +122,18 @@ public class ArticleController {
         return ApiResponse.success(article);
     }
 
+    // 修改文章
     @PostMapping("/edit/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ApiResponse<Article> updateArticle(
         @PathVariable("id") Long id,
         @Valid @RequestBody CreateArticleDTO dto) {
         return ApiResponse.success(articleService.updateArticle(id, dto));
     }
 
+    // 删除文章
     @PostMapping("/delete/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ApiResponse<Article> deleteArticle(
         @PathVariable("id") Long id) {
         articleService.deleteArticle(id);

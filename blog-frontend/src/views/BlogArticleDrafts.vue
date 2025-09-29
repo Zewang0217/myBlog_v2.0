@@ -51,16 +51,25 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
+<script setup lang="ts">import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useArticles, useArticle } from '@/composables/useArticles'
+import { useAuthStore } from '@/stores/auth'
 import type { Article } from '@/types/article'
 
 const router = useRouter()
+const authStore = useAuthStore()
 const { articles, loading, error, fetchDraftArticles } = useArticles()
 const drafts = articles
 const { deleteArticleById, publish } = useArticle()
+
+// 检查用户是否已认证
+const isAuthenticated = computed(() => authStore.isAuthenticated)
+
+// 如果未认证，重定向到登录页面
+if (!isAuthenticated.value) {
+  router.push('/login')
+}
 
 // 状态管理
 const showDeleteConfirm = ref(false)
@@ -68,9 +77,7 @@ const selectedDraftId = ref<number | null>(null)
 
 // 获取草稿列表
 const fetchDrafts = async () => {
-  // console.log('开始获取草稿列表')
   await fetchDraftArticles()
-  // console.log('草稿列表获取成功', articles.value)
 }
 
 // 格式化日期
@@ -126,7 +133,9 @@ const deleteDraft = async () => {
 
 // 组件挂载时获取草稿列表
 onMounted(() => {
-  fetchDrafts()
+  if (isAuthenticated.value) {
+    fetchDrafts()
+  }
 })
 </script>
 

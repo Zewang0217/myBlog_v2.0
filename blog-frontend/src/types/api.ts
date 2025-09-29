@@ -21,3 +21,11 @@ export interface LoginDTO {
   username: string
   password: string
 }
+
+// 用户信息
+export interface User {
+  id: number
+  username: string
+  password?: string // 登录后通常不会返回密码
+  role?: string
+}

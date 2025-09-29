@@ -37,6 +37,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/**").permitAll() // 允许所有人访问认证接口
                 .requestMatchers("/").permitAll() // 允许访问根路径
                 .requestMatchers("/test").permitAll() // 允许访问测试路径
+                .requestMatchers("/api/article/published").permitAll()
+                .requestMatchers("/api/article/{id}").permitAll()
+                .requestMatchers("/api/article/list").permitAll()
                 .anyRequest().authenticated() // 其他所有请求都要认证
             );
 

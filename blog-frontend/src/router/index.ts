@@ -16,13 +16,13 @@ const routes = [
     path: '/articles',
     name: 'Articles',
     component: () => import('@/views/BlogArticles.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: false }
   },
   {
     path: '/article/:id',
     name: 'ArticleDetail',
     component: () => import('@/views/BlogArticleDetail.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: false }
   },
   {
     path: '/article/create',

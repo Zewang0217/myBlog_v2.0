@@ -11,16 +11,21 @@ const apiClient = axios.create({
 })
 
 // 请求拦截器
-apiClient.interceptors.request.use(
-  (config) => {
-    // 添加认证 token
-    const token = localStorage.getItem('token')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
-    return config
+apiClient.interceptors.response.use(
+  (response) => {
+    return response
   },
   (error) => {
+    console.error('API Error:', error.response || error.message)
+
+    // 如果是认证错误，清除认证信息
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token')
+      // 只在当前不是登录页面时重定向
+      // 移除自动重定向，让应用自行处理未授权情况
+      // window.location.href = '/login'
+    }
+
     return Promise.reject(error)
   }
 )

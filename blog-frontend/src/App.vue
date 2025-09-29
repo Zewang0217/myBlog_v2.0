@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
+import { computed } from 'vue'
+
+const authStore = useAuthStore() // 获取用户认证状态
+const isAuthenticated = computed(() => authStore.isAuthenticated) // 获取用户是否已登录
+
+const logout = () => {
+  authStore.logout()
+}
 </script>
 
 <template>
@@ -11,6 +20,15 @@ import { RouterLink, RouterView } from 'vue-router'
           <h1 class="app-title">
             <RouterLink to="/articles" class="title-link">我的博客</RouterLink>
           </h1>
+          <div class="header-actions">
+            <template v-if="isAuthenticated">
+              <span class="user-info"> 欢迎， {{ authStore.user?.username }}</span>
+              <button @click="logout" class="btn-logout">退出登录</button>
+            </template>
+            <template v-else>
+              <RouterLink to="/login" class="btn-login">登录</RouterLink>
+            </template>
+          </div>
         </div>
       </div>
     </header>
@@ -23,7 +41,7 @@ import { RouterLink, RouterView } from 'vue-router'
           <li class="nav-item">
             <RouterLink to="/articles" class="nav-link" active-class="active">文章列表</RouterLink>
           </li>
-          <li class="nav-item">
+          <li v-if="isAuthenticated" class="nav-item">
             <RouterLink to="/drafts" class="nav-link" active-class="active">草稿箱</RouterLink>
           </li>
         </ul>

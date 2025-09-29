@@ -52,8 +52,14 @@ export const useArticles = () => {
       } else {
         error.value = response.message
       }
-    } catch (err) {
-      error.value = '获取已发布文章列表失败'
+    } catch (err: any) {
+      // 更细致的错误处理
+      if (err.response?.status === 401) {
+        // 对于公开API，401可能是后端配置问题，尝试继续处理
+        error.value = '获取文章列表失败，请稍后重试'
+      } else {
+        error.value = err.message || '获取已发布文章列表失败'
+      }
       console.error('Failed to fetch published articles:', err)
     } finally {
       loading.value = false
