@@ -20,12 +20,14 @@
           <span>最后更新: {{ formatDate(draft.updateTime) }}</span>
           <div class="draft-actions">
             <router-link
-              :to="{ name: 'article-edit', params: { id: draft.id } }"
+              :to="{ name: 'ArticleEdit', params: { id: draft.id } }"
               class="btn-edit"
             >
               编辑
             </router-link>
-            <button @click="publishDraft(draft.id)" class="btn-publish">
+            <button v-if="draft.status === 0"
+                    @click="publishDraft(draft.id)"
+                    class="btn-publish">
               发布
             </button>
             <button @click="confirmDelete(draft.id)" class="btn-delete">
@@ -56,7 +58,8 @@ import { useArticles, useArticle } from '@/composables/useArticles'
 import type { Article } from '@/types/article'
 
 const router = useRouter()
-const { articles: drafts, loading, error, fetchDraftArticles } = useArticles()
+const { articles, loading, error, fetchDraftArticles } = useArticles()
+const drafts = articles
 const { deleteArticleById, publish } = useArticle()
 
 // 状态管理
@@ -65,7 +68,9 @@ const selectedDraftId = ref<number | null>(null)
 
 // 获取草稿列表
 const fetchDrafts = async () => {
+  // console.log('开始获取草稿列表')
   await fetchDraftArticles()
+  // console.log('草稿列表获取成功', articles.value)
 }
 
 // 格式化日期

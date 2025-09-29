@@ -24,7 +24,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <RouterLink to="/articles" class="nav-link" active-class="active">文章列表</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/articles/drafts" class="nav-link" active-class="active">草稿箱</RouterLink>
+            <RouterLink to="/drafts" class="nav-link" active-class="active">草稿箱</RouterLink>
           </li>
         </ul>
       </nav>

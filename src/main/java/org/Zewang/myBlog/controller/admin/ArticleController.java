@@ -72,6 +72,7 @@ public class ArticleController {
      * 显示草稿列表
      */
     @GetMapping("/drafts")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ApiResponse<List<Article>> draftList() {
         List<Article> articles = articleService.getAllArticles().stream()
             .filter(article -> article.getStatus() == ArticleStatus.DRAFT)

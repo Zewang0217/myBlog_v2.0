@@ -1,5 +1,6 @@
 package org.Zewang.myBlog.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 
 /**
@@ -20,6 +21,15 @@ public enum ArticleStatus {
         this.description = description;
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    @JsonCreator // 创建一个从代码到枚举的映射
     public static ArticleStatus fromCode(int code) { // fromCode: 从代码获取状态
         for (ArticleStatus status : values()) {
             if (status.code == code) { // 匹配状态代码，返回状态

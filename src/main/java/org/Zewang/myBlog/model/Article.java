@@ -51,6 +51,7 @@ public class Article {
     private LocalDateTime updateTime;
 
     @Schema(description = "状态")
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private ArticleStatus status;
 
 }
