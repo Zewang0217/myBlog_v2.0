@@ -1,17 +1,17 @@
-// src/views/Login.vue
 <template>
-  <div class="login-container">
-    <div class="login-form">
-      <h2>用户登录</h2>
-      <form @submit.prevent="handleLogin">
+  <div class="register-container">
+    <div class="register-form">
+      <h2>用户注册</h2>
+      <form @submit.prevent="handleRegister">
         <div class="form-group">
           <label for="username">用户名</label>
           <input
             id="username"
-            v-model="loginForm.username"
+            v-model="registerForm.username"
             type="text"
             required
             class="form-input"
+            placeholder="请输入用户名"
           />
         </div>
 
@@ -19,22 +19,37 @@
           <label for="password">密码</label>
           <input
             id="password"
-            v-model="loginForm.password"
+            v-model="registerForm.password"
             type="password"
             required
             class="form-input"
+            placeholder="请输入密码"
           />
         </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">确认密码</label>
+          <input
+            id="confirmPassword"
+            v-model="registerForm.confirmPassword"
+            type="password"
+            required
+            class="form-input"
+            placeholder="请再次输入密码"
+          />
+        </div>
+
         <button type="submit" :disabled="loading" class="btn btn-primary">
-          {{ loading ? '登录中...' : '登录' }}
+          {{ loading ? '注册中...' : '注册' }}
         </button>
+
         <div v-if="error" class="error-message">
           {{ error }}
         </div>
       </form>
 
-      <div class="register-link">
-        还没有账户？ <router-link to="/register">立即注册</router-link>
+      <div class="login-link">
+        已有账户？ <router-link to="/login">立即登录</router-link>
       </div>
     </div>
   </div>
@@ -43,29 +58,41 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import apiClient from '@/api/apiClient'
 
 const router = useRouter()
-const authStore = useAuthStore()
 
-const loginForm = ref({
+const registerForm = ref({
   username: '',
-  password: ''
+  password: '',
+  confirmPassword: ''
 })
 
 const loading = ref(false)
 const error = ref('')
 
-const handleLogin = async () => {
+const handleRegister = async () => {
   loading.value = true
   error.value = ''
 
   try {
-    await authStore.login(loginForm.value)
-    router.push('/articles')
+    const response = await apiClient.post('/api/user/register', registerForm.value)
+
+    if (response.data.code === 200) {
+      alert('注册成功！请登录')
+      router.push('/login')
+    } else {
+      error.value = response.data.message || '注册失败'
+    }
   } catch (err: any) {
-    // 显示更具体的错误信息
-    error.value = err.message || '登录失败，请检查用户名和密码'
+    // 改进错误处理逻辑，优先显示字段校验错误
+    if (err.response?.data?.message) {
+      error.value = err.response.data.message
+    } else if (err.response?.status === 400) {
+      error.value = '请求参数不正确，请检查输入'
+    } else {
+      error.value = '注册失败，请稍后重试'
+    }
   } finally {
     loading.value = false
   }
@@ -73,7 +100,7 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
-.login-container {
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,7 +108,7 @@ const handleLogin = async () => {
   background-color: #f5f7fa;
 }
 
-.login-form {
+.register-form {
   width: 100%;
   max-width: 400px;
   padding: 2rem;
@@ -122,12 +149,12 @@ const handleLogin = async () => {
   font-size: 1rem;
   text-align: center;
   transition: background-color 0.3s;
+  width: 100%;
 }
 
 .btn-primary {
   background-color: #42b983;
   color: white;
-  width: 100%;
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -148,7 +175,7 @@ const handleLogin = async () => {
   text-align: center;
 }
 
-.register-link {
+.login-link {
   text-align: center;
   margin-top: 1rem;
 }

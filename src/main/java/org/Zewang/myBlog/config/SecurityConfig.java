@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/article/published").permitAll()
                 .requestMatchers("/api/article/{id}").permitAll()
                 .requestMatchers("/api/article/list").permitAll()
+                .requestMatchers("api/user/register").permitAll()
                 .anyRequest().authenticated() // 其他所有请求都要认证
             );
 

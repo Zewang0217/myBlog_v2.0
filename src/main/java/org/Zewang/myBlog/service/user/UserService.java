@@ -5,4 +5,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService { // 继承UserDetailsService, 用于获取用户信息
     User findByUsername(String username);
+
+    User createUser(User user);
 }

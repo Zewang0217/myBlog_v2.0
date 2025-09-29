@@ -1,6 +1,10 @@
 package org.Zewang.myBlog.common;
 
 
+import lombok.extern.slf4j.Slf4j;
+import org.Zewang.myBlog.common.exception.BusinessException;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -14,8 +18,37 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @date 2025/09/23 19:48
  */
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    /**
+     * 处理方法参数校验异常
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ApiResponse<Void> handleValidationException(MethodArgumentNotValidException e) {
+        StringBuilder errorMsg = new StringBuilder();
+        for (ObjectError error : e.getBindingResult().getAllErrors()) {
+            errorMsg.append(error.getDefaultMessage()).append("; ");
+        }
+        // 移除末尾的分号和空格
+        String message = errorMsg.toString();
+        if (message.endsWith("; ")) {
+            message = message.substring(0, message.length() - 2);
+        }
+        log.info("参数校验失败：{}", message);
+        return ApiResponse.error(400, message);
+    }
+
+    /**
+     * 处理业务异常
+     */
+    @ExceptionHandler(BusinessException.class)
+    public ApiResponse<Void> handleBusinessException(BusinessException e) {
+        // 返回业务异常的错误信息
+        log.info("业务异常：{}", e.getMessage());
+        return ApiResponse.error(400, e.getMessage());
+    }
 
     /**
      * 处理 RuntimeException 异常
@@ -27,6 +60,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ApiResponse<Void> handleRuntimeException(RuntimeException e) {
         // 将异常信息封装成统一的错误响应格式
+        log.error("服务器内部错误", e);
         return ApiResponse.error(500, e.getMessage());
     }
 
@@ -40,6 +74,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ApiResponse<Void> handleException(Exception e) {
 //        返回通用的服务器内部错误信息
-        return ApiResponse.error(500, "服务器内部错误");
+        log.error("服务器内部错误", e);
+        return ApiResponse.error(500, e.getMessage());
     }
+
+
 }
