@@ -6,6 +6,7 @@ package org.Zewang.myBlog.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -41,6 +42,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/article/{id}").permitAll()
                 .requestMatchers("/api/article/list").permitAll()
                 .requestMatchers("api/user/register").permitAll()
+                .requestMatchers(HttpMethod.GET, "api/category").permitAll()
                 .anyRequest().authenticated() // 其他所有请求都要认证
             );
 

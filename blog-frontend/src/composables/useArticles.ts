@@ -11,7 +11,8 @@ import {
   createArticle,
   updateArticle,
   publishArticle,
-  deleteArticle
+  deleteArticle,
+  getArticlesByCategories
 } from '@/api/articleService'
 import { ArticleStatus } from '@/types/article'
 
@@ -85,6 +86,17 @@ export const useArticles = () => {
     }
   }
 
+  // 根据分类获取文章
+  const getArticlesByCategoriesApi = async (categoryIds: number[]) => {
+    try {
+      const response = await getArticlesByCategories(categoryIds)
+      return response
+    } catch (err) {
+      console.error('Failed to fetch articles by categories:', err)
+      throw err
+    }
+  }
+
   // 返回响应式数据和方法
   return {
     articles,
@@ -92,7 +104,8 @@ export const useArticles = () => {
     error,
     fetchArticles,
     fetchPublishedArticles,
-    fetchDraftArticles
+    fetchDraftArticles,
+    getArticlesByCategories: getArticlesByCategoriesApi
   }
 }
 

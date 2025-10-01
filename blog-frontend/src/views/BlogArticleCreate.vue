@@ -1,5 +1,4 @@
-<!-- blog-frontend/src/views/BlogArticleCreate.vue -->
-<!-- 博客文章创建页面 -->
+<!-- src/views/BlogArticleCreate.vue -->
 <template>
   <div class="article-editor">
     <h2>{{ isEditMode ? '编辑文章' : '创建新文章' }}</h2>
@@ -29,6 +28,74 @@
           placeholder="输入作者名称"
           class="form-control"
         />
+      </div>
+
+      <!-- 分类选择 -->
+      <div class="form-group">
+        <label>分类</label>
+        <div class="category-section">
+          <!-- 分类选择 -->
+          <div class="category-checkboxes">
+            <label
+              v-for="category in categories"
+              :key="category.id"
+              class="category-checkbox"
+            >
+              <input
+                type="checkbox"
+                :value="category.id"
+                v-model="selectedCategoryIds"
+                :disabled="loading"
+              />
+              <span>{{ category.name }}</span>
+            </label>
+          </div>
+
+          <!-- 添加新分类 -->
+          <div class="add-category-section">
+            <div class="add-category-form" v-if="showAddCategoryForm">
+              <input
+                v-model="newCategory.name"
+                type="text"
+                placeholder="新分类名称"
+                class="form-control"
+                :disabled="addingCategory"
+              />
+              <textarea
+                v-model="newCategory.description"
+                placeholder="分类描述（可选）"
+                class="form-control"
+                :disabled="addingCategory"
+              ></textarea>
+              <div class="add-category-actions">
+                <button
+                  type="button"
+                  @click="showAddCategoryForm = false"
+                  class="btn-cancel-small"
+                  :disabled="addingCategory"
+                >
+                  取消
+                </button>
+                <button
+                  type="button"
+                  @click="addNewCategory"
+                  class="btn-submit-small"
+                  :disabled="addingCategory || !newCategory.name.trim()"
+                >
+                  {{ addingCategory ? '添加中...' : '添加' }}
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              @click="showAddCategoryForm = true"
+              v-if="!showAddCategoryForm"
+              class="btn-add-category"
+            >
+              + 添加新分类
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -64,7 +131,7 @@
             <button type="button" @click="insertText('**', '**')" title="加粗"><strong>B</strong></button>
             <button type="button" @click="insertText('*', '*')" title="斜体"><em>I</em></button>
             <button type="button" @click="insertText('`', '`')" title="行内代码"><code>code</code></button>
-            <button type="button" @click="insertText('```\n', '\n```')" title="代码块">```</button>
+            <button type="button" @click="insertText('```\n', '\n```')" title="代码块">代码块</button>
             <button type="button" @click="insertText('- ', '')" title="无序列表">•</button>
             <button type="button" @click="insertText('1. ', '')" title="有序列表">1.</button>
             <button type="button" @click="insertText('> ', '')" title="引用">&gt;</button>
@@ -77,15 +144,14 @@
                 id="content"
                 ref="editor"
                 v-model="form.content"
-                required
                 :disabled="loading"
-                placeholder="在这里输入文章内容，支持Markdown格式..."
-                class="editor"
                 @input="updatePreview"
+                class="editor"
+                placeholder="在此输入文章内容，支持Markdown语法..."
               ></textarea>
             </div>
             <div class="preview-wrapper">
-              <div class="preview" v-html="previewContent"></div>
+              <div class="preview-content" v-html="previewContent"></div>
             </div>
           </div>
         </div>
@@ -109,6 +175,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useArticle } from '@/composables/useArticles'
+import { useCategories } from '@/composables/useCategories'
 import { ArticleStatus } from '@/types/article'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
@@ -118,6 +185,12 @@ const router = useRouter()
 const editor = ref<HTMLTextAreaElement | null>(null)
 
 const { article, loading, error, create, update, fetchArticle } = useArticle()
+const {
+  categories,
+  loading: categoriesLoading,
+  fetchCategories,
+  createCategory
+} = useCategories()
 
 // 检查是否是编辑模式
 const isEditMode = computed(() => !!route.params.id)
@@ -129,6 +202,14 @@ const form = ref({
   author: '',
   status: ArticleStatus.DRAFT
 })
+
+// 选中的分类ID
+const selectedCategoryIds = ref<number[]>([])
+
+// 添加分类相关状态
+const showAddCategoryForm = ref(false)
+const newCategory = ref({ name: '', description: '' })
+const addingCategory = ref(false)
 
 // 预览内容
 const previewContent = ref('')
@@ -142,44 +223,73 @@ const updatePreview = () => {
 const insertText = (before: string, after: string) => {
   if (!editor.value) return
 
-  const start = editor.value.selectionStart
-  const end = editor.value.selectionEnd
-  const selectedText = form.value.content.substring(start, end)
+  const textarea = editor.value
+  const start = textarea.selectionStart
+  const end = textarea.selectionEnd
+  const text = textarea.value
+  const beforeText = text.substring(0, start)
+  const afterText = text.substring(end, text.length)
 
-  // 插入文本
-  const newText = form.value.content.substring(0, start) + before + selectedText + after + form.value.content.substring(end)
-  form.value.content = newText
-
-  // 设置光标位置
-  const newCursorPos = start + before.length
-  nextTick(() => {
-    if (editor.value) {
-      editor.value.selectionStart = newCursorPos
-      editor.value.selectionEnd = newCursorPos + selectedText.length
-      editor.value.focus()
-    }
-  })
-
+  textarea.value = beforeText + before + text.substring(start, end) + after + afterText
+  form.value.content = textarea.value
+  textarea.focus()
+  textarea.setSelectionRange(start + before.length, end + before.length)
   updatePreview()
+}
+
+// 添加新分类
+const addNewCategory = async () => {
+  if (!newCategory.value.name.trim()) return
+
+  addingCategory.value = true
+  try {
+    // 调用API创建新分类
+    await createCategory(newCategory.value)
+
+    // 重新获取分类列表
+    await fetchCategories()
+
+    // 清空表单并隐藏添加表单
+    newCategory.value = { name: '', description: '' }
+    showAddCategoryForm.value = false
+
+    alert('分类添加成功！')
+  } catch (err: any) {
+    console.error('添加分类失败:', err)
+    if (err.response && err.response.status === 403) {
+      alert('权限不足：只有管理员可以添加分类')
+    } else {
+      alert('添加分类失败: ' + (err.message || '未知错误'))
+    }
+  } finally {
+    addingCategory.value = false
+  }
 }
 
 // 加载文章数据（编辑模式）
 const loadArticle = async () => {
   if (!isEditMode.value) return
 
-  const articleId = Number(route.params.id)
-  if (!articleId) return
+  try {
+    loading.value = true
+    await fetchArticle(Number(route.params.id))
 
-  const result = await fetchArticle(articleId)
-  if (result.success && result.data) {
-    const articleData = result.data
-    form.value = {
-      title: articleData.title,
-      content: articleData.content,
-      author: articleData.author,
-      status: articleData.status
+    if (article.value) {
+      form.value.title = article.value.title
+      form.value.content = article.value.content
+      form.value.author = article.value.author
+      form.value.status = article.value.status
+
+      // 设置选中的分类（需要后端返回文章的分类信息）
+      // selectedCategoryIds.value = article.value.categories?.map(c => c.id) || []
+
+      await nextTick()
+      updatePreview()
     }
-    updatePreview()
+  } catch (err) {
+    console.error('加载文章失败:', err)
+  } finally {
+    loading.value = false
   }
 }
 
@@ -189,15 +299,23 @@ const handleSubmit = async () => {
     let result
 
     if (isEditMode.value) {
-      // 更新文章
-      result = await update(Number(route.params.id), form.value)
+      // 更新文章（需要包含分类信息）
+      result = await update(Number(route.params.id), {
+        ...form.value,
+        categoryIds: selectedCategoryIds.value
+      })
+
       if (result.success) {
         alert('文章更新成功！')
         router.push(`/article/${route.params.id}`)
       }
     } else {
       // 创建新文章
-      result = await create(form.value)
+      result = await create({
+        ...form.value,
+        categoryIds: selectedCategoryIds.value
+      })
+
       if (result.success) {
         alert('文章创建成功！')
         router.push('/articles')
@@ -208,8 +326,9 @@ const handleSubmit = async () => {
   }
 }
 
-// 组件挂载时加载文章数据（如果是编辑模式）
+// 组件挂载时加载数据
 onMounted(() => {
+  fetchCategories()
   if (isEditMode.value) {
     loadArticle()
   } else {
@@ -226,10 +345,9 @@ onMounted(() => {
 }
 
 .article-form {
-  background: white;
-  border-radius: 8px;
+  background: #f9f9f9;
   padding: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .form-group {
@@ -238,55 +356,147 @@ onMounted(() => {
 
 .form-group label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #2c3e50;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
 }
 
 .form-control {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #dcdfe6;
+  padding: 10px;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 14px;
-  transition: border-color 0.3s;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 .form-control:focus {
   outline: none;
   border-color: #42b983;
-  box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.2);
+}
+
+.form-control:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.category-section {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.category-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.category-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  user-select: none;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.category-checkbox:hover {
+  background-color: #f5f5f5;
+}
+
+.category-checkbox input[type="checkbox"] {
+  margin: 0;
+}
+
+.add-category-section {
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.add-category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-category-form textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.add-category-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn-add-category {
+  padding: 8px 12px;
+  background-color: #42b983;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-add-category:hover {
+  background-color: #359c6d;
+}
+
+.btn-cancel-small,
+.btn-submit-small {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-cancel-small {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-cancel-small:hover {
+  background-color: #5a6268;
+}
+
+.btn-submit-small {
+  background-color: #42b983;
+  color: white;
+}
+
+.btn-submit-small:hover:not(:disabled) {
+  background-color: #359c6d;
+}
+
+.btn-submit-small:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
 }
 
 .status-options {
   display: flex;
   gap: 20px;
-  margin-top: 5px;
 }
 
 .status-option {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   cursor: pointer;
   user-select: none;
 }
 
-.status-option input[type="radio"] {
-  margin: 0;
-}
-
-.editor-section {
-  display: flex;
-  flex-direction: column;
-  height: 600px;
-}
-
 .editor-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #dcdfe6;
+  border: 1px solid #ddd;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -295,98 +505,82 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  padding: 8px;
-  background-color: #f5f7fa;
-  border-bottom: 1px solid #e4e7ed;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
 }
 
 .editor-toolbar button {
-  background: white;
-  border: 1px solid #dcdfe6;
+  padding: 5px 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
   border-radius: 3px;
-  padding: 4px 8px;
   cursor: pointer;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 32px;
-  height: 28px;
-  transition: all 0.2s;
 }
 
 .editor-toolbar button:hover {
-  background-color: #f0f2f5;
-  border-color: #c0c4cc;
+  background-color: #e9e9e9;
 }
 
 .editor-preview-container {
   display: flex;
-  flex: 1;
-  overflow: hidden;
+  height: 500px;
 }
 
 .editor-wrapper,
 .preview-wrapper {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  height: 100%;
+  overflow: auto;
 }
 
 .editor-wrapper {
-  border-right: 1px solid #e4e7ed;
+  border-right: 1px solid #ddd;
 }
 
 .editor {
-  flex: 1;
-  padding: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
   border: none;
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  font-size: 14px;
-  line-height: 1.6;
   resize: none;
-  background-color: #fafafa;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
 }
 
 .editor:focus {
   outline: none;
-  background-color: white;
 }
 
-.preview-wrapper {
-  overflow-y: auto;
+.preview-content {
+  padding: 15px;
+  background-color: #fff;
 }
 
-.preview {
-  flex: 1;
-  padding: 12px;
-  background-color: white;
-  line-height: 1.6;
-  overflow-y: auto;
-}
-
-.preview :deep(h1),
-.preview :deep(h2),
-.preview :deep(h3) {
+.preview-content :deep(h1),
+.preview-content :deep(h2),
+.preview-content :deep(h3) {
   margin: 1.2em 0 0.8em;
   color: #2c3e50;
 }
 
-.preview :deep(p) {
+.preview-content :deep(p) {
   margin: 1em 0;
 }
 
-.preview :deep(a) {
+.preview-content :deep(a) {
   color: #42b983;
   text-decoration: none;
 }
 
-.preview :deep(a:hover) {
+.preview-content :deep(a:hover) {
   text-decoration: underline;
 }
 
-.preview :deep(code) {
+.preview-content :deep(code) {
   padding: 0.2em 0.4em;
   margin: 0;
   font-size: 0.9em;
@@ -395,7 +589,7 @@ onMounted(() => {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
-.preview :deep(pre) {
+.preview-content :deep(pre) {
   background-color: #f6f8fa;
   border-radius: 3px;
   padding: 16px;
@@ -403,7 +597,7 @@ onMounted(() => {
   margin: 1em 0;
 }
 
-.preview :deep(blockquote) {
+.preview-content :deep(blockquote) {
   margin: 1em 0;
   padding: 0.5em 1em;
   border-left: 4px solid #42b983;
@@ -414,10 +608,8 @@ onMounted(() => {
 .form-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 10px;
   margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid #f0f0f0;
 }
 
 .btn-cancel,
@@ -425,23 +617,19 @@ onMounted(() => {
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-cancel {
-  background-color: #f0f0f0;
-  color: #666;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #6c757d;
+  color: white;
 }
 
 .btn-cancel:hover {
-  background-color: #e0e0e0;
+  background-color: #5a6268;
 }
 
 .btn-submit {
@@ -461,29 +649,9 @@ onMounted(() => {
 .error-message {
   margin-top: 15px;
   padding: 10px;
-  background-color: #ffebee;
-  color: #e53935;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
   border-radius: 4px;
-  font-size: 14px;
-}
-
-@media (max-width: 768px) {
-  .editor-preview-container {
-    flex-direction: column;
-  }
-  
-  .editor-wrapper {
-    border-right: none;
-    border-bottom: 1px solid #e4e7ed;
-  }
-  
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .btn-cancel,
-  .btn-submit {
-    width: 100%;
-  }
 }
 </style>

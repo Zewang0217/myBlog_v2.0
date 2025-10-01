@@ -1,9 +1,11 @@
 package org.Zewang.myBlog.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.Zewang.myBlog.model.enums.ArticleStatus;
+import java.util.List;
 
 @Schema(description = "创建或更新文章的数据传输对象")
 public record CreateArticleDTO(
@@ -22,5 +24,9 @@ public record CreateArticleDTO(
     String author,
 
     @Schema(description = "文章状态")
-    ArticleStatus status
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
+    ArticleStatus status,
+
+    @Schema(description = "文章分类ID列表")
+    List<Long> categoryIds
 ) {}

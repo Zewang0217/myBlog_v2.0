@@ -1,5 +1,6 @@
 package org.Zewang.myBlog.service.article;
 
+import java.util.Set;
 import org.Zewang.myBlog.dto.CreateArticleDTO;
 import org.Zewang.myBlog.model.Article;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,11 @@ public interface ArticleService {
      * 获取所有文章（分页）
      */
     List<Article> getAllArticles();
+
+    /**
+     * 通过分类ID获取文章
+     */
+    List<Article> getArticlesByCategoryIds(Set<Long> categoryIds);
 
     /**
      * 根据ID获取文章

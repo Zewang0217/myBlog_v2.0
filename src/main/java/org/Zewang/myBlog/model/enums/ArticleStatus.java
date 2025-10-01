@@ -1,6 +1,7 @@
 package org.Zewang.myBlog.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 /**
@@ -29,14 +30,28 @@ public enum ArticleStatus {
         return description;
     }
 
-    @JsonCreator // 创建一个从代码到枚举的映射
-    public static ArticleStatus fromCode(int code) { // fromCode: 从代码获取状态
+    /**
+     * 用于将JSON中的数字值转换为枚举
+     * @param code 状态码
+     * @return 对应的枚举值
+     */
+    @JsonCreator
+    public static ArticleStatus fromCode(int code) {
         for (ArticleStatus status : values()) {
-            if (status.code == code) { // 匹配状态代码，返回状态
+            if (status.code == code) {
                 return status;
             }
         }
-        return DRAFT; // 默认为草稿
+        // 默认返回草稿状态
+        return DRAFT;
     }
 
+    /**
+     * 用于将枚举值转换为数字值进行JSON序列化
+     * @return 状态码
+     */
+    @JsonValue
+    public int toCode() {
+        return code;
+    }
 }

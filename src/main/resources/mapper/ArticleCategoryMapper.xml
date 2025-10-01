@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.Zewang.myBlog.dao.ArticleCategoryMapper">
+
+  <resultMap id="BaseResultMap" type="org.Zewang.myBlog.dto.ArticleCategory">
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="article_id" property="articleId" jdbcType="BIGINT"/>
+    <result column="category_id" property="categoryId" jdbcType="BIGINT"/>
+  </resultMap>
+  
+  <resultMap id="CategoryResultMap" type="org.Zewang.myBlog.model.Category">
+    <id column="category_id" property="id" jdbcType="BIGINT"/>
+    <result column="category_name" property="name" jdbcType="VARCHAR"/>
+    <result column="category_description" property="description" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, article_id, category_id
+  </sql>
+
+  <select id="findByArticleId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    SELECT id, article_id, category_id
+    FROM article_category
+    WHERE article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+
+  <select id="findByCategoryId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    SELECT id, article_id, category_id
+    FROM article_category
+    WHERE category_id = #{categoryId,jdbcType=BIGINT}
+  </select>
+
+  <select id="findArticleIdsByCategoryIds" resultType="java.lang.Long" parameterType="java.util.List">
+    SELECT DISTINCT article_id
+    FROM article_category
+    WHERE category_id IN
+    <foreach item="item" collection="categoryIds" open="(" separator="," close=")">
+      #{item,jdbcType=BIGINT}
+    </foreach>
+  </select>
+  
+  <select id="findCategoriesByArticleId" resultMap="CategoryResultMap" parameterType="java.lang.Long">
+    SELECT 
+      c.id AS category_id,
+      c.name AS category_name,
+      c.description AS category_description
+    FROM article_category ac
+    JOIN category c ON ac.category_id = c.id
+    WHERE ac.article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insert" parameterType="org.Zewang.myBlog.dto.ArticleCategory">
+    INSERT INTO article_category
+      (article_id, category_id)
+    VALUES
+      (#{articleId,jdbcType=BIGINT},
+       #{categoryId,jdbcType=BIGINT})
+  </insert>
+
+  <delete id="deleteByArticleId" parameterType="java.lang.Long">
+    DELETE FROM article_category
+    WHERE article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteByCategoryId" parameterType="java.lang.Long">
+    DELETE FROM article_category
+    WHERE category_id = #{categoryId,jdbcType=BIGINT}
+  </delete>
+
+</mapper>

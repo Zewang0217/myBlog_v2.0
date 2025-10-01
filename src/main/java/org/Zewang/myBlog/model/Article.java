@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -51,7 +52,8 @@ public class Article {
     private LocalDateTime updateTime;
 
     @Schema(description = "状态")
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private ArticleStatus status;
 
+    @Schema(description = "文章分类列表")
+    private List<Category> categories;
 }

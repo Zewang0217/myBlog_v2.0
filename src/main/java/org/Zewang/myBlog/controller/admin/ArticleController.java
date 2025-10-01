@@ -2,20 +2,26 @@ package org.Zewang.myBlog.controller.admin;
 
 
 import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.Zewang.myBlog.common.ApiResponse;
 import org.Zewang.myBlog.dto.CreateArticleDTO;
 import org.Zewang.myBlog.model.Article;
+import org.Zewang.myBlog.model.Category;
 import org.Zewang.myBlog.model.enums.ArticleStatus;
 import org.Zewang.myBlog.service.article.ArticleService;
+import org.Zewang.myBlog.service.category.CategoryService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -44,6 +50,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
 
     private final ArticleService articleService; // 注入ArticleService
+    private final CategoryService categoryService;
 
     /**
      * 显示文章列表
@@ -139,6 +146,26 @@ public class ArticleController {
         articleService.deleteArticle(id);
         return ApiResponse.success(null);
     }
+
+    // 根据分类筛选文章
+    @GetMapping("/listByCategories")
+    @PreAuthorize("permitAll()")
+    public ApiResponse<List<Article>> listByCategories(@RequestParam(required = false) String categoryIds) {
+        if (categoryIds == null || categoryIds.isEmpty()) {
+            // 如果没有提供分类ID，则返回空列表或所有已发布文章
+            List<Article> articles = articleService.getAllArticles().stream()
+                .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
+                .collect(Collectors.toList());
+            return ApiResponse.success(articles);
+        }
+
+        // 将逗号分隔的字符串转换为Set<Long>
+        Set<Long> categoryIdSet = Arrays.stream(categoryIds.split(","))
+            .map(String::trim)
+            .map(Long::parseLong)
+            .collect(Collectors.toSet());
+
+        List<Article> articles = articleService.getArticlesByCategoryIds(categoryIdSet);
+        return ApiResponse.success(articles);
+    }
 }
-
-

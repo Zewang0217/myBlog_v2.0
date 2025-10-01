@@ -9,8 +9,7 @@
     <result column="author" property="author" jdbcType="VARCHAR"/>
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-    <result column="status" property="status" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
-      javaType="org.Zewang.myBlog.model.enums.ArticleStatus" jdbcType="INTEGER"/>
+    <result column="status" property="status" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -30,6 +29,15 @@
     FROM article
     WHERE id = #{id,jdbcType=BIGINT}
   </select>
+  
+  <select id="findByCategoryId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    SELECT 
+      a.id, a.title, a.content, a.author, a.create_time, a.update_time, a.status
+    FROM article a
+    JOIN article_category ac ON a.id = ac.article_id
+    WHERE ac.category_id = #{categoryId,jdbcType=BIGINT}
+    ORDER BY a.create_time DESC
+  </select>
 
   <insert id="insert" parameterType="org.Zewang.myBlog.model.Article" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO article
@@ -40,7 +48,7 @@
        #{author,jdbcType=VARCHAR},
        #{createTime,jdbcType=TIMESTAMP},
        #{updateTime,jdbcType=TIMESTAMP},
-       #{status,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler})
+       #{status,jdbcType=INTEGER,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler})
   </insert>
 
   <update id="update" parameterType="org.Zewang.myBlog.model.Article">
@@ -49,8 +57,8 @@
       <if test="title != null">title = #{title,jdbcType=VARCHAR},</if>
       <if test="content != null">content = #{content,jdbcType=LONGVARCHAR},</if>
       <if test="author != null">author = #{author,jdbcType=VARCHAR},</if>
-      <if test="status != null">status = #{status,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},</if>
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      <if test="updateTime != null">update_time = #{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="status != null">status = #{status,jdbcType=INTEGER,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},</if>
     </set>
     WHERE id = #{id,jdbcType=BIGINT}
   </update>
@@ -75,8 +83,7 @@
   <select id="existsByTitleAndIdNot" resultType="boolean">
     SELECT COUNT(1) > 0
     FROM article
-    WHERE title = #{title,jdbcType=VARCHAR}
-      AND id != #{id,jdbcType=BIGINT}
+    WHERE title = #{title,jdbcType=VARCHAR} AND id != #{id,jdbcType=BIGINT}
   </select>
 
 </mapper>

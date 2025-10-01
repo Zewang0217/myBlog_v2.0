@@ -6,6 +6,7 @@ export interface Article {
   createTime: string
   updateTime: string
   status: number
+  categories?: Category[]
 }
 
 export interface CreateArticleDTO {
@@ -13,10 +14,25 @@ export interface CreateArticleDTO {
   content: string
   author: string
   status?: number
+  categoryIds?: number[]
 }
 
 export enum ArticleStatus {
   DRAFT = 0,
   PUBLISHED = 1,
   OFFLINE = 2
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  description: string;
+  createTime: string;
+  updateTime: string;
+}
+
+export interface ArticleCategory {
+  id: number;
+  articleId: number;
+  categoryId: number;
 }

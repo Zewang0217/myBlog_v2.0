@@ -13,5 +13,7 @@ import ArticleDetail from '@/components/blog/ArticleDetail.vue'
 <style scoped>
 .blog-article-detail {
   padding: 20px 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 </style>
