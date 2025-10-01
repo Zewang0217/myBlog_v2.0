@@ -2898,3 +2898,247 @@
 2025-10-01 15:39:50.752 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51b44ce6]
 2025-10-01 15:39:50.752 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51b44ce6]
 2025-10-01 15:39:50.752 [http-nio-8080-exec-4] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@51b44ce6]
+2025-10-01 15:44:50.442 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-01 15:44:50.446 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-10-01 16:16:17.144 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 54332 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-10-01 16:16:17.146 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-10-01 16:16:17.146 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-01 16:16:18.275 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleCategoryMapper.class]
+2025-10-01 16:16:18.275 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleMapper.class]
+2025-10-01 16:16:18.275 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\CategoryMapper.class]
+2025-10-01 16:16:18.275 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\UserMapper.class]
+2025-10-01 16:16:18.277 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleCategoryMapper' and 'org.Zewang.myBlog.dao.ArticleCategoryMapper' mapperInterface
+2025-10-01 16:16:18.283 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleCategoryMapper'.
+2025-10-01 16:16:18.283 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleMapper' and 'org.Zewang.myBlog.dao.ArticleMapper' mapperInterface
+2025-10-01 16:16:18.284 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleMapper'.
+2025-10-01 16:16:18.284 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'categoryMapper' and 'org.Zewang.myBlog.dao.CategoryMapper' mapperInterface
+2025-10-01 16:16:18.284 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'categoryMapper'.
+2025-10-01 16:16:18.284 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'userMapper' and 'org.Zewang.myBlog.dao.UserMapper' mapperInterface
+2025-10-01 16:16:18.285 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'userMapper'.
+2025-10-01 16:16:18.904 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-01 16:16:18.905 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-10-01 16:16:19.001 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-01 16:16:19.075 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-10-01 16:16:19.184 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-01 16:16:19.371 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@687eb455
+2025-10-01 16:16:19.373 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-01 16:16:19.427 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-01 16:16:19.501 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-10-01 16:16:19.547 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-01 16:16:20.338 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-01 16:16:20.608 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleCategoryMapper.xml]'
+2025-10-01 16:16:20.632 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleMapper.xml]'
+2025-10-01 16:16:20.650 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\CategoryMapper.xml]'
+2025-10-01 16:16:20.660 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\UserMapper.xml]'
+2025-10-01 16:16:20.759 [main] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-10-01 16:16:20.764 [main] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@526fc044] was not registered for synchronization because synchronization is not active
+2025-10-01 16:16:20.774 [main] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@70231499 wrapping com.mysql.cj.jdbc.ConnectionImpl@687eb455] will not be managed by Spring
+2025-10-01 16:16:20.776 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - ==>  Preparing: SELECT COUNT(1) > 0 FROM user WHERE username = ?
+2025-10-01 16:16:20.790 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - ==> Parameters: admin(String)
+2025-10-01 16:16:20.806 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - <==      Total: 1
+2025-10-01 16:16:20.808 [main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@526fc044]
+2025-10-01 16:16:21.049 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-01 16:16:21.915 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 5.247 seconds (process running for 5.867)
+2025-10-01 16:16:30.503 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-01 16:18:18.875 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-01 16:18:18.884 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-10-01 16:18:22.610 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 51132 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-10-01 16:18:22.613 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-10-01 16:18:22.613 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-01 16:18:23.688 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleCategoryMapper.class]
+2025-10-01 16:18:23.689 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleMapper.class]
+2025-10-01 16:18:23.689 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\CategoryMapper.class]
+2025-10-01 16:18:23.689 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\UserMapper.class]
+2025-10-01 16:18:23.691 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleCategoryMapper' and 'org.Zewang.myBlog.dao.ArticleCategoryMapper' mapperInterface
+2025-10-01 16:18:23.693 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleCategoryMapper'.
+2025-10-01 16:18:23.693 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleMapper' and 'org.Zewang.myBlog.dao.ArticleMapper' mapperInterface
+2025-10-01 16:18:23.693 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleMapper'.
+2025-10-01 16:18:23.693 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'categoryMapper' and 'org.Zewang.myBlog.dao.CategoryMapper' mapperInterface
+2025-10-01 16:18:23.694 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'categoryMapper'.
+2025-10-01 16:18:23.695 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'userMapper' and 'org.Zewang.myBlog.dao.UserMapper' mapperInterface
+2025-10-01 16:18:23.695 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'userMapper'.
+2025-10-01 16:18:24.292 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-01 16:18:24.293 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-10-01 16:18:24.388 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-01 16:18:24.476 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-10-01 16:18:24.578 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-01 16:18:24.744 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@200d1a3d
+2025-10-01 16:18:24.747 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-01 16:18:24.786 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-01 16:18:24.837 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-10-01 16:18:24.883 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-01 16:18:25.527 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-01 16:18:25.718 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleCategoryMapper.xml]'
+2025-10-01 16:18:25.737 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleMapper.xml]'
+2025-10-01 16:18:25.748 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\CategoryMapper.xml]'
+2025-10-01 16:18:25.756 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\UserMapper.xml]'
+2025-10-01 16:18:25.840 [main] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-10-01 16:18:25.846 [main] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5bf4dfb] was not registered for synchronization because synchronization is not active
+2025-10-01 16:18:25.856 [main] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@317366989 wrapping com.mysql.cj.jdbc.ConnectionImpl@200d1a3d] will not be managed by Spring
+2025-10-01 16:18:25.858 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - ==>  Preparing: SELECT COUNT(1) > 0 FROM user WHERE username = ?
+2025-10-01 16:18:25.871 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - ==> Parameters: admin(String)
+2025-10-01 16:18:25.887 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - <==      Total: 1
+2025-10-01 16:18:25.888 [main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5bf4dfb]
+2025-10-01 16:18:26.058 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-01 16:18:26.843 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 4.667 seconds (process running for 5.199)
+2025-10-01 16:18:28.419 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-01 16:18:30.679 [http-nio-8080-exec-2] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 486 ms
+2025-10-01 16:30:21.371 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-01 16:30:21.381 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-10-01 16:30:25.466 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 52216 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-10-01 16:30:25.468 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-10-01 16:30:25.469 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-01 16:30:26.358 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleCategoryMapper.class]
+2025-10-01 16:30:26.359 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleMapper.class]
+2025-10-01 16:30:26.359 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\CategoryMapper.class]
+2025-10-01 16:30:26.359 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\UserMapper.class]
+2025-10-01 16:30:26.360 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleCategoryMapper' and 'org.Zewang.myBlog.dao.ArticleCategoryMapper' mapperInterface
+2025-10-01 16:30:26.362 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleCategoryMapper'.
+2025-10-01 16:30:26.362 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleMapper' and 'org.Zewang.myBlog.dao.ArticleMapper' mapperInterface
+2025-10-01 16:30:26.363 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleMapper'.
+2025-10-01 16:30:26.363 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'categoryMapper' and 'org.Zewang.myBlog.dao.CategoryMapper' mapperInterface
+2025-10-01 16:30:26.363 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'categoryMapper'.
+2025-10-01 16:30:26.363 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'userMapper' and 'org.Zewang.myBlog.dao.UserMapper' mapperInterface
+2025-10-01 16:30:26.364 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'userMapper'.
+2025-10-01 16:30:26.880 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-01 16:30:26.880 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-10-01 16:30:26.968 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-01 16:30:27.049 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-10-01 16:30:27.159 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-01 16:30:27.338 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@54489296
+2025-10-01 16:30:27.341 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-01 16:30:27.382 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-01 16:30:27.429 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-10-01 16:30:27.461 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-01 16:30:28.031 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-01 16:30:28.312 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleCategoryMapper.xml]'
+2025-10-01 16:30:28.337 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleMapper.xml]'
+2025-10-01 16:30:28.349 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\CategoryMapper.xml]'
+2025-10-01 16:30:28.357 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\UserMapper.xml]'
+2025-10-01 16:30:28.450 [main] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-10-01 16:30:28.456 [main] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@532ea86b] was not registered for synchronization because synchronization is not active
+2025-10-01 16:30:28.468 [main] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1019746237 wrapping com.mysql.cj.jdbc.ConnectionImpl@54489296] will not be managed by Spring
+2025-10-01 16:30:28.472 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - ==>  Preparing: SELECT COUNT(1) > 0 FROM user WHERE username = ?
+2025-10-01 16:30:28.490 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - ==> Parameters: admin(String)
+2025-10-01 16:30:28.513 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - <==      Total: 1
+2025-10-01 16:30:28.515 [main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@532ea86b]
+2025-10-01 16:30:28.700 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-01 16:30:29.482 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 4.43 seconds (process running for 4.973)
+2025-10-01 16:30:29.956 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-01 16:30:54.053 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-01 16:30:54.061 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-10-01 16:30:58.127 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 53372 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-10-01 16:30:58.128 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-10-01 16:30:58.128 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-01 16:30:59.111 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleCategoryMapper.class]
+2025-10-01 16:30:59.111 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\ArticleMapper.class]
+2025-10-01 16:30:59.111 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\CategoryMapper.class]
+2025-10-01 16:30:59.111 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Identified candidate component class: file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\dao\UserMapper.class]
+2025-10-01 16:30:59.113 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleCategoryMapper' and 'org.Zewang.myBlog.dao.ArticleCategoryMapper' mapperInterface
+2025-10-01 16:30:59.116 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleCategoryMapper'.
+2025-10-01 16:30:59.116 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'articleMapper' and 'org.Zewang.myBlog.dao.ArticleMapper' mapperInterface
+2025-10-01 16:30:59.116 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'articleMapper'.
+2025-10-01 16:30:59.116 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'categoryMapper' and 'org.Zewang.myBlog.dao.CategoryMapper' mapperInterface
+2025-10-01 16:30:59.117 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'categoryMapper'.
+2025-10-01 16:30:59.117 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'userMapper' and 'org.Zewang.myBlog.dao.UserMapper' mapperInterface
+2025-10-01 16:30:59.118 [main] DEBUG o.m.s.mapper.ClassPathMapperScanner - Enabling autowire by type for MapperFactoryBean with name 'userMapper'.
+2025-10-01 16:30:59.668 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-01 16:30:59.668 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-10-01 16:30:59.743 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-01 16:30:59.818 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-10-01 16:30:59.913 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-01 16:31:00.065 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7de147e9
+2025-10-01 16:31:00.066 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-01 16:31:00.099 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-01 16:31:00.150 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-10-01 16:31:00.186 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-01 16:31:00.806 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-01 16:31:01.010 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleCategoryMapper.xml]'
+2025-10-01 16:31:01.031 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\ArticleMapper.xml]'
+2025-10-01 16:31:01.052 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\CategoryMapper.xml]'
+2025-10-01 16:31:01.067 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Parsed mapper file: 'file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\mapper\UserMapper.xml]'
+2025-10-01 16:31:01.153 [main] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-10-01 16:31:01.158 [main] DEBUG org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8c3b634] was not registered for synchronization because synchronization is not active
+2025-10-01 16:31:01.168 [main] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1389162903 wrapping com.mysql.cj.jdbc.ConnectionImpl@7de147e9] will not be managed by Spring
+2025-10-01 16:31:01.171 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - ==>  Preparing: SELECT COUNT(1) > 0 FROM user WHERE username = ?
+2025-10-01 16:31:01.190 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - ==> Parameters: admin(String)
+2025-10-01 16:31:01.209 [main] DEBUG o.Z.m.d.UserMapper.existsByUsername - <==      Total: 1
+2025-10-01 16:31:01.210 [main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8c3b634]
+2025-10-01 16:31:01.369 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-01 16:31:02.111 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 4.37 seconds (process running for 4.86)
+2025-10-01 16:31:09.850 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-01 16:31:20.542 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-10-01 16:31:20.542 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-10-01 16:31:20.542 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.544 [http-nio-8080-exec-9] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1633105985 wrapping com.mysql.cj.jdbc.ConnectionImpl@7de147e9] will be managed by Spring
+2025-10-01 16:31:20.544 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==>  Preparing: SELECT id, title, content, author, create_time, update_time, status FROM article ORDER BY create_time DESC
+2025-10-01 16:31:20.544 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - ==> Parameters: 
+2025-10-01 16:31:20.541 [http-nio-8080-exec-10] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
+2025-10-01 16:31:20.548 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+2025-10-01 16:31:20.548 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14c4c2b2]
+2025-10-01 16:31:20.548 [http-nio-8080-exec-10] DEBUG o.m.s.t.SpringManagedTransaction - JDBC Connection [HikariProxyConnection@1383491550 wrapping com.mysql.cj.jdbc.ConnectionImpl@289052b3] will be managed by Spring
+2025-10-01 16:31:20.548 [http-nio-8080-exec-10] DEBUG o.Z.m.dao.CategoryMapper.findAll - ==>  Preparing: SELECT id, name, description, create_time, update_time FROM category ORDER BY create_time DESC
+2025-10-01 16:31:20.548 [http-nio-8080-exec-10] DEBUG o.Z.m.dao.CategoryMapper.findAll - ==> Parameters: 
+2025-10-01 16:31:20.554 [http-nio-8080-exec-10] DEBUG o.Z.m.dao.CategoryMapper.findAll - <==      Total: 2
+2025-10-01 16:31:20.555 [http-nio-8080-exec-9] DEBUG o.Z.myBlog.dao.ArticleMapper.findAll - <==      Total: 10
+2025-10-01 16:31:20.555 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.555 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14c4c2b2]
+2025-10-01 16:31:20.556 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14c4c2b2]
+2025-10-01 16:31:20.561 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.561 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.556 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14c4c2b2]
+2025-10-01 16:31:20.563 [http-nio-8080-exec-10] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@14c4c2b2]
+2025-10-01 16:31:20.566 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 10(Long)
+2025-10-01 16:31:20.570 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 2
+2025-10-01 16:31:20.572 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.572 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.572 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.572 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 9(Long)
+2025-10-01 16:31:20.573 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 0
+2025-10-01 16:31:20.574 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.574 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.574 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.575 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 8(Long)
+2025-10-01 16:31:20.576 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 1
+2025-10-01 16:31:20.576 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.576 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.577 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.577 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 7(Long)
+2025-10-01 16:31:20.577 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 0
+2025-10-01 16:31:20.578 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.578 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.578 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.578 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 6(Long)
+2025-10-01 16:31:20.580 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 0
+2025-10-01 16:31:20.580 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.580 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.580 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.581 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 1(Long)
+2025-10-01 16:31:20.583 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 0
+2025-10-01 16:31:20.583 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.583 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.583 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.584 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 2(Long)
+2025-10-01 16:31:20.584 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 0
+2025-10-01 16:31:20.585 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.585 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.585 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.586 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 3(Long)
+2025-10-01 16:31:20.586 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 0
+2025-10-01 16:31:20.586 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.586 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.586 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.587 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 4(Long)
+2025-10-01 16:31:20.588 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 0
+2025-10-01 16:31:20.588 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.590 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938] from current transaction
+2025-10-01 16:31:20.591 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==>  Preparing: SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description FROM article_category ac JOIN category c ON ac.category_id = c.id WHERE ac.article_id = ?
+2025-10-01 16:31:20.592 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - ==> Parameters: 5(Long)
+2025-10-01 16:31:20.616 [http-nio-8080-exec-9] DEBUG o.Z.m.d.A.findCategoriesByArticleId - <==      Total: 0
+2025-10-01 16:31:20.626 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.627 [http-nio-8080-exec-9] DEBUG o.Z.m.s.a.impl.ArticleServiceImpl - 成功获取 10 篇文章
+2025-10-01 16:31:20.677 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.677 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:20.677 [http-nio-8080-exec-9] DEBUG org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@150ff938]
+2025-10-01 16:31:36.504 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-01 16:31:36.513 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

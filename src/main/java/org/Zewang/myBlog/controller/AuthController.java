@@ -1,6 +1,5 @@
 package org.Zewang.myBlog.controller;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.Zewang.myBlog.common.ApiResponse;
 import org.Zewang.myBlog.dto.AuthResponseDTO;
@@ -19,6 +18,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// Swagger注解
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 /**
  * @author "Zewang"
  * @version 1.0
@@ -26,10 +32,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/28 18:24
  */
-
 @Slf4j
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "认证接口", description = "用户登录认证相关接口")
 public class AuthController {
 
     @Autowired
@@ -42,6 +48,20 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
+    @Operation(summary = "用户登录", description = "用户登录获取JWT令牌")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "登录成功",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = AuthResponseDTO.class))}
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400",
+            description = "用户名或密码错误",
+            content = @Content
+        )
+    })
     public ApiResponse<AuthResponseDTO> login(@RequestBody LoginDTO loginDTO) { // RequestBody作用：将json数据映射为对象
 
         // 在认证前添加日志
@@ -69,5 +89,4 @@ public class AuthController {
         // 步骤四：返回包含令牌的响应
         return ApiResponse.success(new AuthResponseDTO(token));
     }
-
 }

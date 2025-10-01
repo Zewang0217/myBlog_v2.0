@@ -1,6 +1,5 @@
 package org.Zewang.myBlog.controller.admin;
 
-
 import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +22,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+// Swagger注解
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * @author "Zewang"
@@ -47,6 +54,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/article")// 修改为API路径
 @RequiredArgsConstructor
 @PreAuthorize("permitAll()")
+@Tag(name = "文章接口", description = "文章管理相关接口")
 public class ArticleController {
 
     private final ArticleService articleService; // 注入ArticleService
@@ -57,6 +65,15 @@ public class ArticleController {
      */
     @GetMapping("/list") // 表示这个方法处理GET请求
     @PreAuthorize("permitAll()") // 列表查看权限放宽到普通
+    @Operation(summary = "获取所有文章", description = "获取系统中的所有文章列表")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "成功获取文章列表",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        )
+    })
     public ApiResponse<List<Article>> list() { // 返回文章列表
         List<Article> articles = articleService.getAllArticles();
         return ApiResponse.success(articles); // 静态方法可以直接调用
@@ -67,6 +84,15 @@ public class ArticleController {
      */
     @GetMapping("/published")
     @PreAuthorize("permitAll()") // 列表查看权限放宽到普通
+    @Operation(summary = "获取已发布的文章", description = "获取所有已发布的文章列表")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "成功获取已发布文章列表",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        )
+    })
     public ApiResponse<List<Article>> publishedList() {
         List<Article> articles = articleService.getAllArticles().stream()
             .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
@@ -80,6 +106,20 @@ public class ArticleController {
      */
     @GetMapping("/drafts")
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @Operation(summary = "获取草稿文章", description = "获取所有草稿文章列表（仅管理员可访问）")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "成功获取草稿文章列表",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "403",
+            description = "权限不足",
+            content = @Content
+        )
+    })
     public ApiResponse<List<Article>> draftList() {
         List<Article> articles = articleService.getAllArticles().stream()
             .filter(article -> article.getStatus() == ArticleStatus.DRAFT)
@@ -94,11 +134,25 @@ public class ArticleController {
     // 获取文章详情
     @GetMapping("/{id}")
     @PreAuthorize("permitAll()") // 文章查看权限放宽到普通
-    public ApiResponse<Article> viewArticle(@PathVariable("id") Long id) {
+    @Operation(summary = "获取文章详情", description = "根据文章ID获取文章详细信息")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "成功获取文章详情",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "404",
+            description = "文章不存在",
+            content = @Content
+        )
+    })
+    public ApiResponse<Article> viewArticle(
+        @Parameter(description = "文章ID") @PathVariable("id") Long id) {
         Article article = articleService.getById(id)
             .orElseThrow(() -> new RuntimeException("文章不存在或已经被删除"));
         return ApiResponse.success(article);
-
     }
 
     /**
@@ -108,7 +162,31 @@ public class ArticleController {
      */
     @PostMapping("/new")
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @Operation(summary = "创建文章", description = "创建新文章（仅管理员可访问）")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "文章创建成功",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400",
+            description = "请求参数错误",
+            content = @Content
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "403",
+            description = "权限不足",
+            content = @Content
+        )
+    })
     public ApiResponse<Article> createArticle(
+        @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "文章信息",
+            required = true,
+            content = @Content(schema = @Schema(implementation = CreateArticleDTO.class))
+        )
         @Valid @RequestBody CreateArticleDTO dto) {
         Article article = articleService.createArticle(dto);
         return ApiResponse.success(article);
@@ -121,7 +199,32 @@ public class ArticleController {
      */
     @PostMapping("/{id}/publish")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse<Article> publishArticle(@PathVariable("id") Long id) {
+    @Operation(summary = "发布文章", description = "将草稿文章发布为正式文章（仅管理员可访问）")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "文章发布成功",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400",
+            description = "文章ID无效",
+            content = @Content
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "403",
+            description = "权限不足",
+            content = @Content
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "404",
+            description = "文章不存在",
+            content = @Content
+        )
+    })
+    public ApiResponse<Article> publishArticle(
+        @Parameter(description = "文章ID") @PathVariable("id") Long id) {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("无效的文章ID：" + id);
         }
@@ -132,8 +235,37 @@ public class ArticleController {
     // 修改文章
     @PostMapping("/edit/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @Operation(summary = "更新文章", description = "更新已存在的文章（仅管理员可访问）")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "文章更新成功",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400",
+            description = "请求参数错误",
+            content = @Content
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "403",
+            description = "权限不足",
+            content = @Content
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "404",
+            description = "文章不存在",
+            content = @Content
+        )
+    })
     public ApiResponse<Article> updateArticle(
-        @PathVariable("id") Long id,
+        @Parameter(description = "文章ID") @PathVariable("id") Long id,
+        @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "更新的文章信息",
+            required = true,
+            content = @Content(schema = @Schema(implementation = CreateArticleDTO.class))
+        )
         @Valid @RequestBody CreateArticleDTO dto) {
         return ApiResponse.success(articleService.updateArticle(id, dto));
     }
@@ -141,8 +273,30 @@ public class ArticleController {
     // 删除文章
     @PostMapping("/delete/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @Operation(summary = "删除文章", description = "删除指定文章（仅管理员可访问）")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "文章删除成功"
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400",
+            description = "文章ID无效",
+            content = @Content
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "403",
+            description = "权限不足",
+            content = @Content
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "404",
+            description = "文章不存在",
+            content = @Content
+        )
+    })
     public ApiResponse<Article> deleteArticle(
-        @PathVariable("id") Long id) {
+        @Parameter(description = "文章ID") @PathVariable("id") Long id) {
         articleService.deleteArticle(id);
         return ApiResponse.success(null);
     }
@@ -150,7 +304,18 @@ public class ArticleController {
     // 根据分类筛选文章
     @GetMapping("/listByCategories")
     @PreAuthorize("permitAll()")
-    public ApiResponse<List<Article>> listByCategories(@RequestParam(required = false) String categoryIds) {
+    @Operation(summary = "根据分类筛选文章", description = "根据一个或多个分类ID筛选文章")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "成功获取筛选后的文章列表",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        )
+    })
+    public ApiResponse<List<Article>> listByCategories(
+        @Parameter(description = "分类ID列表，用逗号分隔")
+        @RequestParam(required = false) String categoryIds) {
         if (categoryIds == null || categoryIds.isEmpty()) {
             // 如果没有提供分类ID，则返回空列表或所有已发布文章
             List<Article> articles = articleService.getAllArticles().stream()

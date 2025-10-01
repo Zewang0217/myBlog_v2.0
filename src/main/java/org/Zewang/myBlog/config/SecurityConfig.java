@@ -42,6 +42,10 @@ public class SecurityConfig {
                 .requestMatchers("/api/article/{id}").permitAll()
                 .requestMatchers("/api/article/list").permitAll()
                 .requestMatchers("api/user/register").permitAll()
+                .requestMatchers("/swagger-ui/index.html").permitAll()  // 允许访问Swagger UI
+                .requestMatchers("/v3/api-docs/**").permitAll() // 允许访问API文档
+                .requestMatchers("/swagger-resources/**").permitAll()
+                .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "api/category").permitAll()
                 .anyRequest().authenticated() // 其他所有请求都要认证
             );

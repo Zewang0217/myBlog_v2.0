@@ -39,3 +39,12 @@ spring.jackson:
 jwt:
   secret: mySecretKey12345MySecretKey12345MySecretKey123456789012
   expiration: 86400  # 24小时 (秒)
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  packages-to-scan: org.Zewang.myBlog.controller
