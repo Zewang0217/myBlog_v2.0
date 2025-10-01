@@ -87,7 +87,7 @@ export const useArticles = () => {
   }
 
   // 根据分类获取文章
-  const getArticlesByCategoriesApi = async (categoryIds: number[]) => {
+  const getArticlesByCategoriesApi = async (categoryIds: string[]) => {
     try {
       const response = await getArticlesByCategories(categoryIds)
       return response
@@ -116,26 +116,46 @@ export const useArticle = () => {
   const error = ref<string | null>(null)
 
   // 根据 ID 获取文章详情
-  const fetchArticle = async (id: number) => {
+  const fetchArticle = async (id: string | number) => {
+    const articleId = typeof id === 'number' ? id.toString() : id;
+
+    // 验证ID有效性
+    if (!articleId || articleId.trim() === '') {
+      error.value = '无效的文章ID'
+      return { success: false, error: '无效的文章ID' }
+    }
+
     loading.value = true
     error.value = null
     try {
-      const response = await getArticleById(id)
+      // console.log('准备调用 getArticleById');
+      const response = await getArticleById(articleId)
+      // console.log('getArticleById 返回结果:', response);
       if (response.code === 200) {
         article.value = response.data
-        return { success: true, data: response.data } // 添加返回值
+        return { success: true, data: response.data }
       } else {
         error.value = response.message
-        return { success: false, error: response.message } // 添加返回值
+        return { success: false, error: response.message }
       }
-    } catch (err) {
-      error.value = '获取文章详情失败'
+    } catch (err: any) {
+      console.error('fetchArticle 发生错误:', err);
+      // 更详细的错误处理
+      if (err.response?.status === 404) {
+        error.value = '文章不存在或已被删除'
+      } else if (err.response?.status === 500) {
+        error.value = '服务器内部错误，请稍后重试'
+      } else {
+        error.value = '获取文章详情失败'
+      }
       console.error('Failed to fetch article:', err)
-      return { success: false, error: '获取文章详情失败' } // 添加返回值
+      return { success: false, error: error.value }
     } finally {
       loading.value = false
+      console.log('fetchArticle 执行完成');
     }
   }
+
 
   // 创建文章
   const create = async (articleData: CreateArticleDTO) => {
@@ -160,7 +180,7 @@ export const useArticle = () => {
   }
 
   // 更新文章
-  const update = async (id: number, articleData: CreateArticleDTO) => {
+  const update = async (id: string, articleData: CreateArticleDTO) => {
     loading.value = true
     error.value = null
     try {
@@ -182,7 +202,7 @@ export const useArticle = () => {
   }
 
   // 发布文章
-  const publish = async (id: number) => {
+  const publish = async (id: string) => {
     loading.value = true
     error.value = null
     try {
@@ -204,7 +224,7 @@ export const useArticle = () => {
   }
 
   // 删除文章
-  const deleteArticleById = async (id: number) => {
+  const deleteArticleById = async (id: string) => {
     loading.value = true
     error.value = null
     try {

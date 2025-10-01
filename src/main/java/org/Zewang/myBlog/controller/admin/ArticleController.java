@@ -14,6 +14,7 @@ import org.Zewang.myBlog.model.Category;
 import org.Zewang.myBlog.model.enums.ArticleStatus;
 import org.Zewang.myBlog.service.article.ArticleService;
 import org.Zewang.myBlog.service.category.CategoryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,41 +31,30 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  * @author "Zewang"
  * @version 1.0
- * @description: 文章的控制器，处理以/article开头的请求
+ * @description: 文章的控制器，处理以/article开头的请求 (MongoDB 版本)
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/21 23:15
  */
-
-/**
- * + @RequestBody：表示从 HTTP 请求的 body 中读取 JSON 数据
- * 并自动反序列化成 Java 对象 CreateArticleDTO
- *
- * + @Valid：表示要对这个对象进行 参数校验
- * 在 CreateArticleDTO 类中添加校验注解（非空等）
- *
- * + @PathVariable("id")
- * 从 URL 路径中提取动态参数，并绑定到方法参数上。
- */
-
 @RestController
-@RequestMapping("/api/article")// 修改为API路径
+@RequestMapping("/api/article")
 @RequiredArgsConstructor
 @PreAuthorize("permitAll()")
 @Tag(name = "文章接口", description = "文章管理相关接口")
 public class ArticleController {
 
-    private final ArticleService articleService; // 注入ArticleService
+    private final ArticleService articleService;
     private final CategoryService categoryService;
 
     /**
      * 显示文章列表
      */
-    @GetMapping("/list") // 表示这个方法处理GET请求
-    @PreAuthorize("permitAll()") // 列表查看权限放宽到普通
+    @GetMapping("/list")
+    @PreAuthorize("permitAll()")
     @Operation(summary = "获取所有文章", description = "获取系统中的所有文章列表")
     @ApiResponses(value = {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -74,16 +64,16 @@ public class ArticleController {
                 schema = @Schema(implementation = Article.class))}
         )
     })
-    public ApiResponse<List<Article>> list() { // 返回文章列表
+    public ApiResponse<List<Article>> list() {
         List<Article> articles = articleService.getAllArticles();
-        return ApiResponse.success(articles); // 静态方法可以直接调用
+        return ApiResponse.success(articles);
     }
 
     /**
      * 显示已发布的文章列表
      */
     @GetMapping("/published")
-    @PreAuthorize("permitAll()") // 列表查看权限放宽到普通
+    @PreAuthorize("permitAll()")
     @Operation(summary = "获取已发布的文章", description = "获取所有已发布的文章列表")
     @ApiResponses(value = {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -99,7 +89,6 @@ public class ArticleController {
             .collect(Collectors.toList());
         return ApiResponse.success(articles);
     }
-
 
     /**
      * 显示草稿列表
@@ -127,13 +116,9 @@ public class ArticleController {
         return ApiResponse.success(articles);
     }
 
-    /**
-     *  参数： @PathVariable("id")：从 URL 中提取 {id} 的值
-     */
-
     // 获取文章详情
     @GetMapping("/{id}")
-    @PreAuthorize("permitAll()") // 文章查看权限放宽到普通
+    @PreAuthorize("permitAll()")
     @Operation(summary = "获取文章详情", description = "根据文章ID获取文章详细信息")
     @ApiResponses(value = {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -149,9 +134,9 @@ public class ArticleController {
         )
     })
     public ApiResponse<Article> viewArticle(
-        @Parameter(description = "文章ID") @PathVariable("id") Long id) {
+        @Parameter(description = "文章ID") @PathVariable("id") String id) {
         Article article = articleService.getById(id)
-            .orElseThrow(() -> new RuntimeException("文章不存在或已经被删除"));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "文章不存在"));
         return ApiResponse.success(article);
     }
 
@@ -224,8 +209,8 @@ public class ArticleController {
         )
     })
     public ApiResponse<Article> publishArticle(
-        @Parameter(description = "文章ID") @PathVariable("id") Long id) {
-        if (id == null || id <= 0) {
+        @Parameter(description = "文章ID") @PathVariable("id") String id) {
+        if (id == null || id.isEmpty()) {
             throw new IllegalArgumentException("无效的文章ID：" + id);
         }
         Article article = articleService.publishArticle(id);
@@ -260,7 +245,7 @@ public class ArticleController {
         )
     })
     public ApiResponse<Article> updateArticle(
-        @Parameter(description = "文章ID") @PathVariable("id") Long id,
+        @Parameter(description = "文章ID") @PathVariable("id") String id,
         @io.swagger.v3.oas.annotations.parameters.RequestBody(
             description = "更新的文章信息",
             required = true,
@@ -296,7 +281,7 @@ public class ArticleController {
         )
     })
     public ApiResponse<Article> deleteArticle(
-        @Parameter(description = "文章ID") @PathVariable("id") Long id) {
+        @Parameter(description = "文章ID") @PathVariable("id") String id) {
         articleService.deleteArticle(id);
         return ApiResponse.success(null);
     }
@@ -324,10 +309,9 @@ public class ArticleController {
             return ApiResponse.success(articles);
         }
 
-        // 将逗号分隔的字符串转换为Set<Long>
-        Set<Long> categoryIdSet = Arrays.stream(categoryIds.split(","))
+        // 将逗号分隔的字符串转换为Set<String>
+        Set<String> categoryIdSet = Arrays.stream(categoryIds.split(","))
             .map(String::trim)
-            .map(Long::parseLong)
             .collect(Collectors.toSet());
 
         List<Article> articles = articleService.getArticlesByCategoryIds(categoryIdSet);

@@ -1,5 +1,5 @@
 export interface Article {
-  id: number
+  id: string
   title: string
   content: string
   author: string
@@ -14,7 +14,7 @@ export interface CreateArticleDTO {
   content: string
   author: string
   status?: number
-  categoryIds?: number[]
+  categoryIds?: string[]
 }
 
 export enum ArticleStatus {
@@ -24,7 +24,7 @@ export enum ArticleStatus {
 }
 
 export interface Category {
-  id: number;
+  id: string;
   name: string;
   description: string;
   createTime: string;
@@ -32,7 +32,7 @@ export interface Category {
 }
 
 export interface ArticleCategory {
-  id: number;
-  articleId: number;
-  categoryId: number;
+  id: string;
+  articleId: string;
+  categoryId: string;
 }

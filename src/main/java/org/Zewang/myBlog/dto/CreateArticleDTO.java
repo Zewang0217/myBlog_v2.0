@@ -28,5 +28,5 @@ public record CreateArticleDTO(
     ArticleStatus status,
 
     @Schema(description = "文章分类ID列表")
-    List<Long> categoryIds
+    List<String> categoryIds
 ) {}

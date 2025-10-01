@@ -1,17 +1,20 @@
 spring:
   application:
     name:myBlog
-  datasource:
-    url: jdbc:mysql://localhost:3306/blog_v2?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
-    username: blog_user
-    password: Blog123!@#
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  configuration: # 配置mybatis
-    map-underscore-to-camel-case: true # 下划线转驼峰
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/MyBlog
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/blog_v2?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
+#    username: blog_user
+#    password: Blog123!@#
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#
+#
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  configuration: # 配置mybatis
+#    map-underscore-to-camel-case: true # 下划线转驼峰
 
 logging:
   level:

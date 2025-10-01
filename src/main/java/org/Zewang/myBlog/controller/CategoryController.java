@@ -26,11 +26,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 /**
  * @author "Zewang"
  * @version 1.0
- * @description: 文章分类管理接口
+ * @description: 文章分类管理接口 (MongoDB 版本)
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/30 21:58
  */
-
 @RestController
 @RequestMapping("api/category")
 @RequiredArgsConstructor
@@ -117,7 +116,7 @@ public class CategoryController {
         )
     })
     public ApiResponse<Category> update(
-        @Parameter(description = "分类ID") @PathVariable("id") Long id,
+        @Parameter(description = "分类ID") @PathVariable("id") String id,
         @io.swagger.v3.oas.annotations.parameters.RequestBody(
             description = "更新的分类信息",
             required = true,
@@ -154,7 +153,7 @@ public class CategoryController {
         )
     })
     public ApiResponse<Void> delete(
-        @Parameter(description = "分类ID") @PathVariable("id") Long id) {
+        @Parameter(description = "分类ID") @PathVariable("id") String id) {
         categoryService.deleteCategory(id);
         return ApiResponse.success(null);
     }

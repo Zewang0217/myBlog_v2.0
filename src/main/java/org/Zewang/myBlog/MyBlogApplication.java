@@ -1,21 +1,17 @@
 package org.Zewang.myBlog;
+
 /**
  * @author Zewang
  * @date 2025.9.21
- * @description 启动类
- *
+ * @description 启动类 (MongoDB 版本)
  */
-
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-@SpringBootApplication
-@MapperScan("org.Zewang.myBlog.dao")
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class MyBlogApplication {
 	public static void main(String[] args) {
-
 		SpringApplication.run(MyBlogApplication.class, args);
 	}
-
 }

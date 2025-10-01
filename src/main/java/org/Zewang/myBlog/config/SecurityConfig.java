@@ -1,8 +1,4 @@
-// src/main/java/org/Zewang/myBlog/config/SecurityConfig.java
 package org.Zewang.myBlog.config;
-
-// 安全配置：定义URL访问权限规则；设置认证和授权策略；
-//           配置会话管理方式；确保应用复合安全最佳实践
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,25 +28,24 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // 禁用CSRF保护 （REST API通常不需要）
+            .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/api/auth/**").permitAll() // 允许所有人访问认证接口
-                .requestMatchers("/").permitAll() // 允许访问根路径
-                .requestMatchers("/test").permitAll() // 允许访问测试路径
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/").permitAll()
+                .requestMatchers("/test").permitAll()
                 .requestMatchers("/api/article/published").permitAll()
                 .requestMatchers("/api/article/{id}").permitAll()
                 .requestMatchers("/api/article/list").permitAll()
-                .requestMatchers("api/user/register").permitAll()
-                .requestMatchers("/swagger-ui/index.html").permitAll()  // 允许访问Swagger UI
-                .requestMatchers("/v3/api-docs/**").permitAll() // 允许访问API文档
+                .requestMatchers("/api/user/register").permitAll()
+                .requestMatchers("/swagger-ui/index.html").permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
                 .requestMatchers("/swagger-resources/**").permitAll()
                 .requestMatchers("/webjars/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "api/category").permitAll()
-                .anyRequest().authenticated() // 其他所有请求都要认证
+                .requestMatchers(HttpMethod.GET, "/api/category").permitAll()
+                .anyRequest().authenticated()
             );
 
-        // 添加JWT过滤器
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

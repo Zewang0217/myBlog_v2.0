@@ -12,6 +12,8 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import org.Zewang.myBlog.model.enums.ArticleStatus;
@@ -19,16 +21,18 @@ import org.Zewang.myBlog.model.enums.ArticleStatus;
 /**
  * @author "Zewang"
  * @version 2.0
- * @description: 文章实体类
+ * @description: 文章实体类 (MongoDB 版本)
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/23 21:30
  */
 @Data
 @Accessors(chain = true)
+@Document(collection = "articles")
 @Schema(description = "文章实体")
 public class Article {
+    @Id
     @Schema(description = "文章ID")
-    private Long id;
+    private String id;
 
     @Schema(description = "文章标题")
     private String title;

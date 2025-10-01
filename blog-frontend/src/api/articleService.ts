@@ -26,7 +26,8 @@ export const getDraftArticles = (): Promise<ApiResponse<Article[]>> => {
 }
 
 // 根据 ID 获取文章详情
-export const getArticleById = (id: number): Promise<ApiResponse<Article>> => {
+export const getArticleById = (id: string | number): Promise<ApiResponse<Article>> => {
+  // console.log('准备发送请求，文章ID:', id);
   return apiClient.get<ApiResponse<Article>>(`/api/article/${id}`)
   .then(response => response.data)
 }
@@ -38,19 +39,19 @@ export const createArticle = (article: CreateArticleDTO): Promise<ApiResponse<Ar
 }
 
 // 更新文章
-export const updateArticle = (id: number, article: CreateArticleDTO): Promise<ApiResponse<Article>> => {
+export const updateArticle = (id: string, article: CreateArticleDTO): Promise<ApiResponse<Article>> => {
   return apiClient.post<ApiResponse<Article>>(`/api/article/edit/${id}`, article)
   .then(response => response.data)
 }
 
 // 发布文章
-export const publishArticle = (id: number): Promise<ApiResponse<Article>> => {
+export const publishArticle = (id: string): Promise<ApiResponse<Article>> => {
   return apiClient.post<ApiResponse<Article>>(`/api/article/${id}/publish`)
   .then(response => response.data)
 }
 
 // 删除文章
-export const deleteArticle = (id: number): Promise<ApiResponse<void>> => {
+export const deleteArticle = (id: string): Promise<ApiResponse<void>> => {
   return apiClient.post<ApiResponse<void>>(`/api/article/delete/${id}`)
   .then(response => response.data)
 }
@@ -68,14 +69,14 @@ export const createCategory = (category: Omit<Category, 'id' | 'createTime' | 'u
 }
 
 // 删除分类
-export const deleteCategory = (id: number): Promise<ApiResponse<void>> => {
+export const deleteCategory = (id: string): Promise<ApiResponse<void>> => {
   return apiClient.delete<ApiResponse<void>>(`/api/category/${id}`)
   .then(response => response.data)
 }
 
 // 根据分类筛选文章
 export const getArticlesByCategories = (
-  categoryIds: number[]
+  categoryIds: string[]
 ): Promise<ApiResponse<Article[]>> => {
   const params = categoryIds.length > 0
     ? { categoryIds: categoryIds.join(',') }

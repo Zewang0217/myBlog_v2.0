@@ -23,14 +23,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 /**
  * @author "Zewang"
  * @version 1.0
- * @description: 用户的controller层，负责用户管理
+ * @description: 用户的controller层，负责用户管理 (MongoDB 版本)
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/29 21:26
  */
-
-@RestController // 此注解作用是：表示该类是一个控制器，可以处理 HTTP 请求，并返回 HTTP 响应，默认情况下，控制器方法返回的视图名称和控制器方法名称一致，例如：@GetMapping("/index")，则返回的视图名称为 index
+@RestController
 @RequestMapping("/api/user")
-@RequiredArgsConstructor // 此注解作用是：表示自动注入类中的所有字段，包括私有字段和受保护的字段
+@RequiredArgsConstructor
 @PreAuthorize("permitAll()")
 @Slf4j
 @Tag(name = "用户接口", description = "用户注册等相关接口")
@@ -77,7 +76,6 @@ public class UserController {
         User user = new User();
         user.setUsername(registerDTO.getUsername());
         user.setPassword(registerDTO.getPassword());
-
         user.setRole("ROLE_USER");
 
         User savedUser = userService.createUser(user);

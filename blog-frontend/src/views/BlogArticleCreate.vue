@@ -204,7 +204,7 @@ const form = ref({
 })
 
 // 选中的分类ID
-const selectedCategoryIds = ref<number[]>([])
+const selectedCategoryIds = ref<string[]>([])
 
 // 添加分类相关状态
 const showAddCategoryForm = ref(false)
@@ -272,7 +272,7 @@ const loadArticle = async () => {
 
   try {
     loading.value = true
-    await fetchArticle(Number(route.params.id))
+    await fetchArticle(route.params.id as string)
 
     if (article.value) {
       form.value.title = article.value.title
@@ -281,7 +281,9 @@ const loadArticle = async () => {
       form.value.status = article.value.status
 
       // 设置选中的分类（需要后端返回文章的分类信息）
-      // selectedCategoryIds.value = article.value.categories?.map(c => c.id) || []
+      if (article.value.categories) {
+        selectedCategoryIds.value = article.value.categories.map(c => c.id)
+      }
 
       await nextTick()
       updatePreview()
@@ -300,7 +302,7 @@ const handleSubmit = async () => {
 
     if (isEditMode.value) {
       // 更新文章（需要包含分类信息）
-      result = await update(Number(route.params.id), {
+      result = await update(route.params.id as string, {
         ...form.value,
         categoryIds: selectedCategoryIds.value
       })

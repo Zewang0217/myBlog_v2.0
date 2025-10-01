@@ -14,8 +14,8 @@ interface UseCategoriesReturn {
   error: Ref<string | null>;
   fetchCategories: () => Promise<void>;
   createCategory: (category: Omit<Category, 'id' | 'createTime' | 'updateTime'>) => Promise<void>;
-  deleteCategory: (id: number) => Promise<void>;
-  getArticlesByCategories: (categoryIds: number[]) => Promise<any>;
+  deleteCategory: (id: string) => Promise<void>;
+  getArticlesByCategories: (categoryIds: string[]) => Promise<any>;
 }
 
 export const useCategories = (): UseCategoriesReturn => {
@@ -54,7 +54,7 @@ export const useCategories = (): UseCategoriesReturn => {
       loading.value = false;
     }
   };
-  const deleteCategory = async (id: number) => {
+  const deleteCategory = async (id: string) => {
     loading.value = true;
     error.value = null;
     try {
@@ -71,7 +71,7 @@ export const useCategories = (): UseCategoriesReturn => {
   };
   
   // 根据分类获取文章
-  const getArticlesByCategoriesApi = async (categoryIds: number[]) => {
+  const getArticlesByCategoriesApi = async (categoryIds: string[]) => {
     try {
       const response = await getArticlesByCategories(categoryIds);
       return response;

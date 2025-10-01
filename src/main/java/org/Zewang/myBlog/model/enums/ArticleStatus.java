@@ -17,10 +17,15 @@ public enum ArticleStatus {
     private final int code;
     private final String description;
 
+    ArticleStatus(int code) {
+        this(code, "");
+    }
+
     ArticleStatus(int code, String description) {
         this.code = code;
         this.description = description;
     }
+
 
     public int getCode() {
         return code;

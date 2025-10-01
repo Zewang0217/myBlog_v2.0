@@ -9,7 +9,20 @@
 
     <!-- 错误状态 -->
     <div v-else-if="error" class="error">
-      错误: {{ error }}
+      <div v-if="error.includes('不存在') || error.includes('NOT_FOUND')">
+        <h3>文章未找到</h3>
+        <p>您访问的文章不存在或已被删除。</p>
+        <button @click="goBack" class="back-btn">返回文章列表</button>
+      </div>
+      <div v-else-if="error.includes('无效的文章ID')">
+        <h3>请求参数错误</h3>
+        <p>文章ID参数无效，请检查URL是否正确。</p>
+        <button @click="goBack" class="back-btn">返回文章列表</button>
+      </div>
+      <div v-else>
+        错误: {{ error }}
+        <button @click="goBack" class="back-btn">返回文章列表</button>
+      </div>
     </div>
 
     <!-- 文章内容 -->
@@ -110,9 +123,13 @@ const deleteArticle = async () => {
 
 // 组件挂载时获取文章详情
 onMounted(() => {
-  const id = parseInt(route.params.id as string)
-  if (id) {
+  const id = route.params.id as string
+  if (id && typeof id === 'string' && id.trim() !== '') {
+    console.log('调用 fetchArticle 函数');
     fetchArticle(id)
+  } else {
+    console.error('Invalid article ID:', id)
+    error.value = '文章不存在'
   }
 })
 </script>
