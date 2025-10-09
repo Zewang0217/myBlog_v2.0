@@ -1,6 +1,8 @@
 package org.Zewang.myBlog.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -29,6 +31,11 @@ import org.Zewang.myBlog.model.enums.ArticleStatus;
 @Accessors(chain = true)
 @Document(collection = "articles")
 @Schema(description = "文章实体")
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.CLASS,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "@class"
+)
 public class Article {
     @Id
     @Schema(description = "文章ID")

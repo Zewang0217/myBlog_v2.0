@@ -51,7 +51,9 @@
   </div>
 </template>
 
-<script setup lang="ts">import { ref, onMounted, computed } from 'vue'
+<!-- src/views/BlogArticleDrafts.vue -->
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useArticles, useArticle } from '@/composables/useArticles'
 import { useAuthStore } from '@/stores/auth'
@@ -77,7 +79,21 @@ const selectedDraftId = ref<number | null>(null)
 
 // 获取草稿列表
 const fetchDrafts = async () => {
-  await fetchDraftArticles()
+  try {
+    await fetchDraftArticles()
+  } catch (err: any) {
+    // 检查是否是权限错误
+    if (err.response?.status === 401) {
+      alert('登录已过期，请重新登录')
+      authStore.logout()
+      router.push('/login')
+    } else if (err.response?.status === 403) {
+      alert('权限不足，无法访问草稿箱')
+      router.push('/articles')
+    } else {
+      error.value = err.message || '加载草稿失败'
+    }
+  }
 }
 
 // 格式化日期
@@ -86,7 +102,7 @@ const formatDate = (dateString: string) => {
 }
 
 // 发布草稿
-const publishDraft = async (id: number) => {
+const publishDraft = async (id: string) => {
   try {
     loading.value = true
     error.value = null
@@ -95,16 +111,24 @@ const publishDraft = async (id: number) => {
       await fetchDrafts() // 刷新列表
       alert('文章已成功发布')
     }
-  } catch (err) {
-    console.error('发布文章失败:', err)
-    error.value = err instanceof Error ? err.message : '发布文章失败'
+  } catch (err: any) {
+    if (err.response?.status === 401) {
+      alert('登录已过期，请重新登录')
+      authStore.logout()
+      router.push('/login')
+    } else if (err.response?.status === 403) {
+      alert('权限不足，无法发布文章')
+    } else {
+      console.error('发布文章失败:', err)
+      error.value = err instanceof Error ? err.message : '发布文章失败'
+    }
   } finally {
     loading.value = false
   }
 }
 
 // 确认删除
-const confirmDelete = (id: number) => {
+const confirmDelete = (id: string) => {
   selectedDraftId.value = id
   showDeleteConfirm.value = true
 }
@@ -116,16 +140,24 @@ const deleteDraft = async () => {
   try {
     loading.value = true
     error.value = null
-    const result = await deleteArticleById(selectedDraftId.value)
+    const result = await deleteArticleById(String(selectedDraftId.value))
     if (result.success) {
       await fetchDrafts() // 刷新列表
       showDeleteConfirm.value = false
     } else {
       error.value = result.error || '删除草稿失败'
     }
-  } catch (err) {
-    console.error('删除草稿失败:', err)
-    error.value = err instanceof Error ? err.message : '删除草稿失败'
+  } catch (err: any) {
+    if (err.response?.status === 401) {
+      alert('登录已过期，请重新登录')
+      authStore.logout()
+      router.push('/login')
+    } else if (err.response?.status === 403) {
+      alert('权限不足，无法删除草稿')
+    } else {
+      console.error('删除草稿失败:', err)
+      error.value = err instanceof Error ? err.message : '删除草稿失败'
+    }
   } finally {
     loading.value = false
   }
@@ -138,6 +170,7 @@ onMounted(() => {
   }
 })
 </script>
+
 
 <style scoped>
 .drafts-container {

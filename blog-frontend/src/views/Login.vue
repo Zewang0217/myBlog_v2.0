@@ -64,12 +64,23 @@ const handleLogin = async () => {
     await authStore.login(loginForm.value)
     router.push('/articles')
   } catch (err: any) {
-    // 显示更具体的错误信息
-    error.value = err.message || '登录失败，请检查用户名和密码'
+    // 更详细的错误处理
+    if (err.response?.data?.message) {
+      error.value = err.response.data.message
+    } else if (err.response?.status === 401) {
+      error.value = '用户名或密码错误'
+    } else if (err.response?.status === 500) {
+      error.value = '服务器内部错误，请稍后重试'
+    } else if (err.message) {
+      error.value = err.message
+    } else {
+      error.value = '登录失败，请检查用户名和密码'
+    }
   } finally {
     loading.value = false
   }
 }
+
 </script>
 
 <style scoped>

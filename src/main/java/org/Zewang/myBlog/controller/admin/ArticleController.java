@@ -84,9 +84,7 @@ public class ArticleController {
         )
     })
     public ApiResponse<List<Article>> publishedList() {
-        List<Article> articles = articleService.getAllArticles().stream()
-            .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
-            .collect(Collectors.toList());
+        List<Article> articles = articleService.getPublishedArticles();
         return ApiResponse.success(articles);
     }
 

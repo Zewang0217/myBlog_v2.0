@@ -101,22 +101,36 @@ const deleteArticle = async () => {
     return
   }
 
-  // 检查是否有管理员权限（这里假设管理员角色为'ADMIN'）
-  const hasAdminRole = authStore.user?.role === 'ADMIN'
+  // 改进权限检查方式
+  const userRole = authStore.user?.role
+  const hasAdminRole = userRole === 'ADMIN' || userRole === 'ROLE_ADMIN'
 
   if (!hasAdminRole) {
-    // 权限不足提示
     alert('权限不足，只有管理员可以删除文章')
     return
   }
 
   if (article.value && confirm('确定要删除这篇文章吗？此操作不可恢复！')) {
-    const result = await deleteArticleById(article.value.id)
-    if (result.success) {
-      alert('文章删除成功')
-      router.push('/articles')
-    } else {
-      alert(`删除失败: ${result.error}`)
+    try {
+      const result = await deleteArticleById(article.value.id)
+      if (result.success) {
+        alert('文章删除成功')
+        router.push('/articles')
+      } else {
+        alert(`删除失败: ${result.error}`)
+      }
+    } catch (error: any) {
+      // 检查是否是权限错误
+      if (error.response?.status === 403) {
+        alert('权限不足，无法删除文章')
+      } else if (error.response?.status === 401) {
+        // Token过期或无效
+        alert('登录已过期，请重新登录')
+        authStore.logout()
+        router.push('/login')
+      } else {
+        alert('删除失败: ' + (error.message || '未知错误'))
+      }
     }
   }
 }

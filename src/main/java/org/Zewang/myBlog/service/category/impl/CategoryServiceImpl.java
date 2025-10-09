@@ -8,6 +8,8 @@ import org.Zewang.myBlog.common.exception.BusinessException;
 import org.Zewang.myBlog.model.Category;
 import org.Zewang.myBlog.repository.CategoryRepository;
 import org.Zewang.myBlog.service.category.CategoryService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> getAllCategories() {
+    @Cacheable(value = "categories", key = "'all'")    public List<Category> getAllCategories() {
         log.info("获取所有分类");
         try {
             return categoryRepository.findAll();
@@ -35,6 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Cacheable(value = "categories", key = "#id")
     public Category getCategoryById(String id) {
         log.info("获取分类 id={}", id);
 
@@ -54,6 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @CacheEvict(value = "categories", allEntries = true)
     public Category updateCategory(String id, Category category) {
         log.info("更新分类 id={}", id);
 
@@ -92,6 +96,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @CacheEvict(value = "categories", allEntries = true)
     public Category createCategory(Category category) {
         log.info("创建分类, 名称: {}", category.getName());
 
@@ -119,6 +124,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @CacheEvict(value = "categories", allEntries = true)
     public void deleteCategory(String id) {
         log.info("删除分类, ID: {}", id);
 

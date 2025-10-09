@@ -1,9 +1,13 @@
 spring:
-  application:
-    name:myBlog
   data:
     mongodb:
       uri: mongodb://localhost:27017/MyBlog
+    redis:
+      host: localhost
+      port: 6379
+      password: myblog123
+      database: 0
+      timeout: 2000ms  # 连接超时时间
 #  datasource:
 #    url: jdbc:mysql://localhost:3306/blog_v2?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
 #    username: blog_user

@@ -238,10 +238,17 @@ export const useArticle = () => {
         error.value = response.message
         return { success: false, error: response.message }
       }
-    } catch (err) {
-      error.value = '删除文章失败'
+    } catch (err: any) {
+      // 更详细的错误处理
+      if (err.response?.status === 401) {
+        error.value = '登录已过期，请重新登录'
+      } else if (err.response?.status === 403) {
+        error.value = '权限不足，无法删除文章'
+      } else {
+        error.value = '删除文章失败'
+      }
       console.error('Failed to delete article:', err)
-      return { success: false, error: '删除文章失败' }
+      return { success: false, error: error.value }
     } finally {
       loading.value = false
     }

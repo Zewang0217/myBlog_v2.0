@@ -7,7 +7,9 @@ import org.Zewang.myBlog.common.ApiResponse;
 import org.Zewang.myBlog.dto.RegisterDTO;
 import org.Zewang.myBlog.model.User;
 import org.Zewang.myBlog.service.user.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,5 +86,39 @@ public class UserController {
 
         log.info("用户" + registerDTO.getUsername() + "注册成功");
         return ApiResponse.success(savedUser);
+    }
+
+    // 获取用户信息
+    @GetMapping("/info")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @Operation(summary = "获取当前用户信息", description = "获取当前登录用户的信息")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "成功获取用户信息",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = User.class))}
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "401",
+            description = "未认证",
+            content = @Content
+        )
+    })
+    public ApiResponse<User> getCurrentUser(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ApiResponse.error(401, "未认证");
+        }
+
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+
+        if (user == null) {
+            return ApiResponse.error(404, "用户不存在");
+        }
+
+        // 不返回密码信息
+        user.setPassword(null);
+        return ApiResponse.success(user);
     }
 }

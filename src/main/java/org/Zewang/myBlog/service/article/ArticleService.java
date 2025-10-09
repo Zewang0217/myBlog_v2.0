@@ -17,8 +17,12 @@ public interface ArticleService {
     List<Article> getAllArticles();
 
     /**
-     * 通过分类ID获取文章
+     * 获取已发布文章
      */
+    public List<Article> getPublishedArticles();
+        /**
+         * 通过分类ID获取文章
+         */
     List<Article> getArticlesByCategoryIds(Set<String> categoryIds);
 
     /**

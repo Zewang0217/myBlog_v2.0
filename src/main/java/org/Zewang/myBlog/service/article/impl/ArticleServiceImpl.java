@@ -15,6 +15,8 @@ import org.Zewang.myBlog.model.enums.ArticleStatus;
 import org.Zewang.myBlog.repository.ArticleRepository;
 import org.Zewang.myBlog.repository.CategoryRepository;
 import org.Zewang.myBlog.service.article.ArticleService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,6 +33,7 @@ public class ArticleServiceImpl implements ArticleService {
     private final CategoryRepository categoryRepository;
 
     @Override
+    @Cacheable(value = "articles", key = "'all'")
     public List<Article> getAllArticles() {
         log.info("获取所有文章");
         try {
@@ -46,6 +49,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(value = "articles", key = "'published'")
+    public List<Article> getPublishedArticles() {
+        log.info("获取已发布的文章");
+        try {
+            return articleRepository.findByStatus(ArticleStatus.PUBLISHED);
+        } catch (Exception e) {
+            log.error("获取已发布文章列表失败", e);
+            throw new BusinessException("获取已发布文章列表失败: " + e.getMessage());
+        }
+    }
+
+    @Override
+    @Cacheable(value = "articles", key = "'byCategoryIds:' + #categoryIds")
     public List<Article> getArticlesByCategoryIds(Set<String> categoryIds) {
         log.info("根据分类ID获取文章, categoryIds={}", categoryIds);
 
@@ -69,6 +85,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(value = "articles", key = "'byId:' + #id")
     public Optional<Article> getById(String id) {
         log.info("根据ID获取文章, id={}", id);
 
@@ -85,6 +102,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @CacheEvict(value = "articles", allEntries = true)
     public Article createArticle(CreateArticleDTO dto) {
         log.info("创建文章, 标题: {}", dto.title());
 
@@ -127,6 +145,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @CacheEvict(value = "articles", allEntries = true)
     public Article updateArticle(String id, CreateArticleDTO dto) {
         log.info("更新文章, ID: {}", id);
 
@@ -176,6 +195,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @CacheEvict(value = "articles", allEntries = true)
     public Article publishArticle(String id) {
         log.info("发布文章，ID：{}", id);
 
@@ -207,6 +227,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @CacheEvict(value = "articles", allEntries = true)
     public void deleteArticle(String id) {
         log.info("删除文章, ID: {}", id);
 
@@ -235,6 +256,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(value = "articles", key = "'search_' + #keyword")
     public List<Article> searchArticles(String keyword) {
         log.info("搜索文章，关键词：{}", keyword);
 
