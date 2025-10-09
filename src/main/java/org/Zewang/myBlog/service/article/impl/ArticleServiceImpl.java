@@ -1,6 +1,7 @@
 package org.Zewang.myBlog.service.article.impl;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -230,6 +231,30 @@ public class ArticleServiceImpl implements ArticleService {
         } catch (Exception e) {
             log.error("删除文章失败, ID: " + id, e);
             throw new BusinessException("删除文章失败: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Article> searchArticles(String keyword) {
+        log.info("搜索文章，关键词：{}", keyword);
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return getAllArticles();
+        }
+
+        try {
+            List<Article> allArticles = getAllArticles();
+            String lowerCaseKeyword = keyword.toLowerCase().trim();
+
+            return allArticles.stream()
+                .filter(article ->
+                    (article.getTitle() != null && article.getTitle().toLowerCase().contains(lowerCaseKeyword)) ||
+                        (article.getContent() != null && article.getContent().toLowerCase().contains(lowerCaseKeyword)) ||
+                        (article.getAuthor() != null && article.getAuthor().toLowerCase().contains(lowerCaseKeyword))
+                ).collect(Collectors.toList());
+        } catch (Exception e) {
+            log.error("搜索文章失败, 关键词: " + keyword, e);
+            throw new BusinessException("搜索文章失败: " + e.getMessage());
         }
     }
 }

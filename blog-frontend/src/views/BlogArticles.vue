@@ -3,10 +3,12 @@
 import { ref, onMounted, computed } from 'vue'
 import { useArticles } from '@/composables/useArticles'
 import { useCategories } from '@/composables/useCategories'
-import { ArticleStatus } from '@/types/article'
+import {type Article, ArticleStatus} from '@/types/article'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
-import {getArticlesByCategories} from "@/types/api.ts";
+import {type ApiResponse, getArticlesByCategories} from "@/types/api.ts"
+import { searchArticles } from "@/api/articleService.ts";
+import apiClient from "@/api/apiClient.ts";
 
 const { articles, loading, error, fetchArticles, fetchPublishedArticles } = useArticles()
 const { categories, fetchCategories } = useCategories()
@@ -15,7 +17,10 @@ const router = useRouter()
 
 // 分类筛选相关
 const showCategoryFilter = ref(false)
-const selectedCategoryIds = ref<number[]>([])
+const selectedCategoryIds = ref<string[]>([]) // 修复1: 统一使用 string[] 类型
+
+// 搜索相关
+const searchKeyword = ref('')
 
 // 组件挂载时获取已发布的文章列表和分类
 onMounted(() => {
@@ -29,7 +34,7 @@ const formatDate = (dateString: string) => {
 }
 
 // 切换分类选择
-const toggleCategory = (categoryId: number) => {
+const toggleCategory = (categoryId: string) => { // 修复2: 参数类型改为 string
   const index = selectedCategoryIds.value.indexOf(categoryId)
   if (index > -1) {
     selectedCategoryIds.value.splice(index, 1)
@@ -37,62 +42,107 @@ const toggleCategory = (categoryId: number) => {
     selectedCategoryIds.value.push(categoryId)
   }
   // 重新加载文章
-  loadArticles();
+  loadArticles()
 }
 
 // 加载文章
-const loadArticles = async() => {
-  // 如果有选中的分类，则使用分类筛选api
-  if (selectedCategoryIds.value.length > 0) {
-    try {
-      loading.value = true;
-      error.value = null;
+const loadArticles = async () => {
+  try {
+    loading.value = true
+    error.value = null
 
-      const response = await getArticlesByCategories(selectedCategoryIds.value);
+    // 如果有搜索关键词，执行搜索
+    if (searchKeyword.value.trim()) {
+      const response = await searchArticles(searchKeyword.value.trim())
       if (response.code === 200) {
-        articles.value = response.data;
+        articles.value = response.data
       } else {
-        error.value = response.message;
+        error.value = response.message
       }
-    } catch (err: any) {
-      error.value = err.message || '加载文章失败';
-    } finally {
-      loading.value = false;
+      return
     }
-    return;
+
+    // 如果有选中的分类，则使用分类筛选api
+    if (selectedCategoryIds.value.length > 0) {
+      // 直接使用字符串数组，无需转换
+      const response = await getArticlesByCategories(selectedCategoryIds.value)
+      if (response.code === 200) {
+        articles.value = response.data
+      } else {
+        error.value = response.message
+      }
+      return
+    }
+
+    // 默认加载已发布的文章
+    await fetchPublishedArticles()
+  } catch (err: any) {
+    error.value = err.message || '加载文章失败'
+  } finally {
+    loading.value = false
   }
+}
+
+// 搜索文章，添加分类筛选功能
+const searchArticlesWithFilters = async (params: any) => {
+  try {
+    // 如果同时有搜索关键词和分类，则需要后端API支持
+    // 这里假设有一个API可以同时处理搜索和分类筛选
+    const response = await apiClient.get<ApiResponse<Article[]>>('/api/article/searchWithFilters', { params })
+    return response.data
+  } catch (err) {
+    console.error('搜索文章失败:', err)
+    throw err
+  }
+}
+
+// 搜索文章 - 修复4: 添加搜索功能
+const searchArticlesByKeyword = async () => {
+  await loadArticles()
+}
+
+// 清除搜索
+const clearSearch = async () => {
+  searchKeyword.value = ''
+  selectedCategoryIds.value = []
+  await loadArticles()
 }
 
 // 清除分类筛选
 const clearCategories = () => {
   selectedCategoryIds.value = []
+  // 不再特殊处理搜索关键词
+  loadArticles()
 }
 
 // 应用分类筛选
 const applyCategoryFilter = async () => {
+  // 清除搜索关键词
+  searchKeyword.value = ''
   // 如果有选中的分类，则根据分类筛选文章
   if (selectedCategoryIds.value.length > 0) {
     try {
-      loading.value = true;
-      error.value = null;
+      loading.value = true
+      error.value = null
 
-      const response = await getArticlesByCategories(selectedCategoryIds.value);
+      // 直接使用字符串数组，无需转换
+      const response = await getArticlesByCategories(selectedCategoryIds.value)
       if (response.code === 200) {
-        articles.value = response.data;
+        articles.value = response.data
       } else {
-        error.value = response.message;
+        error.value = response.message
       }
     } catch (err: any) {
-      error.value = err.message || '获取文章列表失败';
+      error.value = err.message || '获取文章列表失败'
     } finally {
-      loading.value = false;
+      loading.value = false
     }
   } else {
     // 如果没有选中分类，获取所有已发布文章
-    await fetchPublishedArticles();
+    await fetchPublishedArticles()
   }
-  showCategoryFilter.value = false;
-};
+  showCategoryFilter.value = false
+}
 </script>
 
 <template>
@@ -101,6 +151,23 @@ const applyCategoryFilter = async () => {
       <h2>文章列表</h2>
       <!-- 只有登录后才显示创建文章按钮 -->
       <div v-if="authStore.isAuthenticated" class="header-actions">
+        <!-- 搜索框 - 修复5: 添加搜索功能 -->
+        <div class="search-container">
+          <input
+            v-model="searchKeyword"
+            type="text"
+            placeholder="搜索文章..."
+            class="search-input"
+            @keyup.enter="searchArticlesByKeyword"
+          />
+          <button @click="searchArticlesByKeyword" class="search-btn">搜索</button>
+          <button v-if="searchKeyword || selectedCategoryIds.length > 0"
+                  @click="clearSearch"
+                  class="clear-search-btn">
+            清除
+          </button>
+        </div>
+
         <button
           class="filter-btn"
           @click="showCategoryFilter = !showCategoryFilter"
@@ -164,7 +231,7 @@ const applyCategoryFilter = async () => {
           <router-link :to="`/article/${article.id}`" class="btn-view">阅读更多</router-link>
           <!-- 只有登录后才显示编辑按钮，且只能编辑自己创建的草稿 -->
           <router-link
-            v-if="authStore.isAuthenticated && article.status === 0"
+            v-if="authStore.isAuthenticated && article.status === ArticleStatus.DRAFT"
             :to="`/article/edit/${article.id}`"
             class="btn-edit">
             编辑
@@ -188,10 +255,44 @@ const applyCategoryFilter = async () => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .header h2 {
   margin: 0;
+}
+
+/* 搜索框样式 - 修复6: 添加搜索框样式 */
+.search-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.search-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.search-btn, .clear-search-btn {
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+}
+
+.search-btn {
+  background-color: #42b983;
+  color: white;
+}
+
+.clear-search-btn {
+  background-color: #6c757d;
+  color: white;
 }
 
 .filter-btn, .create-btn {
@@ -407,5 +508,24 @@ const applyCategoryFilter = async () => {
 
 .apply-btn:hover {
   background-color: #359c6d;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .search-container {
+    flex: 1;
+    min-width: 100%;
+  }
 }
 </style>

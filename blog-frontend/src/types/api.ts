@@ -40,7 +40,7 @@ export const getCategories = (): Promise<ApiResponse<Category[]>> => {
 };
 
 // 根据分类筛选文章
-export const getArticlesByCategories = (categoryIds: number[]): Promise<ApiResponse<Article[]>> => {
+export const getArticlesByCategories = (categoryIds: string[]): Promise<ApiResponse<Article[]>> => {
   const params = categoryIds.length > 0 ? { categoryIds: categoryIds.join(',') } : {};
   return apiClient.get<ApiResponse<Article[]>>('/api/article/listByCategories', { params })
   .then(response => response.data);

@@ -133,7 +133,7 @@ myBlog-backend/ # 后端项目
 - 前端单元测试：使用Vitest和Vue Test Utils
 - 端到端测试：使用Cypress进行E2E测试
 - 后端单元测试：使用JUnit 5和Mockito
-- API测试：使用Postman集合进行接口测试
+- API测试：使用Postman集合进行接口测试 ok
 
 ## 🚀 部署方案
 

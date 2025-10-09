@@ -12,9 +12,12 @@ import {
   updateArticle,
   publishArticle,
   deleteArticle,
-  getArticlesByCategories
+  getArticlesByCategories,
+  searchArticles
 } from '@/api/articleService'
 import { ArticleStatus } from '@/types/article'
+
+const searchResults: Ref<Article[]> = ref([])
 
 // 定义文章列表的组合式函数
 export const useArticles = () => {
@@ -244,16 +247,41 @@ export const useArticle = () => {
     }
   }
 
+  // 搜索文章
+  const searchArticleList = async (keyword: string) => {
+    loading.value = true;
+    error.value = null;
+    try {
+      const response = await searchArticles(keyword);
+      if (response && response.code === 200) {
+        searchResults.value = response.data; // 正确赋值到数组类型
+        return { success: true, data: response.data };
+      } else {
+        error.value = response?.message || '未知错误';
+        return { success: false, error: error.value };
+      }
+    } catch (err) {
+      error.value = '搜索文章失败';
+      console.error('Failed to search articles:', err);
+      return { success: false, error: error.value };
+    } finally {
+      loading.value = false;
+    }
+  };
+
+
   // 返回响应式数据和方法
   return {
     article,
+    searchResults,
     loading,
     error,
     fetchArticle,
     create,
     update,
     publish,
-    deleteArticleById
+    deleteArticleById,
+    searchArticleList
   }
 
 }

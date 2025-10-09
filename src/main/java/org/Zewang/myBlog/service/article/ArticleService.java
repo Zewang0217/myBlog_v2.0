@@ -45,4 +45,10 @@ public interface ArticleService {
      * 发布文章
      */
     Article publishArticle(String id);
+
+    /**
+     * 检索文章
+     */
+    List<Article> searchArticles(String keyword);
+
 }

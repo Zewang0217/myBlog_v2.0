@@ -317,4 +317,83 @@ public class ArticleController {
         List<Article> articles = articleService.getArticlesByCategoryIds(categoryIdSet);
         return ApiResponse.success(articles);
     }
+
+    @GetMapping("/search")
+    @PreAuthorize("permitAll()")
+    @Operation(summary = "搜索文章", description = "根据关键字搜索文章")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "成功搜索文章",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        )
+    })
+    public ApiResponse<List<Article>> searchArticles(
+        @Parameter(description = "关键词") @RequestParam(required = false) String keyword
+    ) {
+        List<Article> articles = articleService.searchArticles(keyword);
+
+        List<Article> publishedArticles = articles.stream()
+            .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
+            .collect(Collectors.toList());
+        return ApiResponse.success(publishedArticles);
+    }
+
+    @GetMapping("/searchWithFilters")
+    @PreAuthorize("permitAll()")
+    @Operation(summary = "根据搜索关键词和分类筛选文章", description = "根据关键词和分类ID列表筛选文章")
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "成功获取筛选后的文章列表",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = Article.class))}
+        )
+    })
+    public ApiResponse<List<Article>> searchWithFilters(
+        @Parameter(description = "关键词") @RequestParam(required = false) String keyword,
+        @Parameter(description = "分类ID列表，用逗号分隔") @RequestParam(required = false) String categoryIds) {
+
+        List<Article> articles;
+
+        // 如果同时提供了关键词和分类
+        if (keyword != null && !keyword.isEmpty() && categoryIds != null && !categoryIds.isEmpty()) {
+            // 先根据关键词搜索
+            articles = articleService.searchArticles(keyword);
+            // 再根据分类筛选
+            Set<String> categoryIdSet = Arrays.stream(categoryIds.split(","))
+                .map(String::trim)
+                .collect(Collectors.toSet());
+            articles = articles.stream()
+                .filter(article -> article.getCategories() != null &&
+                    article.getCategories().stream()
+                        .anyMatch(category -> categoryIdSet.contains(category.getId())))
+                .collect(Collectors.toList());
+        }
+        // 如果只提供了关键词
+        else if (keyword != null && !keyword.isEmpty()) {
+            articles = articleService.searchArticles(keyword);
+        }
+        // 如果只提供了分类
+        else if (categoryIds != null && !categoryIds.isEmpty()) {
+            Set<String> categoryIdSet = Arrays.stream(categoryIds.split(","))
+                .map(String::trim)
+                .collect(Collectors.toSet());
+            articles = articleService.getArticlesByCategoryIds(categoryIdSet);
+        }
+        // 如果都没有提供
+        else {
+            articles = articleService.getAllArticles().stream()
+                .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
+                .collect(Collectors.toList());
+        }
+
+        // 只返回已发布的文章
+        List<Article> publishedArticles = articles.stream()
+            .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
+            .collect(Collectors.toList());
+
+        return ApiResponse.success(publishedArticles);
+    }
 }

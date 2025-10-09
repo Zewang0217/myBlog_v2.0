@@ -56,6 +56,22 @@ export const deleteArticle = (id: string): Promise<ApiResponse<void>> => {
   .then(response => response.data)
 }
 
+// 搜索文章
+export const searchArticles = (keyword: string): Promise<ApiResponse<Article[]>> => {
+  const params = keyword ? { keyword } : {};
+  return apiClient.get<ApiResponse<Article[]>>('/api/article/search', { params })
+  .then(response => response.data);
+}
+
+// 根据筛选条件搜索文章
+export const searchArticlesWithFilters = (
+  params: { keyword?: string; categoryIds?: string }
+): Promise<ApiResponse<Article[]>> => {
+  return apiClient
+  .get<ApiResponse<Article[]>>('/api/article/searchWithFilters', { params })
+  .then(response => response.data);
+};
+
 // 获取分类列表
 export const getCategories = (): Promise<ApiResponse<Category[]>> => {
   return apiClient.get<ApiResponse<Category[]>>('/api/category')
