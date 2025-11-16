@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import org.Zewang.myBlog.model.enums.ArticleStatus;
 import java.util.List;
 
@@ -11,10 +13,12 @@ import java.util.List;
 public record CreateArticleDTO(
     @NotBlank(message = "标题不能为空")
     @Size(max = 200, message = "标题长度不能超过200个字符")
+    @Pattern(regexp = "^[^<>]*$", message = "标题不能包含特殊字符 <>")
     @Schema(description = "文章标题", requiredMode = Schema.RequiredMode.REQUIRED, example = "我的第一篇文章")
     String title,
 
     @NotBlank(message = "内容不能为空")
+    @Size(min = 10, message = "文章内容至少需要10个字符")
     @Schema(description = "文章内容", requiredMode = Schema.RequiredMode.REQUIRED)
     String content,
 
@@ -23,6 +27,7 @@ public record CreateArticleDTO(
     @Schema(description = "作者", example = "Zewang")
     String author,
 
+    @NotNull(message = "文章状态不能为空")
     @Schema(description = "文章状态")
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     ArticleStatus status,

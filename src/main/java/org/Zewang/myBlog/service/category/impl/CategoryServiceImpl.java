@@ -2,15 +2,23 @@ package org.Zewang.myBlog.service.category.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.Zewang.myBlog.common.exception.BusinessException;
+import org.Zewang.myBlog.dto.CreateCategoryDTO;
+import org.Zewang.myBlog.model.Article;
 import org.Zewang.myBlog.model.Category;
+import org.Zewang.myBlog.model.enums.ArticleStatus;
+import org.Zewang.myBlog.repository.ArticleRepository;
 import org.Zewang.myBlog.repository.CategoryRepository;
 import org.Zewang.myBlog.service.category.CategoryService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author "Zewang"
@@ -19,20 +27,70 @@ import org.springframework.stereotype.Service;
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/30 21:30
  */
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
+    private final ArticleRepository articleRepository;
+    private static final Logger log = LoggerFactory.getLogger(CategoryServiceImpl.class);
 
     @Override
     @Cacheable(value = "categories", key = "'all'")    public List<Category> getAllCategories() {
         log.info("获取所有分类");
         try {
-            return categoryRepository.findAll();
+            List<Category> categories = categoryRepository.findAll();
+            
+            // 统计每个分类的文章数量
+            Map<String, Long> categoryArticleCounts = getCategoryArticleCounts();
+            
+            // 设置文章数量
+            for (Category category : categories) {
+                Long count = categoryArticleCounts.getOrDefault(category.getId(), 0L);
+                category.setArticleCount(count.intValue());
+            }
+            
+            return categories;
         } catch (Exception e) {
             log.error("获取所有分类失败", e);
             throw new BusinessException("获取所有分类失败" + e.getMessage());
+        }
+    }
+    
+    /**
+     * 获取每个分类的文章数量统计
+     */
+    private Map<String, Long> getCategoryArticleCounts() {
+        try {
+            List<Article> allArticles = articleRepository.findAll();
+            
+            // 统计每个分类的文章数量（只统计已发布的文章）
+            return allArticles.stream()
+                .filter(article -> {
+                    if (article.getStatus() == null) return false;
+                    
+                    // 处理数字类型的状态
+                    if (article.getStatus() instanceof ArticleStatus) {
+                        return article.getStatus() == ArticleStatus.PUBLISHED;
+                    }
+                    
+                    // 处理字符串类型的状态
+                    if (article.getStatus() instanceof String) {
+                        return "PUBLISHED".equalsIgnoreCase((String) article.getStatus());
+                    }
+                    
+                    // 处理数字类型的状态
+                    if (article.getStatus() instanceof Number) {
+                        return ((Number) article.getStatus()).intValue() == 1;
+                    }
+                    
+                    return false;
+                })
+                .flatMap(article -> article.getCategories() != null ? 
+                         article.getCategories().stream() : java.util.stream.Stream.empty())
+                .collect(Collectors.groupingBy(Category::getId, Collectors.counting()));
+        } catch (Exception e) {
+            log.error("统计分类文章数量失败", e);
+            return java.util.Collections.emptyMap();
         }
     }
 
@@ -58,29 +116,29 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @CacheEvict(value = "categories", allEntries = true)
-    public Category updateCategory(String id, Category category) {
+    public Category updateCategory(String id, CreateCategoryDTO dto) {
         log.info("更新分类 id={}", id);
 
         if (id == null || id.isEmpty()) {
             throw new BusinessException("无效的分类ID");
         }
 
-        if (category == null) {
-            throw new BusinessException("无效的分类");
+        if (dto == null) {
+            throw new BusinessException("无效的分类数据");
         }
 
         try {
             Category existingCategory = categoryRepository.findById(id)
                 .orElseThrow(() -> new BusinessException("分类不存在"));
 
-            if (!existingCategory.getName().equals(category.getName()) &&
-                categoryRepository.existsByName(category.getName())) {
-                log.warn("更新失败，名称已被其他分类使用: {}", category.getName());
+            if (!existingCategory.getName().equals(dto.name()) &&
+                categoryRepository.existsByName(dto.name())) {
+                log.warn("更新失败，名称已被其他分类使用: {}", dto.name());
                 throw new BusinessException("分类名称已被其他分类使用");
             }
 
-            existingCategory.setName(category.getName());
-            existingCategory.setDescription(category.getDescription());
+            existingCategory.setName(dto.name());
+            existingCategory.setDescription(dto.description());
             existingCategory.setUpdateTime(LocalDateTime.now());
 
             Category updatedCategory = categoryRepository.save(existingCategory);
@@ -97,19 +155,22 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @CacheEvict(value = "categories", allEntries = true)
-    public Category createCategory(Category category) {
-        log.info("创建分类, 名称: {}", category.getName());
+    public Category createCategory(CreateCategoryDTO dto) {
+        log.info("创建分类, 名称: {}", dto.name());
 
-        if (category == null) {
+        if (dto == null) {
             throw new IllegalArgumentException("分类信息不能为空");
         }
 
-        if (categoryRepository.existsByName(category.getName())) {
-            log.warn("创建分类失败，名称已存在: {}", category.getName());
+        if (categoryRepository.existsByName(dto.name())) {
+            log.warn("创建分类失败，名称已存在: {}", dto.name());
             throw new BusinessException("分类名称已存在");
         }
 
         try {
+            Category category = new Category();
+            category.setName(dto.name());
+            category.setDescription(dto.description());
             category.setCreateTime(LocalDateTime.now());
             category.setUpdateTime(LocalDateTime.now());
 

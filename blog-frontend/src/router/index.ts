@@ -5,7 +5,8 @@ import { useAuthStore } from '@/stores/auth'
 const routes = [
   {
     path: '/',
-    redirect: '/articles'
+    name: 'Welcome',
+    component: () => import('@/views/Welcome.vue')
   },
   {
     path: '/login',
@@ -45,6 +46,12 @@ const routes = [
     path: '/drafts',
     name: 'Drafts',
     component: () => import('@/views/BlogArticleDrafts.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true }
+  },
+  {
+    path: '/categories',
+    name: 'Categories',
+    component: () => import('@/views/CategoryManager.vue'),
     meta: { requiresAuth: true }
   }
 ]
@@ -60,6 +67,9 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/login')
+  } else if (to.meta.requiresAdmin && !authStore.isAdmin) {
+    alert('您没有权限访问此页面。')
+    next('/') // 重定向到首页
   } else {
     next()
   }

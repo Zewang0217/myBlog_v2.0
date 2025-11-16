@@ -112,7 +112,7 @@
 
 ### 后端配置
 1. 安装MongoDB并创建数据库`MyBlog`
-2. 安装Redis并设置密码`myblog123`
+2. 安装Redis并设置密码`root`
 3. 修改`application.yml`中的数据库连接配置
 4. 运行`mvn spring-boot:run`启动后端服务
 

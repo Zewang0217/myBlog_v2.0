@@ -26,29 +26,62 @@ public enum ArticleStatus {
         this.description = description;
     }
 
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     /**
-     * 用于将JSON中的数字值转换为枚举
-     * @param code 状态码
+     * 用于将JSON中的数字值或字符串值转换为枚举
+     * @param value 状态值（数字或字符串）
      * @return 对应的枚举值
      */
     @JsonCreator
-    public static ArticleStatus fromCode(int code) {
-        for (ArticleStatus status : values()) {
-            if (status.code == code) {
-                return status;
+    public static ArticleStatus fromValue(Object value) {
+        if (value == null) {
+            return DRAFT;
+        }
+        
+        if (value instanceof Integer) {
+            int code = (Integer) value;
+            for (ArticleStatus status : values()) {
+                if (status.code == code) {
+                    return status;
+                }
+            }
+        } else if (value instanceof String) {
+            String strValue = ((String) value).trim().toUpperCase();
+            
+            // 直接按名称匹配（处理MongoDB中的字符串状态值）
+            for (ArticleStatus status : values()) {
+                if (status.name().equals(strValue)) {
+                    return status;
+                }
+            }
+            
+            // 尝试按代码匹配
+            try {
+                int code = Integer.parseInt(strValue);
+                for (ArticleStatus status : values()) {
+                    if (status.code == code) {
+                        return status;
+                    }
+                }
+            } catch (NumberFormatException ex) {
+                // 忽略，继续执行
             }
         }
         // 默认返回草稿状态
         return DRAFT;
+    }
+    
+    /**
+     * 用于Spring Data MongoDB的字符串转换
+     */
+    public static ArticleStatus fromString(String value) {
+        return fromValue(value);
+    }
+    
+    /**
+     * 用于Spring Data MongoDB的整数转换
+     */
+    public static ArticleStatus fromCode(Integer value) {
+        return fromValue(value);
     }
 
     /**
@@ -58,5 +91,12 @@ public enum ArticleStatus {
     @JsonValue
     public int toCode() {
         return code;
+    }
+    
+    /**
+     * 获取枚举名称，用于MongoDB存储
+     */
+    public String getName() {
+        return this.name();
     }
 }

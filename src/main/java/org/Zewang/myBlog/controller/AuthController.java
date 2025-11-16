@@ -1,5 +1,6 @@
 package org.Zewang.myBlog.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.Zewang.myBlog.common.ApiResponse;
 import org.Zewang.myBlog.dto.AuthResponseDTO;
@@ -32,20 +33,18 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/28 18:24
  */
-@Slf4j
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
+@Slf4j
 @Tag(name = "认证接口", description = "用户登录认证相关接口")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager; // 认证管理器
+    private final AuthenticationManager authenticationManager; // 认证管理器
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
     @PostMapping("/login")
     @Operation(summary = "用户登录", description = "用户登录获取JWT令牌")
@@ -65,7 +64,7 @@ public class AuthController {
     public ApiResponse<AuthResponseDTO> login(@RequestBody LoginDTO loginDTO) { // RequestBody作用：将json数据映射为对象
 
         // 在认证前添加日志
-        log.debug("Attempting authentication for user: {}", loginDTO.getUsername());
+        System.out.println("Attempting authentication for user: " + loginDTO.getUsername());
 
         // 步骤一：验证用户名和密码
         Authentication authentication = authenticationManager.authenticate( // 调用Spring Security的认证机制验证用户凭据
@@ -75,14 +74,14 @@ public class AuthController {
             )
         );
 
-        log.debug("Authentication successful for user: {}", loginDTO.getUsername());
+        System.out.println("Authentication successful for user: " + loginDTO.getUsername());
 
         // 步骤二：设置认证上下文
         SecurityContextHolder.getContext().setAuthentication(authentication); // 将认证信息保存到安全上下文中
 
         // 步骤三：获取用户详情并生成JWT令牌
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginDTO.getUsername()); // 获取用户详细信息
-        log.debug("User details loaded: {}", userDetails.getUsername());
+        System.out.println("User details loaded: " + userDetails.getUsername());
 
         String token = jwtUtil.generateToken(userDetails);
 

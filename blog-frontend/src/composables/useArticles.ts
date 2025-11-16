@@ -15,7 +15,8 @@ import {
   getArticlesByCategories,
   searchArticles
 } from '@/api/articleService'
-import { ArticleStatus } from '@/types/article'
+export { ArticleStatus } from '@/types/article'
+import { likeArticle, unlikeArticle } from '@/api/articleLikeService'
 
 const searchResults: Ref<Article[]> = ref([])
 
@@ -25,6 +26,7 @@ export const useArticles = () => {
   const articles: Ref<Article[]> = ref([])
   const loading = ref(false)
   const error = ref<string | null>(null)
+  const searchResults: Ref<Article[]> = ref([]) // 添加搜索结果
 
   // 获取所有文章
   const fetchArticles = async () => {
@@ -100,15 +102,39 @@ export const useArticles = () => {
     }
   }
 
+  // 搜索文章
+  const searchArticlesFunc = async (keyword: string) => {
+    loading.value = true;
+    error.value = null;
+    try {
+      const response = await searchArticles(keyword);
+      if (response && response.code === 200) {
+        searchResults.value = response.data;
+        return { success: true, data: response.data };
+      } else {
+        error.value = response?.message || '未知错误';
+        return { success: false, error: error.value };
+      }
+    } catch (err) {
+      error.value = '搜索文章失败';
+      console.error('Failed to search articles:', err);
+      return { success: false, error: error.value };
+    } finally {
+      loading.value = false;
+    }
+  };
+
   // 返回响应式数据和方法
   return {
     articles,
+    searchResults, // 导出搜索结果
     loading,
     error,
     fetchArticles,
     fetchPublishedArticles,
     fetchDraftArticles,
-    getArticlesByCategories: getArticlesByCategoriesApi
+    getArticlesByCategories: getArticlesByCategoriesApi,
+    searchArticles: searchArticlesFunc
   }
 }
 
@@ -277,6 +303,46 @@ export const useArticle = () => {
   };
 
 
+  // 切换文章点赞状态
+  const toggleArticleLike = async () => {
+    if (!article.value) {
+      return { success: false, error: '文章不存在' }
+    }
+
+    loading.value = true
+    error.value = null
+
+    // 乐观更新UI
+    const newIsLiked = !article.value.isLiked
+    const newLikeCount = newIsLiked 
+      ? (article.value.likeCount || 0) + 1 
+      : Math.max(0, (article.value.likeCount || 0) - 1)
+
+    const oldIsLiked = article.value.isLiked
+    const oldLikeCount = article.value.likeCount
+
+    article.value.isLiked = newIsLiked
+    article.value.likeCount = newLikeCount
+
+    try {
+      if (newIsLiked) {
+        await likeArticle(article.value.id)
+      } else {
+        await unlikeArticle(article.value.id)
+      }
+      return { success: true }
+    } catch (err) {
+      // 回滚乐观更新
+      article.value.isLiked = oldIsLiked
+      article.value.likeCount = oldLikeCount
+      
+      console.error('文章点赞操作失败:', err)
+      return { success: false, error: '点赞操作失败' }
+    } finally {
+      loading.value = false
+    }
+  }
+
   // 返回响应式数据和方法
   return {
     article,
@@ -288,7 +354,8 @@ export const useArticle = () => {
     update,
     publish,
     deleteArticleById,
-    searchArticleList
+    searchArticleList,
+    toggleArticleLike
   }
 
 }

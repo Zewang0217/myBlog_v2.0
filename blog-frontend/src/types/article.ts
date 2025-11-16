@@ -5,8 +5,10 @@ export interface Article {
   author: string
   createTime: string
   updateTime: string
-  status: number
+  status: number | string  // 支持数字和字符串两种格式
   categories?: Category[]
+  likeCount: number
+  isLiked?: boolean
 }
 
 export interface CreateArticleDTO {
@@ -29,6 +31,7 @@ export interface Category {
   description: string;
   createTime: string;
   updateTime: string;
+  articleCount?: number;
 }
 
 export interface ArticleCategory {

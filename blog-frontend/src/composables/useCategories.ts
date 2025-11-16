@@ -15,6 +15,7 @@ interface UseCategoriesReturn {
   fetchCategories: () => Promise<void>;
   createCategory: (category: Omit<Category, 'id' | 'createTime' | 'updateTime'>) => Promise<void>;
   deleteCategory: (id: string) => Promise<void>;
+  updateCategory: (category: Category) => Promise<void>;
   getArticlesByCategories: (categoryIds: string[]) => Promise<any>;
 }
 
@@ -69,6 +70,25 @@ export const useCategories = (): UseCategoriesReturn => {
       loading.value = false;
     }
   };
+  const updateCategory = async (category: Category) => {
+    loading.value = true;
+    error.value = null;
+    try {
+      // 假设有一个更新分类的API
+      const response = await createCategoryApi({
+        name: category.name,
+        description: category.description
+      });
+      if (response.code !== 200) {
+        throw new Error(response.message);
+      }
+    } catch (err: any) {
+      error.value = err.message || '更新分类失败';
+      throw err;
+    } finally {
+      loading.value = false;
+    }
+  };
   
   // 根据分类获取文章
   const getArticlesByCategoriesApi = async (categoryIds: string[]) => {
@@ -88,6 +108,7 @@ export const useCategories = (): UseCategoriesReturn => {
     fetchCategories, 
     createCategory, 
     deleteCategory,
+    updateCategory,
     getArticlesByCategories: getArticlesByCategoriesApi
   };
 };

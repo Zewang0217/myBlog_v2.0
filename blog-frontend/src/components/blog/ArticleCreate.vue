@@ -30,33 +30,39 @@
 
       <div class="form-group">
         <label for="content">内容:</label>
-        <textarea
-          id="content"
+        <SimpleMarkdownEditor
           v-model="form.content"
-          required
-          :disabled="loading"
-          rows="10"
-          class="form-control"
-        ></textarea>
+          @auto-save="handleAutoSave"
+          placeholder="在此输入文章内容，支持Markdown语法..."
+          class="markdown-editor-container"
+        />
+        <div v-if="autoSaveStatus" class="auto-save-status">
+          {{ autoSaveStatus }}
+        </div>
       </div>
 
       <div class="form-group">
-        <label>
-          <input
-            type="radio"
-            v-model="form.status"
-            :value="ArticleStatus.DRAFT"
-            :disabled="loading"
-          /> 保存为草稿
-        </label>
-        <label>
-          <input
-            type="radio"
-            v-model="form.status"
-            :value="ArticleStatus.PUBLISHED"
-            :disabled="loading"
-          /> 直接发布
-        </label>
+        <label>文章状态:</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input
+              type="radio"
+              v-model="form.status"
+              :value="ArticleStatus.DRAFT"
+              :disabled="loading"
+              required
+            /> 保存为草稿
+          </label>
+          <label class="radio-label">
+            <input
+              type="radio"
+              v-model="form.status"
+              :value="ArticleStatus.PUBLISHED"
+              :disabled="loading"
+              required
+            /> 直接发布
+          </label>
+        </div>
       </div>
 
       <div class="form-actions">
@@ -71,14 +77,20 @@
       <div v-if="error" class="error-message">
         错误: {{ error }}
       </div>
+
+      <div v-if="error" class="error-message">
+        错误: {{ error }}
+      </div>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { useArticle, ArticleStatus } from '@/composables/useArticles'
+import { reactive, ref } from 'vue'
+import { useArticle } from '@/composables/useArticles'
+import { ArticleStatus } from '@/types/article'
 import { useRouter } from 'vue-router'
+import SimpleMarkdownEditor from '@/components/blog/SimpleMarkdownEditor.vue'
 
 const router = useRouter()
 const { loading, error, create } = useArticle()
@@ -90,6 +102,38 @@ const form = reactive({
   author: '',
   status: ArticleStatus.DRAFT
 })
+
+// 自动保存状态
+const autoSaveStatus = ref('')
+
+// 处理自动保存
+const handleAutoSave = async (content: string) => {
+  // 只有当标题不为空时才自动保存
+  if (form.title.trim() !== '') {
+    autoSaveStatus.value = '自动保存中...'
+    
+    try {
+      // 创建一个临时的草稿对象
+      const draftForm = {
+        ...form,
+        content: content,
+        status: ArticleStatus.DRAFT
+      }
+      
+      // 调用创建或更新方法
+      const result = await create(draftForm)
+      
+      if (result.success && result.data) {
+        autoSaveStatus.value = `已自动保存: ${new Date().toLocaleTimeString()}`
+      } else {
+        autoSaveStatus.value = '自动保存失败'
+      }
+    } catch (err) {
+      console.error('自动保存失败:', err)
+      autoSaveStatus.value = '自动保存失败'
+    }
+  }
+}
 
 // 提交表单
 const handleSubmit = async () => {
@@ -106,7 +150,9 @@ const handleSubmit = async () => {
 
 // 返回文章列表
 const goBack = () => {
-  router.push('/articles')
+  if (confirm('确定要离开页面吗？未保存的内容将会丢失。')) {
+    router.push('/articles')
+  }
 }
 </script>
 
@@ -134,6 +180,20 @@ const goBack = () => {
   color: #333;
 }
 
+.radio-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 5px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-weight: normal;
+}
+
 .form-control {
   width: 100%;
   padding: 10px;
@@ -146,6 +206,13 @@ const goBack = () => {
 .form-control:focus {
   outline: none;
   border-color: #42b983;
+}
+
+.markdown-editor-container {
+  height: 500px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #ddd;
 }
 
 .form-actions {

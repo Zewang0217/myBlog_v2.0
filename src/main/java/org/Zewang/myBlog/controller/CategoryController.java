@@ -1,8 +1,10 @@
 package org.Zewang.myBlog.controller;
 
 import java.util.List;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.Zewang.myBlog.common.ApiResponse;
+import org.Zewang.myBlog.dto.CreateCategoryDTO;
 import org.Zewang.myBlog.model.Category;
 import org.Zewang.myBlog.service.category.CategoryService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -81,10 +83,10 @@ public class CategoryController {
         @io.swagger.v3.oas.annotations.parameters.RequestBody(
             description = "分类信息",
             required = true,
-            content = @Content(schema = @Schema(implementation = Category.class))
+            content = @Content(schema = @Schema(implementation = CreateCategoryDTO.class))
         )
-        @RequestBody Category category) {
-        Category createdCategory = categoryService.createCategory(category);
+        @Valid @RequestBody CreateCategoryDTO dto) {
+        Category createdCategory = categoryService.createCategory(dto);
         return ApiResponse.success(createdCategory);
     }
 
@@ -116,14 +118,14 @@ public class CategoryController {
         )
     })
     public ApiResponse<Category> update(
-        @Parameter(description = "分类ID") @PathVariable("id") String id,
+        @Parameter(description = "分类ID", required = true) @PathVariable String id,
         @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "更新的分类信息",
+            description = "分类信息",
             required = true,
-            content = @Content(schema = @Schema(implementation = Category.class))
+            content = @Content(schema = @Schema(implementation = CreateCategoryDTO.class))
         )
-        @RequestBody Category category) {
-        Category updatedCategory = categoryService.updateCategory(id, category);
+        @Valid @RequestBody CreateCategoryDTO dto) {
+        Category updatedCategory = categoryService.updateCategory(id, dto);
         return ApiResponse.success(updatedCategory);
     }
 

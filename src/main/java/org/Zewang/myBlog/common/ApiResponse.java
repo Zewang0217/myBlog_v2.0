@@ -32,4 +32,11 @@ public class ApiResponse<T> {
         response.message = message;
         return response;
     }
+
+    public static <T> ApiResponse<T> error(String message) {
+        ApiResponse<T> response = new ApiResponse<>();
+        response.code = 500;
+        response.message = message;
+        return response;
+    }
 }

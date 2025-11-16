@@ -4,7 +4,8 @@ import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.Zewang.myBlog.model.User;
 import org.Zewang.myBlog.repository.UserRepository;
 import org.Zewang.myBlog.service.user.UserService;
@@ -20,9 +21,9 @@ import org.springframework.stereotype.Service;
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/28 18:16
  */
-@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;

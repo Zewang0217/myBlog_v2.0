@@ -21,7 +21,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/30 21:14
  */
-@Data
 @Accessors(chain = true)
 @Document(collection = "categories")
 @Schema(description = "文章分类实体")
@@ -52,4 +51,56 @@ public class Category {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime updateTime;
+    
+    @Schema(description = "文章数量")
+    private Integer articleCount = 0;
+    
+    // Getters and Setters
+    public String getId() {
+        return id;
+    }
+    
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+    
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+    
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+    
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+    
+    public Integer getArticleCount() {
+        return articleCount;
+    }
+    
+    public void setArticleCount(Integer articleCount) {
+        this.articleCount = articleCount;
+    }
 }

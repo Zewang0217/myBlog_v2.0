@@ -1,6 +1,7 @@
 package org.Zewang.myBlog.service.category;
 
 import java.util.List;
+import org.Zewang.myBlog.dto.CreateCategoryDTO;
 import org.Zewang.myBlog.model.Category;
 
 /**
@@ -16,9 +17,9 @@ public interface CategoryService {
 
     Category getCategoryById(String id);
 
-    Category createCategory(Category category);
+    Category createCategory(CreateCategoryDTO dto);
 
-    Category updateCategory(String id, Category category);
+    Category updateCategory(String id, CreateCategoryDTO dto);
 
     void deleteCategory(String id);
 

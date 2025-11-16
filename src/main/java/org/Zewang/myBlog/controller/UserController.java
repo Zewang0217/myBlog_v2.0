@@ -2,7 +2,8 @@ package org.Zewang.myBlog.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.Zewang.myBlog.common.ApiResponse;
 import org.Zewang.myBlog.dto.RegisterDTO;
 import org.Zewang.myBlog.model.User;
@@ -33,11 +34,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 @PreAuthorize("permitAll()")
-@Slf4j
 @Tag(name = "用户接口", description = "用户注册等相关接口")
 public class UserController {
 
     private final UserService userService;
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/register")
     @Operation(summary = "用户注册", description = "注册新用户")

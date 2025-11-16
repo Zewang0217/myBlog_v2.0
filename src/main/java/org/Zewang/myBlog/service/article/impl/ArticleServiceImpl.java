@@ -1,12 +1,13 @@
 package org.Zewang.myBlog.service.article.impl;
 
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.Zewang.myBlog.common.exception.BusinessException;
 import org.Zewang.myBlog.dto.CreateArticleDTO;
 import org.Zewang.myBlog.model.Article;
@@ -25,10 +26,10 @@ import java.util.List;
 /**
  * 文章服务实现类 (MongoDB 版本)
  */
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService {
+    private static final Logger log = LoggerFactory.getLogger(ArticleServiceImpl.class);
     private final ArticleRepository articleRepository;
     private final CategoryRepository categoryRepository;
 
@@ -271,11 +272,10 @@ public class ArticleServiceImpl implements ArticleService {
             return allArticles.stream()
                 .filter(article ->
                     (article.getTitle() != null && article.getTitle().toLowerCase().contains(lowerCaseKeyword)) ||
-                        (article.getContent() != null && article.getContent().toLowerCase().contains(lowerCaseKeyword)) ||
-                        (article.getAuthor() != null && article.getAuthor().toLowerCase().contains(lowerCaseKeyword))
+                        (article.getContent() != null && article.getContent().toLowerCase().contains(lowerCaseKeyword))
                 ).collect(Collectors.toList());
         } catch (Exception e) {
-            log.error("搜索文章失败, 关键词: " + keyword, e);
+            System.err.println("搜索文章失败, 关键词: " + keyword + ", 错误: " + e.getMessage());
             throw new BusinessException("搜索文章失败: " + e.getMessage());
         }
     }

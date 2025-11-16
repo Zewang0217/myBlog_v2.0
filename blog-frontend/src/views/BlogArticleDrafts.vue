@@ -65,17 +65,19 @@ const { articles, loading, error, fetchDraftArticles } = useArticles()
 const drafts = articles
 const { deleteArticleById, publish } = useArticle()
 
-// 检查用户是否已认证
+// 检查用户是否已认证和是否为管理员
 const isAuthenticated = computed(() => authStore.isAuthenticated)
+const isAdmin = computed(() => authStore.user?.role === 'ADMIN' || authStore.user?.role === 'ROLE_ADMIN')
 
-// 如果未认证，重定向到登录页面
-if (!isAuthenticated.value) {
-  router.push('/login')
+// 如果未认证或不是管理员，重定向到首页
+if (!isAuthenticated.value || !isAdmin.value) {
+  alert('您没有权限访问草稿箱页面。')
+  router.push('/')
 }
 
 // 状态管理
 const showDeleteConfirm = ref(false)
-const selectedDraftId = ref<number | null>(null)
+const selectedDraftId = ref<string | null>(null)
 
 // 获取草稿列表
 const fetchDrafts = async () => {
