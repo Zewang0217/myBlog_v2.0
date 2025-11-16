@@ -77,7 +77,7 @@ export const useComments = () => {
                 if (!commentList[i].replies) {
                   commentList[i].replies = []
                 }
-                commentList[i].replies.push(response.data)
+                commentList[i].replies!.push(response.data)
                 return true
               }
               if (commentList[i].replies && findAndAddReply(commentList[i].replies)) {
@@ -146,7 +146,8 @@ export const useComments = () => {
           findAndRemoveReply(comments.value || [])
         } else {
           // 如果是顶级评论，直接从评论列表中移除
-          comments.value = comments.value.filter(comment => comment.id !== commentId)
+          comments.value = (comments.value || []).filter(comment => comment.id !== commentId)
+
         }
         return { success: true }
       } else {

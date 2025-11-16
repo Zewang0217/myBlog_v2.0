@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.Zewang.myBlog.common.*;
 import org.Zewang.myBlog.common.ApiResponse;
 import org.Zewang.myBlog.dto.CreateArticleDTO;
 import org.Zewang.myBlog.model.Article;
@@ -300,10 +301,8 @@ public class ArticleController {
         @Parameter(description = "分类ID列表，用逗号分隔")
         @RequestParam(required = false) String categoryIds) {
         if (categoryIds == null || categoryIds.isEmpty()) {
-            // 如果没有提供分类ID，则返回空列表或所有已发布文章
-            List<Article> articles = articleService.getAllArticles().stream()
-                .filter(article -> article.getStatus() == ArticleStatus.PUBLISHED)
-                .collect(Collectors.toList());
+            // 如果没有提供分类ID，则返回所有文章（不过滤状态）
+            List<Article> articles = articleService.getAllArticles();
             return ApiResponse.success(articles);
         }
 

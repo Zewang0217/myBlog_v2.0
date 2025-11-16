@@ -276,6 +276,101 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* 深色主题支持 */
+[data-theme="dark"] .article-list {
+  background: var(--background-secondary);
+}
+
+[data-theme="dark"] .header {
+  background: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .header h2 {
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="dark"] .category-filters {
+  background: var(--background-glass);
+}
+
+[data-theme="dark"] .category-filters label {
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .category-btn {
+  background: linear-gradient(135deg, var(--background-secondary), var(--background-glass));
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .category-btn:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+  color: white;
+}
+
+[data-theme="dark"] .category-btn.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+  color: white;
+}
+
+[data-theme="dark"] .clear-categories-btn {
+  background: var(--background-glass);
+  color: var(--text-color-primary);
+  border: 2px solid #ef4444;
+}
+
+[data-theme="dark"] .clear-categories-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+[data-theme="dark"] .create-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+}
+
+[data-theme="dark"] .article-item {
+  background: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .article-title {
+  background: linear-gradient(135deg, var(--text-color-primary), var(--text-color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="dark"] .article-meta {
+  color: var(--text-color-light);
+}
+
+[data-theme="dark"] .article-preview {
+  color: var(--text-color-secondary);
+  background: var(--background-secondary);
+}
+
+[data-theme="dark"] .view-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+}
+
+[data-theme="dark"] .publish-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+[data-theme="dark"] .error {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  color: #f87171;
+  border: 2px solid rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .empty-state {
+  color: var(--text-color-light);
+  background: var(--background-glass);
+}
+
 /* 现代化博客样式 - 玻璃拟态风格 */
 .article-list {
   max-width: 1200px;

@@ -360,26 +360,16 @@ const formatText = (type: 'bold' | 'italic' | 'heading' | 'link' | 'code' | 'quo
       return
   }
   
-  if (type !== 'heading') {
-    content.value = content.value.substring(0, start) + newText + content.value.substring(end)
-    newCursorPos = start + newText.length
-    
-    // 在下一次 DOM 更新后设置光标位置
-    nextTick(() => {
-      if (editorRef.value) {
-        editorRef.value.focus()
-        editorRef.value.setSelectionRange(newCursorPos, newCursorPos)
-      }
-    })
-  } else {
-    // 对于heading类型也要设置光标位置
-    nextTick(() => {
-      if (editorRef.value) {
-        editorRef.value.focus()
-        editorRef.value.setSelectionRange(newCursorPos, newCursorPos)
-      }
-    })
-  }
+  content.value = content.value.substring(0, start) + newText + content.value.substring(end)
+  newCursorPos = start + newText.length
+  
+  // 在下一次 DOM 更新后设置光标位置
+  nextTick(() => {
+    if (editorRef.value) {
+      editorRef.value.focus()
+      editorRef.value.setSelectionRange(newCursorPos, newCursorPos)
+    }
+  })
 }
 
 // 处理键盘快捷键

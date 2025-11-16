@@ -180,6 +180,9 @@ onMounted(() => {
             <li class="nav-item">
               <RouterLink to="/categories" class="nav-link" active-class="active" @click="mobileMenuOpen = false">分类管理</RouterLink>
             </li>
+            <li class="nav-item">
+              <RouterLink to="/photos" class="nav-link" active-class="active" @click="mobileMenuOpen = false">摄影相册</RouterLink>
+            </li>
           </ul>
         </div>
       </div>
@@ -204,6 +207,9 @@ onMounted(() => {
           </li>
           <li class="nav-item">
             <RouterLink to="/categories" class="nav-link" active-class="active">分类管理</RouterLink>
+          </li>
+          <li class="nav-item">
+            <RouterLink to="/photos" class="nav-link" active-class="active">摄影相册</RouterLink>
           </li>
         </ul>
       </nav>
@@ -234,6 +240,179 @@ onMounted(() => {
   flex-direction: column;
   font-family: var(--font-family-main);
   line-height: 1.6;
+}
+
+/* CSS变量定义 - 支持深色主题 */
+:root {
+  /* 基础颜色 - 浅色主题 */
+  --primary-color: #667eea;
+  --primary-color-dark: #5a67d8;
+  --secondary-color: #764ba2;
+  --accent-color: #f093fb;
+  
+  /* 背景色 */
+  --background-primary: #ffffff;
+  --background-secondary: #f8fafc;
+  --background-glass: rgba(255, 255, 255, 0.85);
+  --background-card: rgba(255, 255, 255, 0.95);
+  
+  /* 文字颜色 */
+  --text-color-primary: #1a202c;
+  --text-color-secondary: #4a5568;
+  --text-color-regular: #2d3748;
+  --text-color-light: #718096;
+  
+  /* 边框颜色 */
+  --border-color-base: #e2e8f0;
+  --border-color-light: #f1f5f9;
+  --border-color-lighter: rgba(226, 232, 240, 0.5);
+  
+  /* 阴影效果 */
+  --box-shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --box-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --box-shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.15);
+  --box-shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* 其他变量 */
+  --border-radius-base: 8px;
+  --border-radius-large: 16px;
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+  --spacing-extra-large: 32px;
+  --font-family-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-size-base: 15px;
+  --font-size-medium: 14px;
+  --font-size-small: 12px;
+  --font-size-large: 18px;
+  --font-size-extra-large: 24px;
+  --transition-normal: 0.3s;
+}
+
+/* 深色主题样式 */
+[data-theme="dark"] {
+  /* 基础颜色 - 深色主题 */
+  --primary-color: #818cf8;
+  --primary-color-dark: #6366f1;
+  --secondary-color: #a78bfa;
+  --accent-color: #f472b6;
+  
+  /* 背景色 */
+  --background-primary: #0f172a;
+  --background-secondary: #1e293b;
+  --background-glass: rgba(15, 23, 42, 0.85);
+  --background-card: rgba(30, 41, 59, 0.95);
+  
+  /* 文字颜色 */
+  --text-color-primary: #f8fafc;
+  --text-color-secondary: #cbd5e1;
+  --text-color-regular: #e2e8f0;
+  --text-color-light: #94a3b8;
+  
+  /* 边框颜色 */
+  --border-color-base: #334155;
+  --border-color-light: #475569;
+  --border-color-lighter: rgba(71, 85, 105, 0.5);
+  
+  /* 阴影效果 - 深色主题更柔和 */
+  --box-shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --box-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --box-shadow-glass: 0 8px 32px rgba(2, 8, 20, 0.4);
+  --box-shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* 深色主题特定样式 */
+[data-theme="dark"] .app-header {
+  background-color: var(--background-glass);
+  border-bottom: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .search-wrapper {
+  background-color: var(--background-glass);
+  border: 2px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .search-input {
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .search-input::placeholder {
+  color: var(--text-color-light);
+}
+
+[data-theme="dark"] .search-results {
+  background-color: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .search-result-item {
+  color: var(--text-color-primary);
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+[data-theme="dark"] .search-result-item:hover {
+  background-color: rgba(129, 140, 248, 0.1);
+  border-left-color: var(--primary-color);
+}
+
+[data-theme="dark"] .search-result-meta {
+  color: var(--text-color-light);
+}
+
+[data-theme="dark"] .search-no-results {
+  color: var(--text-color-light);
+}
+
+[data-theme="dark"] .btn-theme,
+[data-theme="dark"] .btn-settings {
+  background-color: var(--background-glass);
+  border: 2px solid var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .btn-theme:hover,
+[data-theme="dark"] .btn-settings:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .btn-logout,
+[data-theme="dark"] .btn-login {
+  background-color: var(--background-glass);
+  border: 2px solid var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .btn-logout:hover,
+[data-theme="dark"] .btn-login:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+  color: white;
+}
+
+[data-theme="dark"] .side-nav {
+  background-color: var(--background-glass);
+  border-right: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .nav-link {
+  color: var(--text-color-regular);
+}
+
+[data-theme="dark"] .nav-link:hover,
+[data-theme="dark"] .nav-link.active {
+  color: var(--primary-color);
+  background-color: rgba(129, 140, 248, 0.1);
+  border-left-color: var(--primary-color);
+}
+
+[data-theme="dark"] .app-footer {
+  background-color: var(--background-glass);
+  border-top: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .footer-text {
+  color: var(--text-color-light);
 }
 
 /* 大气风格的头部导航 */

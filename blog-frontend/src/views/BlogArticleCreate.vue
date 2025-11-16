@@ -203,12 +203,23 @@ onMounted(() => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .article-editor {
+  background-color: var(--background-primary);
 }
 
 .article-form {
   background: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .article-form {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color-base);
 }
 
 .form-group {
@@ -220,6 +231,11 @@ onMounted(() => {
   margin-bottom: 5px;
   font-weight: bold;
   color: #333;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .form-group label {
+  color: var(--text-color-primary);
 }
 
 .form-control {
@@ -229,11 +245,26 @@ onMounted(() => {
   border-radius: 4px;
   font-size: 16px;
   box-sizing: border-box;
+  transition: all 0.3s ease;
+  background-color: white;
+  color: #333;
+}
+
+[data-theme="dark"] .form-control {
+  background-color: var(--background-primary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
 }
 
 .form-control:focus {
   outline: none;
   border-color: #42b983;
+  box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.2);
+}
+
+[data-theme="dark"] .form-control:focus {
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.3);
 }
 
 .form-control:disabled {
@@ -253,6 +284,12 @@ onMounted(() => {
   border-radius: 4px;
   padding: 15px;
   background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .category-section {
+  background-color: var(--background-primary);
+  border-color: var(--border-color-base);
 }
 
 .category-checkboxes {
@@ -271,10 +308,22 @@ onMounted(() => {
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .category-checkbox {
+  background-color: var(--background-secondary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
 }
 
 .category-checkbox:hover {
   background-color: #f5f5f5;
+}
+
+[data-theme="dark"] .category-checkbox:hover {
+  background-color: rgba(66, 185, 131, 0.1);
+  border-color: var(--primary-color-light);
 }
 
 .category-checkbox input[type="checkbox"] {
@@ -342,5 +391,12 @@ onMounted(() => {
   color: #721c24;
   border: 1px solid #f5c6cb;
   border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .error-message {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #ff6b6b;
+  border-color: rgba(220, 53, 69, 0.3);
 }
 </style>

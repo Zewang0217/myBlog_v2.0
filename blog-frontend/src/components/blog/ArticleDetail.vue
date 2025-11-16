@@ -144,6 +144,11 @@
         </button>
       </div>
 
+      <!-- 文章封面图片 -->
+      <div v-if="article?.coverImage" class="article-cover">
+        <img :src="article.coverImage" :alt="article.title" class="cover-image" />
+      </div>
+
       <!-- 文章评论区 -->
       <div class="article-comments">
         <CommentSection :articleId="article?.id || ''" />
@@ -423,6 +428,198 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* 深色主题支持 */
+[data-theme="dark"] .article-detail {
+  background: var(--background-secondary);
+}
+
+[data-theme="dark"] .loading {
+  color: var(--text-color-light);
+}
+
+[data-theme="dark"] .error {
+  color: #f87171;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  border: 2px solid rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .not-found {
+  color: var(--text-color-light);
+}
+
+[data-theme="dark"] .article-header {
+  border-bottom: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .article-title {
+  background: linear-gradient(135deg, var(--text-color-primary), var(--text-color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="dark"] .article-meta {
+  color: var(--text-color-light);
+}
+
+[data-theme="dark"] .meta-text {
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .content {
+  background: var(--background-glass);
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .content :deep(h1),
+[data-theme="dark"] .content :deep(h2),
+[data-theme="dark"] .content :deep(h3),
+[data-theme="dark"] .content :deep(h4),
+[data-theme="dark"] .content :deep(h5),
+[data-theme="dark"] .content :deep(h6) {
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .content :deep(p) {
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .content :deep(a) {
+  color: var(--primary-color);
+  border-bottom: 1px solid transparent;
+}
+
+[data-theme="dark"] .content :deep(a:hover) {
+  border-bottom: 1px solid var(--primary-color);
+  color: var(--primary-color-dark);
+}
+
+[data-theme="dark"] .content :deep(code) {
+  background-color: var(--background-secondary);
+  color: #fbbf24;
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .content :deep(pre) {
+  background-color: var(--background-secondary);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .content :deep(pre code) {
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .content :deep(blockquote) {
+  border-left: 4px solid var(--primary-color);
+  background-color: var(--background-secondary);
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .content :deep(img) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .toc-container {
+  background: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .toc-container h3 {
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .toc-item a {
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .toc-item a:hover,
+[data-theme="dark"] .toc-item a.active-toc {
+  background-color: rgba(129, 140, 248, 0.2);
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .social-share {
+  background: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .social-share h3 {
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .share-btn.twitter {
+  background-color: #1da1f2;
+}
+
+[data-theme="dark"] .share-btn.facebook {
+  background-color: #1877f2;
+}
+
+[data-theme="dark"] .share-btn.link {
+  background-color: var(--border-color-base);
+}
+
+[data-theme="dark"] .article-actions {
+  border-top: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .action-btn {
+  background-color: var(--background-glass);
+  color: var(--text-color-primary);
+  border: 2px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .back-btn {
+  background-color: var(--border-color-base);
+}
+
+[data-theme="dark"] .edit-btn {
+  background-color: #10b981;
+}
+
+[data-theme="dark"] .delete-btn {
+  background-color: #ef4444;
+}
+
+[data-theme="dark"] .like-btn {
+  background-color: #1da1f2;
+}
+
+[data-theme="dark"] .article-comments {
+  background: var(--background-glass);
+  border-top: 1px solid var(--border-color-base);
+}
+
+/* 文章封面图片样式 */
+.article-cover {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.cover-image {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .article-cover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .cover-image {
+  filter: brightness(0.9);
+}
+
 .article-detail {
   max-width: 1200px;
   margin: 0 auto;

@@ -181,7 +181,7 @@ const addCategory = async () => {
   }
 }
 
-const deleteCategory = async (id: number) => {
+const deleteCategory = async (id: string | number) => {
   if (!confirm('确定要删除这个分类吗？此操作不可恢复。')) return
   deletingCategory.value = true
   try {
@@ -224,6 +224,11 @@ const saveCategory = async () => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .category-manager {
+  background-color: var(--background-primary);
 }
 
 .header {
@@ -234,12 +239,22 @@ const saveCategory = async () => {
   margin: 0 0 10px 0;
   font-size: 28px;
   color: #2c3e50;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .header h2 {
+  color: var(--text-color-primary);
 }
 
 .subtitle {
   margin: 0;
   color: #7f8c8d;
   font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .subtitle {
+  color: var(--text-color-secondary);
 }
 
 .card {
@@ -248,6 +263,12 @@ const saveCategory = async () => {
   padding: 24px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .card {
+  background: var(--background-glass);
+  border: 1px solid var(--border-color-base);
 }
 
 .card h3 {
@@ -255,6 +276,11 @@ const saveCategory = async () => {
   margin-bottom: 20px;
   color: #2c3e50;
   font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .card h3 {
+  color: var(--text-color-primary);
 }
 
 .form-group {
@@ -266,6 +292,11 @@ const saveCategory = async () => {
   margin-bottom: 8px;
   font-weight: 600;
   color: #2c3e50;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .form-group label {
+  color: var(--text-color-primary);
 }
 
 .form-control {
@@ -276,6 +307,13 @@ const saveCategory = async () => {
   font-size: 16px;
   transition: all 0.3s ease;
   background-color: #fafafa;
+  color: #333;
+}
+
+[data-theme="dark"] .form-control {
+  background-color: var(--background-primary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
 }
 
 .form-control:focus {
@@ -283,6 +321,12 @@ const saveCategory = async () => {
   border-color: #42b983;
   box-shadow: 0 0 0 3px rgba(66, 185, 131, 0.2);
   background-color: white;
+}
+
+[data-theme="dark"] .form-control:focus {
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(66, 185, 131, 0.3);
+  background-color: var(--background-secondary);
 }
 
 .btn-submit {

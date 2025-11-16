@@ -53,6 +53,12 @@ const routes = [
     name: 'Categories',
     component: () => import('@/views/CategoryManager.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/photos',
+    name: 'PhotoGallery',
+    component: () => import('@/views/PhotoGallery.vue'),
+    meta: { requiresAuth: false }
   }
 ]
 

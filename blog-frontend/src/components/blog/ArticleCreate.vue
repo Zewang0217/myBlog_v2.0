@@ -29,6 +29,14 @@
       </div>
 
       <div class="form-group">
+        <label>封面图片:</label>
+        <ArticleImageUpload
+          v-model="form.coverImage"
+          @image-uploaded="handleCoverImageUploaded"
+        />
+      </div>
+
+      <div class="form-group">
         <label for="content">内容:</label>
         <SimpleMarkdownEditor
           v-model="form.content"
@@ -91,6 +99,7 @@ import { useArticle } from '@/composables/useArticles'
 import { ArticleStatus } from '@/types/article'
 import { useRouter } from 'vue-router'
 import SimpleMarkdownEditor from '@/components/blog/SimpleMarkdownEditor.vue'
+import ArticleImageUpload from '@/components/blog/ArticleImageUpload.vue'
 
 const router = useRouter()
 const { loading, error, create } = useArticle()
@@ -100,11 +109,18 @@ const form = reactive({
   title: '',
   content: '',
   author: '',
-  status: ArticleStatus.DRAFT
+  status: ArticleStatus.DRAFT,
+  coverImage: ''
 })
 
 // 自动保存状态
 const autoSaveStatus = ref('')
+
+// 封面图片处理
+const handleCoverImageUploaded = (url: string, fileName: string) => {
+  form.coverImage = url
+  console.log('封面图片已上传:', url, fileName)
+}
 
 // 处理自动保存
 const handleAutoSave = async (content: string) => {

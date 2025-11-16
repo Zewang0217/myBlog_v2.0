@@ -9,6 +9,7 @@ export interface Article {
   categories?: Category[]
   likeCount: number
   isLiked?: boolean
+  coverImage?: string  // 封面图片URL
 }
 
 export interface CreateArticleDTO {
@@ -17,6 +18,7 @@ export interface CreateArticleDTO {
   author: string
   status?: number
   categoryIds?: string[]
+  coverImage?: string  // 封面图片URL
 }
 
 export enum ArticleStatus {

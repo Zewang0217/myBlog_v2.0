@@ -74,14 +74,14 @@ public class CategoryServiceImpl implements CategoryService {
                     }
                     
                     // 处理字符串类型的状态
-                    if (article.getStatus() instanceof String) {
-                        return "PUBLISHED".equalsIgnoreCase((String) article.getStatus());
+                    if (article.getStatus().getDescription() instanceof String) {
+                        return "PUBLISHED".equalsIgnoreCase((String) article.getStatus().getDescription());
                     }
                     
                     // 处理数字类型的状态
-                    if (article.getStatus() instanceof Number) {
-                        return ((Number) article.getStatus()).intValue() == 1;
-                    }
+//                    if (article.getStatus().getCode() instanceof Number) {
+//                        return ((Number) article.getStatus().getCode()).intValue() == 1;
+//                    }
                     
                     return false;
                 })
