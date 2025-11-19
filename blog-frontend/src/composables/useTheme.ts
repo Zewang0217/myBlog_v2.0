@@ -53,12 +53,18 @@ export function useTheme() {
     if (savedSettings) {
       try {
         const parsedSettings = JSON.parse(savedSettings)
-        themeSettings.value = { ...DEFAULT_SETTINGS, ...parsedSettings }
+        // 加载所有设置，但始终将阅读模式重置为默认值'normal'
+        // 这样可以确保应用总是以正常模式启动
+        themeSettings.value = { 
+          ...DEFAULT_SETTINGS, 
+          ...parsedSettings,
+          readingMode: DEFAULT_SETTINGS.readingMode // 强制使用默认的阅读模式
+        }
       } catch (e) {
         console.error('Failed to parse theme settings', e)
       }
     }
-    
+
     // 应用主题设置
     applyThemeSettings()
   }
@@ -67,10 +73,10 @@ export function useTheme() {
   const applyThemeSettings = () => {
     // 设置主题
     document.documentElement.setAttribute('data-theme', themeSettings.value.theme)
-    
+
     // 设置主题色
     document.documentElement.style.setProperty('--primary-color', themeSettings.value.primaryColor)
-    
+
     // 设置字体大小
     let fontSizeValue = ''
     switch (themeSettings.value.fontSize) {
@@ -86,7 +92,7 @@ export function useTheme() {
         break
     }
     document.documentElement.style.setProperty('--font-size-base', fontSizeValue)
-    
+
     // 设置阅读模式
     if (themeSettings.value.readingMode === 'reading') {
       document.body.classList.add('reading-mode')

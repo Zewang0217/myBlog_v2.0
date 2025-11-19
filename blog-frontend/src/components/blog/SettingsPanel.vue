@@ -6,22 +6,22 @@
         <h2>个性化设置</h2>
         <button class="close-btn" @click="closePanel">×</button>
       </div>
-      
+
       <div class="settings-body">
         <!-- 主题切换 -->
         <div class="setting-group">
           <h3>主题模式</h3>
           <div class="theme-toggle">
-            <button 
-              class="theme-btn" 
+            <button
+              class="theme-btn"
               :class="{ active: themeSettings.theme === 'light' }"
               @click="setTheme('light')"
             >
               <span class="theme-icon">☀️</span>
               <span>浅色</span>
             </button>
-            <button 
-              class="theme-btn" 
+            <button
+              class="theme-btn"
               :class="{ active: themeSettings.theme === 'dark' }"
               @click="setTheme('dark')"
             >
@@ -30,7 +30,7 @@
             </button>
           </div>
         </div>
-        
+
         <!-- 主题色选择 -->
         <div class="setting-group">
           <h3>主题色</h3>
@@ -46,7 +46,7 @@
             ></button>
           </div>
         </div>
-        
+
         <!-- 字体大小 -->
         <div class="setting-group">
           <h3>字体大小</h3>
@@ -62,7 +62,7 @@
             </button>
           </div>
         </div>
-        
+
         <!-- 阅读模式 -->
         <div class="setting-group">
           <h3>阅读模式</h3>
@@ -78,7 +78,7 @@
             </button>
           </div>
         </div>
-        
+
         <!-- 重置按钮 -->
         <div class="setting-group">
           <button class="reset-btn" @click="resetToDefault">
@@ -366,14 +366,14 @@ defineExpose({
   .settings-content {
     max-width: 100%;
   }
-  
+
   .font-size-options,
   .reading-mode-options,
   .theme-toggle {
     flex-direction: column;
     gap: 8px;
   }
-  
+
   .font-size-btn,
   .reading-mode-btn,
   .theme-btn {
