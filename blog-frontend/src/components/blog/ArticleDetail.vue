@@ -70,8 +70,15 @@
         
         <div class="article-sidebar">
           <div v-if="toc.length > 0" class="toc-container">
-            <h3>文章目录</h3>
-            <ul class="toc-list">
+            <div class="toc-header">
+              <h3>文章目录</h3>
+              <button class="toc-toggle-btn" @click="toggleToc">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" :transform="tocCollapsed ? 'rotate(-90)' : 'rotate(0)'">
+                  <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+              </button>
+            </div>
+            <ul v-show="!tocCollapsed" class="toc-list">
               <li 
                 v-for="item in toc" 
                 :key="item.id" 
@@ -96,14 +103,14 @@
           <div class="social-share">
             <h3>分享文章</h3>
             <div class="share-buttons">
-              <button @click="shareToTwitter" class="share-btn twitter" title="分享到Twitter">
+              <button @click="shareToWeChat" class="share-btn wechat" title="分享到微信">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                  <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22.8c-5.96 0-10.8-4.84-10.8-10.8S6.04 1.2 12 1.2 22.8 6.04 22.8 12 17.96 22.8 12 22.8zm1.36-6.71c-.42.15-.88.24-1.36.24-.48 0-.94-.09-1.36-.24-1.58-.57-2.09-1.55-2.09-2.53 0-.97.54-1.93 1.64-2.54.86-.47 1.16-.89 1.16-1.54 0-.43-.35-.81-.79-.81-.38 0-.76.12-1.02.25-1.1.52-1.74 1.31-1.74 2.41 0 1.35 1.15 2.46 3.01 2.87 2.12.46 3.06 1.53 3.06 2.71 0 .82-.45 1.67-1.64 2.12zm-2.72-4.77c-.71 0-1.29.57-1.29 1.29s.58 1.29 1.29 1.29 1.29-.57 1.29-1.29-.58-1.29-1.29-1.29z"/>
                 </svg>
               </button>
-              <button @click="shareToFacebook" class="share-btn facebook" title="分享到Facebook">
+              <button @click="shareToQQ" class="share-btn qq" title="分享到QQ">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22.8c-5.96 0-10.8-4.84-10.8-10.8S6.04 1.2 12 1.2 22.8 6.04 22.8 12 17.96 22.8 12 22.8zm1.36-6.71c-.42.15-.88.24-1.36.24-.48 0-.94-.09-1.36-.24-1.58-.57-2.09-1.55-2.09-2.53 0-.97.54-1.93 1.64-2.54.86-.47 1.16-.89 1.16-1.54 0-.43-.35-.81-.79-.81-.38 0-.76.12-1.02.25-1.1.52-1.74 1.31-1.74 2.41 0 1.35 1.15 2.46 3.01 2.87 2.12.46 3.06 1.53 3.06 2.71 0 .82-.45 1.67-1.64 2.12zm-2.72-4.77c-.71 0-1.29.57-1.29 1.29s.58 1.29 1.29 1.29 1.29-.57 1.29-1.29-.58-1.29-1.29-1.29z"/>
                 </svg>
               </button>
               <button @click="copyLink" class="share-btn link" title="复制链接">
@@ -118,9 +125,11 @@
 
       <div class="article-actions">
         <button class="action-btn like-btn" @click="handleLike" :disabled="likeLoading">
-          <svg width="16" height="16" viewBox="0 0 24 24" :fill="article.isLiked ? '#e53935' : 'currentColor'">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
+          <div class="heart-animation-wrapper">
+            <svg width="16" height="16" viewBox="0 0 24 24" :fill="article.isLiked ? '#e53935' : 'currentColor'" :class="{ 'heart-beat': article.isLiked }">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
           {{ article.likeCount || 0 }}
           <span class="like-text">{{ article.isLiked ? '已赞' : '点赞' }}</span>
         </button>
@@ -148,6 +157,17 @@
       <div v-if="article?.coverImage" class="article-cover">
         <img :src="article.coverImage" :alt="article.title" class="cover-image" />
       </div>
+
+      <!-- 回到顶端按钮 -->
+      <button
+        class="back-to-top-btn"
+        @click="scrollToTop"
+        ref="backToTopBtn"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 8l-6 6h12z"/>
+        </svg>
+      </button>
 
       <!-- 文章评论区 -->
       <div class="article-comments">
@@ -186,6 +206,42 @@ interface TocItem {
 
 const toc = ref<TocItem[]>([])
 const activeTocId = ref<string | null>(null)
+const tocCollapsed = ref(false)
+
+// 回到顶端按钮相关
+const backToTopBtn = ref<HTMLButtonElement | null>(null)
+
+// 初始化marked配置
+import hljs from 'highlight.js';
+import 'highlight.js/styles/vs2015.css'; // 导入highlight.js主题样式
+
+// 配置marked使用highlight.js
+marked.setOptions({
+  highlight: (code, lang) => {
+    // 如果指定了语言且该语言存在于highlight.js中，则使用该语言高亮
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(code, { language: lang }).value;
+      } catch (__) {}
+    }
+    // 如果没有指定语言或语言不支持，则使用自动检测
+    try {
+      return hljs.highlightAuto(code).value;
+    } catch (__) {}
+    // 如果都失败了，返回原始代码
+    return code;
+  },
+  langPrefix: 'hljs language-', // 为代码块添加CSS类
+  breaks: true, // 自动转换换行符
+  gfm: true, // 启用GitHub风格的Markdown
+  headerIds: true, // 启用标题ID自动生成
+  mangle: true,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  xhtml: false
+});
 
 // 渲染Markdown内容
 const renderedContent = computed(() => {
@@ -209,6 +265,11 @@ const addIdsToHeadings = (html: string) => {
 
     return `<h${level} id="${id}">${content}</h${level}>`
   })
+}
+
+// 切换目录展开/收起状态
+const toggleToc = () => {
+  tocCollapsed.value = !tocCollapsed.value
 }
 
 // 生成目录
@@ -260,6 +321,14 @@ const handleScroll = () => {
 // 格式化日期显示
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('zh-CN')
+}
+
+// 回到顶端功能
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
 }
 
 // 获取状态文本
@@ -379,17 +448,18 @@ const deleteArticle = async () => {
 }
 
 // 社交分享功能
-const shareToTwitter = () => {
+const shareToWeChat = () => {
   if (!article.value) return
-  const url = encodeURIComponent(window.location.href)
-  const text = encodeURIComponent(article.value.title)
-  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank')
+  alert('已复制链接到剪贴板，您可以在微信中粘贴分享！')
+  copyLink()
 }
 
-const shareToFacebook = () => {
+const shareToQQ = () => {
   if (!article.value) return
   const url = encodeURIComponent(window.location.href)
-  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank')
+  const title = encodeURIComponent(article.value.title)
+  const summary = encodeURIComponent(article.value.content ? article.value.content.substring(0, 100) : '')
+  window.open(`https://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}&summary=${summary}`, '_blank', 'width=720,height=610')
 }
 
 const copyLink = async () => {
@@ -496,18 +566,35 @@ onUnmounted(() => {
 }
 
 [data-theme="dark"] .content :deep(code) {
-  background-color: var(--background-secondary);
+  background-color: #1f2937;
   color: #fbbf24;
-  border: 1px solid var(--border-color-base);
+  border: 1px solid #374151;
 }
 
 [data-theme="dark"] .content :deep(pre) {
-  background-color: var(--background-secondary);
-  color: var(--text-color-primary);
+  background-color: #111827;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  border: 1px solid #374151;
+}
+
+[data-theme="dark"] .content :deep(pre:hover) {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .content :deep(pre code) {
-  color: var(--text-color-secondary);
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .content :deep(pre > code):before {
+  color: #d1d5db;
+  background-color: rgba(55, 65, 81, 0.8);
+  border-color: #4b5563;
+}
+
+[data-theme="dark"] .content :deep(.hljs) {
+  background: transparent;
+  padding: 0;
+  font-family: inherit;
 }
 
 [data-theme="dark"] .content :deep(blockquote) {
@@ -548,12 +635,12 @@ onUnmounted(() => {
   color: var(--text-color-primary);
 }
 
-[data-theme="dark"] .share-btn.twitter {
-  background-color: #1da1f2;
+[data-theme="dark"] .share-btn.wechat {
+  background-color: #07c160;
 }
 
-[data-theme="dark"] .share-btn.facebook {
-  background-color: #1877f2;
+[data-theme="dark"] .share-btn.qq {
+  background-color: #12b7f5;
 }
 
 [data-theme="dark"] .share-btn.link {
@@ -673,12 +760,14 @@ onUnmounted(() => {
 
 .article-title {
   margin: 0 0 20px 0;
-  color: #2c3e50;
+  color: #e96900; /* 使用橙色系，更加醒目 */
   font-size: 2.5em;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
   text-align: center;
   letter-spacing: -0.5px;
+  text-shadow: 0 2px 8px rgba(233, 105, 0, 0.2); /* 添加文字阴影增强视觉效果 */
+  transition: all 0.3s ease;
 }
 
 .article-meta {
@@ -821,24 +910,57 @@ onUnmounted(() => {
   border-radius: 6px;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   color: #e96900;
+  word-break: break-word;
 }
 
 .content :deep(pre) {
-  background-color: #2d3748;
+  background-color: #fafafa;
   border-radius: 8px;
   padding: 16px;
   overflow: auto;
   margin: 1.5em 0;
-  line-height: 1.5;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  line-height: 1.6;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.content :deep(pre:hover) {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .content :deep(pre code) {
-  color: #e2e8f0;
+  color: #24292e;
   background: none;
   padding: 0;
   font-size: 0.9em;
   border: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+/* 支持highlight.js的主题样式 */
+.content :deep(.hljs) {
+  background: transparent;
+  padding: 0;
+  font-family: inherit;
+}
+
+/* 代码语言显示 */
+.content :deep(pre > code):before {
+  content: attr(class);
+  display: inline-block;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.7em;
+  color: #6a737d;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid #e1e4e8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .content :deep(blockquote) {
@@ -890,6 +1012,40 @@ onUnmounted(() => {
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.toc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.toc-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.toc-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #42b983;
+}
+
+/* 增加文章内容宽度 */
+.content-wrapper {
+  flex: 1 1 calc(100% - 320px); /* 为目录留出320px宽度 */
+  min-width: 0;
+}
+
+@media (max-width: 992px) {
+  .content-wrapper {
+    flex: 1; /* 在移动端内容宽度占满 */
+  }
 }
 
 .toc-container h3 {
@@ -967,13 +1123,13 @@ onUnmounted(() => {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.share-btn.twitter {
-  background-color: #1da1f2;
+.share-btn.wechat {
+  background-color: #07c160;
   color: white;
 }
 
-.share-btn.facebook {
-  background-color: #1877f2;
+.share-btn.qq {
+  background-color: #12b7f5;
   color: white;
 }
 
@@ -1094,6 +1250,55 @@ onUnmounted(() => {
   .like-text {
     margin-left: 4px;
   }
+
+  /* 爱心跳动动画 */
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    10%, 30% {
+      transform: scale(1.25);
+    }
+    20%, 40% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+    60% {
+      transform: scale(1);
+    }
+  }
+
+  .heart-beat {
+    animation: heartbeat 0.8s ease-in-out;
+  }
+
+/* 回到顶端按钮样式 */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(66, 185, 131, 0.8);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-to-top-btn:hover {
+  background-color: rgba(53, 156, 109, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
 
 /* 滚动条样式 */
 .toc-list::-webkit-scrollbar {

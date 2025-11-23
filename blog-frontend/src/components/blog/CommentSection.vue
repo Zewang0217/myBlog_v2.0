@@ -125,20 +125,22 @@
               </svg>
               <span>{{ comment.likeCount || 0 }}</span>
             </button>
-            
+
+            <!-- 回复按钮仅管理员可见 -->
             <button
               @click="replyToComment(comment)"
-              class="action-btn reply-btn"
+              class="action-btn reply-btn admin-only-btn"
+              v-if="authStore.isAuthenticated && (authStore.user?.role === 'ADMIN' || authStore.user?.role === 'ROLE_ADMIN')"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
               </svg>
               回复
             </button>
-            
+
             <button
               @click="handleDeleteComment(comment.id)"
-              class="action-btn delete-btn"
+              class="action-btn delete-btn admin-only-btn"
               v-if="authStore.isAuthenticated && (authStore.user?.role === 'ADMIN' || authStore.user?.role === 'ROLE_ADMIN')"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -301,16 +303,20 @@ const toggleCommentForm = () => {
 
 // 回复评论
 const replyToComment = (comment: Comment) => {
-  isReplying.value = true
-  replyingTo.value = comment.id
-  replyForm.value.content = ''
-  // 滚动到回复表单
-  setTimeout(() => {
-    const formElement = document.querySelector(`.reply-form-container`)
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }
-  }, 100)
+  if (authStore.isAuthenticated && (authStore.user?.role === 'ADMIN' || authStore.user?.role === 'ROLE_ADMIN')) {
+    isReplying.value = true
+    replyingTo.value = comment.id
+    replyForm.value.content = ''
+    // 滚动到回复表单
+    setTimeout(() => {
+      const formElement = document.querySelector(`.reply-form-container`)
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    }, 100)
+  } else {
+    alert('只有管理员可以回复评论！')
+  }
 }
 
 // 取消回复
@@ -365,7 +371,17 @@ const handleDeleteComment = async (commentId: string, parentId?: string) => {
 
 // 组件挂载时获取评论
 onMounted(async () => {
-  await fetchComments(props.articleId)
+  console.log('CommentSection mounted, articleId:', props.articleId); // 调试用
+  if (props.articleId && props.articleId.trim() !== '') {
+    await fetchComments(props.articleId)
+  } else {
+    console.error('Article ID is empty, cannot fetch comments');
+    // 确保加载状态被设置为false
+    const { loading: commentsLoading } = useComments()
+    if (commentsLoading) {
+      commentsLoading.value = false;
+    }
+  }
 })
 </script>
 
@@ -706,6 +722,40 @@ onMounted(async () => {
 .no-comments p {
   margin: 0;
   font-size: 16px;
+}
+
+/* 评论框浮动动画 */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.comment-form-container:hover,
+.reply-form-container:hover {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* 提交按钮点击爆炸效果 */
+@keyframes explode {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(66, 185, 131, 0);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(66, 185, 131, 0);
+  }
+}
+
+.btn-submit:active:not(:disabled) {
+  animation: explode 0.3s ease-in-out;
 }
 
 /* 响应式设计 */
