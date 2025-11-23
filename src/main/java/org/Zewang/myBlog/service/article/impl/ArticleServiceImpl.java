@@ -34,7 +34,6 @@ public class ArticleServiceImpl implements ArticleService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    @Cacheable(value = "articles", key = "'all'")
     public List<Article> getAllArticles() {
         log.info("获取所有文章");
         try {
@@ -50,7 +49,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(value = "articles", key = "'published'")
     public List<Article> getPublishedArticles() {
         log.info("获取已发布的文章");
         try {
@@ -62,7 +60,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(value = "articles", key = "'byCategoryIds:' + #categoryIds")
     public List<Article> getArticlesByCategoryIds(Set<String> categoryIds) {
         log.info("根据分类ID获取文章, categoryIds={}", categoryIds);
 
@@ -86,7 +83,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(value = "articles", key = "'byId:' + #id")
     public Optional<Article> getById(String id) {
         log.info("根据ID获取文章, id={}", id);
 
@@ -257,7 +253,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(value = "articles", key = "'search_' + #keyword")
     public List<Article> searchArticles(String keyword) {
         log.info("搜索文章，关键词：{}", keyword);
 

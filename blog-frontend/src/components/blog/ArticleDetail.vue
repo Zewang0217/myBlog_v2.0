@@ -237,8 +237,6 @@ marked.setOptions({
   headerIds: true, // 启用标题ID自动生成
   mangle: true,
   pedantic: false,
-  sanitize: false,
-  smartLists: true,
   smartypants: false,
   xhtml: false
 });

@@ -1,684 +1,116 @@
-2025-11-19 22:29:49.446 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 42900 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
-2025-11-19 22:29:49.460 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
-2025-11-19 22:29:49.463 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
-2025-11-19 22:29:51.269 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-11-19 22:29:51.269 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
-2025-11-19 22:29:51.364 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-11-19 22:29:51.433 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-2025-11-19 22:29:51.610 [main] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.8+12-LTS-250"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@621f23ac, com.mongodb.Jep395RecordCodecProvider@7761e342, com.mongodb.KotlinCodecProvider@51f68849]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
-2025-11-19 22:29:51.620 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器配置中...
-2025-11-19 22:29:51.624 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器已配置，包含类型转换支持
-2025-11-19 22:29:51.639 [cluster-ClusterId{value='691dd45f010a7749caa981ef', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=38612500}
-2025-11-19 22:29:53.420 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 4.542 seconds (process running for 5.274)
-2025-11-19 22:30:36.177 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-11-19 22:30:37.537 [http-nio-8080-exec-10] ERROR o.Z.m.common.GlobalExceptionHandler - 运行时异常
-org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.translateException(LettuceConnectionFactory.java:1795)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1726)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1528)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.lambda$getConnection$0(LettuceConnectionFactory.java:1508)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.doInLock(LettuceConnectionFactory.java:1469)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1505)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:1191)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:997)
-	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.execute(DefaultRedisCacheWriter.java:346)
-	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.get(DefaultRedisCacheWriter.java:140)
-	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.get(DefaultRedisCacheWriter.java:129)
-	at org.springframework.data.redis.cache.RedisCache.lookup(RedisCache.java:207)
-	at org.springframework.cache.support.AbstractValueAdaptingCache.get(AbstractValueAdaptingCache.java:58)
-	at org.springframework.cache.interceptor.AbstractCacheInvoker.doGet(AbstractCacheInvoker.java:73)
-	at org.springframework.cache.interceptor.CacheAspectSupport.findInCaches(CacheAspectSupport.java:518)
-	at org.springframework.cache.interceptor.CacheAspectSupport.findCachedValue(CacheAspectSupport.java:481)
-	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:431)
-	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:395)
-	at org.springframework.cache.interceptor.CacheInterceptor.invoke(CacheInterceptor.java:74)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
-	at org.Zewang.myBlog.service.article.impl.ArticleServiceImpl$$SpringCGLIB$$0.getPublishedArticles(<generated>)
-	at org.Zewang.myBlog.controller.admin.ArticleController.publishedList(ArticleController.java:88)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:354)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
-	at org.Zewang.myBlog.controller.admin.ArticleController$$SpringCGLIB$$0.publishedList(<generated>)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.Zewang.myBlog.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:75)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to localhost/<unresolved>:6379
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78)
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56)
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:350)
-	at io.lettuce.core.RedisClient.connect(RedisClient.java:215)
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:112)
-	at java.base/java.util.Optional.orElseGet(Optional.java:364)
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:112)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1724)
-	... 134 common frames omitted
-Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:6379
-Caused by: java.net.ConnectException: Connection refused: getsockopt
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:973)
-	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:337)
-	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-2025-11-19 22:30:37.539 [http-nio-8080-exec-3] ERROR o.Z.m.common.GlobalExceptionHandler - 运行时异常
-org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.translateException(LettuceConnectionFactory.java:1795)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1726)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1528)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.lambda$getConnection$0(LettuceConnectionFactory.java:1508)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.doInLock(LettuceConnectionFactory.java:1469)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1505)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:1191)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:997)
-	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.execute(DefaultRedisCacheWriter.java:346)
-	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.get(DefaultRedisCacheWriter.java:140)
-	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.get(DefaultRedisCacheWriter.java:129)
-	at org.springframework.data.redis.cache.RedisCache.lookup(RedisCache.java:207)
-	at org.springframework.cache.support.AbstractValueAdaptingCache.get(AbstractValueAdaptingCache.java:58)
-	at org.springframework.cache.interceptor.AbstractCacheInvoker.doGet(AbstractCacheInvoker.java:73)
-	at org.springframework.cache.interceptor.CacheAspectSupport.findInCaches(CacheAspectSupport.java:518)
-	at org.springframework.cache.interceptor.CacheAspectSupport.findCachedValue(CacheAspectSupport.java:481)
-	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:431)
-	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:395)
-	at org.springframework.cache.interceptor.CacheInterceptor.invoke(CacheInterceptor.java:74)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
-	at org.Zewang.myBlog.service.article.impl.ArticleServiceImpl$$SpringCGLIB$$0.getAllArticles(<generated>)
-	at org.Zewang.myBlog.controller.admin.ArticleController.list(ArticleController.java:69)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:354)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
-	at org.Zewang.myBlog.controller.admin.ArticleController$$SpringCGLIB$$0.list(<generated>)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.Zewang.myBlog.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:75)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to localhost/<unresolved>:6379
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78)
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56)
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:350)
-	at io.lettuce.core.RedisClient.connect(RedisClient.java:215)
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:112)
-	at java.base/java.util.Optional.orElseGet(Optional.java:364)
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:112)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1724)
-	... 134 common frames omitted
-Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:6379
-Caused by: java.net.ConnectException: Connection refused: getsockopt
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:973)
-	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:337)
-	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-2025-11-19 22:30:37.543 [http-nio-8080-exec-8] ERROR o.Z.m.common.GlobalExceptionHandler - 运行时异常
-org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.translateException(LettuceConnectionFactory.java:1795)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1726)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1528)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.lambda$getConnection$0(LettuceConnectionFactory.java:1508)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.doInLock(LettuceConnectionFactory.java:1469)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1505)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getSharedConnection(LettuceConnectionFactory.java:1191)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:997)
-	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.execute(DefaultRedisCacheWriter.java:346)
-	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.get(DefaultRedisCacheWriter.java:140)
-	at org.springframework.data.redis.cache.DefaultRedisCacheWriter.get(DefaultRedisCacheWriter.java:129)
-	at org.springframework.data.redis.cache.RedisCache.lookup(RedisCache.java:207)
-	at org.springframework.cache.support.AbstractValueAdaptingCache.get(AbstractValueAdaptingCache.java:58)
-	at org.springframework.cache.interceptor.AbstractCacheInvoker.doGet(AbstractCacheInvoker.java:73)
-	at org.springframework.cache.interceptor.CacheAspectSupport.findInCaches(CacheAspectSupport.java:518)
-	at org.springframework.cache.interceptor.CacheAspectSupport.findCachedValue(CacheAspectSupport.java:481)
-	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:431)
-	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:395)
-	at org.springframework.cache.interceptor.CacheInterceptor.invoke(CacheInterceptor.java:74)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
-	at org.Zewang.myBlog.service.category.impl.CategoryServiceImpl$$SpringCGLIB$$0.getAllCategories(<generated>)
-	at org.Zewang.myBlog.controller.CategoryController.list(CategoryController.java:56)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:354)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
-	at org.Zewang.myBlog.controller.CategoryController$$SpringCGLIB$$0.list(<generated>)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.Zewang.myBlog.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:75)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-Caused by: io.lettuce.core.RedisConnectionException: Unable to connect to localhost/<unresolved>:6379
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:78)
-	at io.lettuce.core.RedisConnectionException.create(RedisConnectionException.java:56)
-	at io.lettuce.core.AbstractRedisClient.getConnection(AbstractRedisClient.java:350)
-	at io.lettuce.core.RedisClient.connect(RedisClient.java:215)
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.lambda$getConnection$1(StandaloneConnectionProvider.java:112)
-	at java.base/java.util.Optional.orElseGet(Optional.java:364)
-	at org.springframework.data.redis.connection.lettuce.StandaloneConnectionProvider.getConnection(StandaloneConnectionProvider.java:112)
-	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$ExceptionTranslatingConnectionProvider.getConnection(LettuceConnectionFactory.java:1724)
-	... 134 common frames omitted
-Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: getsockopt: localhost/127.0.0.1:6379
-Caused by: java.net.ConnectException: Connection refused: getsockopt
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:973)
-	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:337)
-	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
-	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-2025-11-19 22:31:13.969 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 16440 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
-2025-11-19 22:31:13.970 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
-2025-11-19 22:31:13.970 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
-2025-11-19 22:31:15.755 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-11-19 22:31:15.756 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
-2025-11-19 22:31:15.829 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-11-19 22:31:15.913 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-2025-11-19 22:31:16.118 [main] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.8+12-LTS-250"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@653a5967, com.mongodb.Jep395RecordCodecProvider@5a85b4e6, com.mongodb.KotlinCodecProvider@766b6d02]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
-2025-11-19 22:31:16.126 [cluster-ClusterId{value='691dd4b40770f808057dc428', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=19422400}
-2025-11-19 22:31:16.127 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器配置中...
-2025-11-19 22:31:16.129 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器已配置，包含类型转换支持
-2025-11-19 22:31:18.063 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 4.461 seconds (process running for 5.018)
-2025-11-19 22:31:26.409 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-11-19 22:31:27.050 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:31:27.050 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
-2025-11-19 22:31:27.050 [http-nio-8080-exec-1] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
-2025-11-19 22:31:27.057 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
-2025-11-19 22:31:27.103 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:31:27.106 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:31:27.107 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:31:27.107 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:31:27.109 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:31:27.109 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:31:27.113 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:31:27.113 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:31:27.114 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:31:27.114 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:31:27.114 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:31:27.115 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:32:13.712 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=68dd359904f19209342ae3a0
-2025-11-19 22:32:13.720 [http-nio-8080-exec-10] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:13.771 [http-nio-8080-exec-2] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：68dd359904f19209342ae3a0
-2025-11-19 22:32:17.471 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据分类ID获取文章, categoryIds=[68dd359904f19209342ae39e]
-2025-11-19 22:32:17.472 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:32:17.475 [http-nio-8080-exec-7] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:17.475 [http-nio-8080-exec-7] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:17.476 [http-nio-8080-exec-7] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:32:17.476 [http-nio-8080-exec-7] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:32:17.477 [http-nio-8080-exec-7] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:17.477 [http-nio-8080-exec-7] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:32:18.139 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据分类ID获取文章, categoryIds=[68dd359904f19209342ae39f]
-2025-11-19 22:32:18.140 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:32:18.143 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:18.144 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:18.144 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:32:18.144 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:32:18.147 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:18.148 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:32:29.650 [http-nio-8080-exec-2] INFO  o.Z.m.common.GlobalExceptionHandler - 参数校验失败：content: 文章内容至少需要10个字符
-2025-11-19 22:32:33.032 [http-nio-8080-exec-1] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 创建文章, 标题: test
-2025-11-19 22:32:33.066 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
-2025-11-19 22:32:33.104 [http-nio-8080-exec-1] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 文章创建成功, ID: 691dd5010770f808057dc429
-2025-11-19 22:32:34.509 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
-2025-11-19 22:32:34.509 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:32:34.510 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
-2025-11-19 22:32:34.513 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
-2025-11-19 22:32:34.517 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:34.518 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:34.518 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:32:34.518 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:32:34.519 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:34.520 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:32:34.520 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
-2025-11-19 22:32:38.593 [http-nio-8080-exec-6] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=691dd5010770f808057dc429
-2025-11-19 22:32:38.598 [http-nio-8080-exec-6] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
-2025-11-19 22:32:38.646 [http-nio-8080-exec-8] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：691dd5010770f808057dc429
-2025-11-19 22:32:40.832 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 删除文章, ID: 691dd5010770f808057dc429
-2025-11-19 22:32:40.850 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 文章删除成功, ID: 691dd5010770f808057dc429
-2025-11-19 22:32:42.344 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:32:42.345 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
-2025-11-19 22:32:42.346 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
-2025-11-19 22:32:42.349 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:42.350 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:42.350 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:32:42.350 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:32:42.350 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:32:42.352 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:32:42.635 [http-nio-8080-exec-3] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：691dd5010770f808057dc429
-2025-11-19 22:36:05.024 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据分类ID获取文章, categoryIds=[68dd359904f19209342ae39e]
-2025-11-19 22:36:05.024 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:36:05.029 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:36:05.030 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:36:05.030 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:36:05.030 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:36:05.030 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:36:05.031 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:36:10.493 [http-nio-8080-exec-1] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据分类ID获取文章, categoryIds=[68dd359904f19209342ae39f]
-2025-11-19 22:36:10.493 [http-nio-8080-exec-1] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:36:10.497 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:36:10.498 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:36:10.498 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:36:10.498 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:36:10.498 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:36:10.498 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:37:12.877 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 34316 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
-2025-11-19 22:37:12.877 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
-2025-11-19 22:37:12.879 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
-2025-11-19 22:37:14.630 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-11-19 22:37:14.631 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
-2025-11-19 22:37:14.706 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-11-19 22:37:14.779 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-2025-11-19 22:37:14.943 [main] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.8+12-LTS-250"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@2f09e6b2, com.mongodb.Jep395RecordCodecProvider@1bee0085, com.mongodb.KotlinCodecProvider@16e1219f]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
-2025-11-19 22:37:14.952 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器配置中...
-2025-11-19 22:37:14.956 [cluster-ClusterId{value='691dd61a363f81041778e516', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=21252600}
-2025-11-19 22:37:14.956 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器已配置，包含类型转换支持
-2025-11-19 22:37:16.694 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 4.202 seconds (process running for 4.741)
-2025-11-19 22:46:04.402 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 544 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
-2025-11-19 22:46:04.404 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
-2025-11-19 22:46:04.404 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
-2025-11-19 22:46:06.327 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-11-19 22:46:06.327 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
-2025-11-19 22:46:06.405 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-11-19 22:46:06.474 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-2025-11-19 22:46:06.693 [main] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.8+12-LTS-250"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@44da7eb3, com.mongodb.Jep395RecordCodecProvider@5e69cf07, com.mongodb.KotlinCodecProvider@3d512652]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
-2025-11-19 22:46:06.701 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器配置中...
-2025-11-19 22:46:06.704 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器已配置，包含类型转换支持
-2025-11-19 22:46:06.706 [cluster-ClusterId{value='691dd82eaeae6e75778d9f08', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=18853600}
-2025-11-19 22:46:08.638 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 4.743 seconds (process running for 5.492)
-2025-11-19 22:46:45.004 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-11-19 22:49:42.402 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 搜索文章，关键词：r
-2025-11-19 22:49:42.404 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:49:42.547 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.561 [http-nio-8080-exec-6] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 搜索文章，关键词：re
-2025-11-19 22:49:42.562 [http-nio-8080-exec-6] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:49:42.570 [http-nio-8080-exec-6] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.613 [http-nio-8080-exec-6] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.613 [http-nio-8080-exec-6] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:42.614 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.615 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:42.615 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:42.615 [http-nio-8080-exec-6] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:42.615 [http-nio-8080-exec-6] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.619 [http-nio-8080-exec-6] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:49:42.631 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.637 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:49:42.768 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 搜索文章，关键词：red
-2025-11-19 22:49:42.769 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:49:42.771 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.772 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.772 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:42.772 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:42.773 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.773 [http-nio-8080-exec-4] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:49:42.904 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 搜索文章，关键词：redi
-2025-11-19 22:49:42.904 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:49:42.906 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.908 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.908 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:42.908 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:42.909 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:42.909 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:49:43.196 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 搜索文章，关键词：redis
-2025-11-19 22:49:43.196 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
-2025-11-19 22:49:43.198 [http-nio-8080-exec-10] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:43.199 [http-nio-8080-exec-10] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:43.199 [http-nio-8080-exec-10] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:43.199 [http-nio-8080-exec-10] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
-2025-11-19 22:49:43.201 [http-nio-8080-exec-10] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:43.201 [http-nio-8080-exec-10] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
-2025-11-19 22:49:47.016 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=68e7af94384ae6106b14ca1a
-2025-11-19 22:49:47.022 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:49:47.072 [http-nio-8080-exec-8] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：68e7af94384ae6106b14ca1a
-2025-11-19 22:50:00.657 [http-nio-8080-exec-7] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：68e7af94384ae6106b14ca1a
-2025-11-19 22:50:26.849 [http-nio-8080-exec-10] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
-2025-11-19 22:50:26.947 [http-nio-8080-exec-10] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
-2025-11-19 22:50:27.295 [http-nio-8080-exec-5] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：68e7af94384ae6106b14ca1a
-2025-11-19 22:50:37.190 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
-2025-11-19 22:50:37.192 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
-2025-11-19 22:50:37.543 [http-nio-8080-exec-8] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：68e7af94384ae6106b14ca1a
-2025-11-19 22:50:38.257 [http-nio-8080-exec-6] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
-2025-11-19 22:50:38.262 [http-nio-8080-exec-6] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
-2025-11-19 22:50:38.598 [http-nio-8080-exec-1] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：68e7af94384ae6106b14ca1a
-2025-11-19 22:50:47.307 [http-nio-8080-exec-9] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 创建评论，文章ID：68e7af94384ae6106b14ca1a, 用户ID：admin
-2025-11-19 22:50:47.335 [http-nio-8080-exec-9] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
-2025-11-19 22:50:47.335 [http-nio-8080-exec-9] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
-2025-11-19 22:50:56.110 [http-nio-8080-exec-2] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：68e7af94384ae6106b14ca1a
-2025-11-19 22:51:15.616 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
-2025-11-19 22:51:15.624 [http-nio-8080-exec-5] INFO  o.Z.m.common.GlobalExceptionHandler - 业务异常：已经点赞过该文章
-2025-11-19 22:51:15.654 [http-nio-8080-exec-3] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：68e7af94384ae6106b14ca1a
-2025-11-19 22:51:16.174 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
-2025-11-19 22:51:16.175 [http-nio-8080-exec-8] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
-2025-11-19 22:51:16.508 [http-nio-8080-exec-6] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：68e7af94384ae6106b14ca1a
+2025-11-23 23:07:41.873 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 48232 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-11-23 23:07:41.874 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-11-23 23:07:41.875 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-23 23:07:44.256 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-23 23:07:44.257 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-11-23 23:07:44.345 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-23 23:07:44.447 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-23 23:07:44.705 [main] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.8+12-LTS-250"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@5b332439, com.mongodb.Jep395RecordCodecProvider@59262a90, com.mongodb.KotlinCodecProvider@78479f2b]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
+2025-11-23 23:07:44.717 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器配置中...
+2025-11-23 23:07:44.721 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器已配置，包含类型转换支持
+2025-11-23 23:07:44.725 [cluster-ClusterId{value='69232340abfd640b82c97f22', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=22258000}
+2025-11-23 23:07:45.333 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'cacheController' defined in file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\controller\admin\CacheController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.springframework.cache.CacheManager' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-11-23 23:07:45.340 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-11-23 23:07:45.388 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.Zewang.myBlog.controller.admin.CacheController required a bean of type 'org.springframework.cache.CacheManager' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.cache.CacheManager' in your configuration.
+
+2025-11-23 23:09:36.847 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 36280 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-11-23 23:09:36.848 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-11-23 23:09:36.848 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-23 23:09:38.591 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-23 23:09:38.593 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-11-23 23:09:38.682 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-23 23:09:38.750 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-23 23:09:38.928 [main] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.8+12-LTS-250"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@3e74fd84, com.mongodb.Jep395RecordCodecProvider@147efd9, com.mongodb.KotlinCodecProvider@1e120628]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
+2025-11-23 23:09:38.933 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器配置中...
+2025-11-23 23:09:38.938 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器已配置，包含类型转换支持
+2025-11-23 23:09:38.938 [cluster-ClusterId{value='692323b2980db3706021eaa1', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=18806400}
+2025-11-23 23:09:39.373 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'cacheController' defined in file [D:\Zewang\PROJECTS\myBlog_v2\target\classes\org\Zewang\myBlog\controller\admin\CacheController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.springframework.cache.CacheManager' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-11-23 23:09:39.378 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-11-23 23:09:39.425 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.Zewang.myBlog.controller.admin.CacheController required a bean of type 'org.springframework.cache.CacheManager' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.cache.CacheManager' in your configuration.
+
+2025-11-23 23:15:32.659 [main] INFO  o.Z.myBlog.MyBlogApplicationTests - Starting MyBlogApplicationTests using Java 21.0.8 with PID 13892 (started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-11-23 23:15:32.660 [main] DEBUG o.Z.myBlog.MyBlogApplicationTests - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-11-23 23:15:32.660 [main] INFO  o.Z.myBlog.MyBlogApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-11-23 23:15:34.670 [main] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.8+12-LTS-250"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@1600a8a2, com.mongodb.Jep395RecordCodecProvider@6b25ef1c, com.mongodb.KotlinCodecProvider@56b1e527]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
+2025-11-23 23:15:34.707 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器配置中...
+2025-11-23 23:15:34.719 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器已配置，包含类型转换支持
+2025-11-23 23:15:34.774 [cluster-ClusterId{value='692325164675cd5bf4e0c598', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=89950200}
+2025-11-23 23:15:37.433 [main] INFO  o.Z.myBlog.MyBlogApplicationTests - Started MyBlogApplicationTests in 5.097 seconds (process running for 6.08)
+2025-11-23 23:15:38.170 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 更新文章, ID: 1
+2025-11-23 23:15:38.174 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 文章更新成功, ID: 1
+2025-11-23 23:15:38.189 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=999
+2025-11-23 23:15:38.197 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 创建文章, 标题: 测试标题
+2025-11-23 23:15:38.197 [main] WARN  o.Z.m.s.a.impl.ArticleServiceImpl - 创建文章失败，标题已存在: 测试标题
+2025-11-23 23:15:38.200 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 删除文章, ID: 1
+2025-11-23 23:15:38.200 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 文章删除成功, ID: 1
+2025-11-23 23:15:38.203 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=1
+2025-11-23 23:15:38.210 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-23 23:15:38.213 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 创建文章, 标题: 测试标题
+2025-11-23 23:15:38.214 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 文章创建成功, ID: 1
+2025-11-23 23:15:38.218 [main] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 删除文章, ID: 999
+2025-11-23 23:15:38.218 [main] WARN  o.Z.m.s.a.impl.ArticleServiceImpl - 删除失败，文章不存在, ID: 999
+2025-11-23 23:15:45.726 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication using Java 21.0.8 with PID 51044 (D:\Zewang\PROJECTS\myBlog_v2\target\classes started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-11-23 23:15:45.728 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-11-23 23:15:45.729 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-23 23:15:47.346 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-23 23:15:47.347 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-11-23 23:15:47.443 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-23 23:15:47.510 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-23 23:15:47.673 [main] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.8+12-LTS-250"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@66b0e207, com.mongodb.Jep395RecordCodecProvider@74a58a06, com.mongodb.KotlinCodecProvider@7308c820]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
+2025-11-23 23:15:47.681 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器配置中...
+2025-11-23 23:15:47.684 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器已配置，包含类型转换支持
+2025-11-23 23:15:47.685 [cluster-ClusterId{value='69232523dd8f7c337a51c29e', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=16547800}
+2025-11-23 23:15:49.137 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 3.829 seconds (process running for 4.369)
+2025-11-23 23:16:01.928 [http-nio-8080-exec-9] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-23 23:16:02.009 [http-nio-8080-exec-1] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
+2025-11-23 23:16:02.009 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
+2025-11-23 23:16:02.009 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-23 23:16:02.013 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 将ArticleStatus转换为字符串: PUBLISHED
+2025-11-23 23:16:02.049 [http-nio-8080-exec-9] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
+2025-11-23 23:16:02.049 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
+2025-11-23 23:16:02.053 [http-nio-8080-exec-9] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
+2025-11-23 23:16:02.053 [http-nio-8080-exec-2] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
+2025-11-23 23:16:02.054 [http-nio-8080-exec-9] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
+2025-11-23 23:16:02.055 [http-nio-8080-exec-9] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
+2025-11-23 23:16:02.057 [http-nio-8080-exec-9] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
+2025-11-23 23:16:02.057 [http-nio-8080-exec-9] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
+2025-11-23 23:16:02.057 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
+2025-11-23 23:16:02.057 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
+2025-11-23 23:16:02.057 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
+2025-11-23 23:16:02.058 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
+2025-11-23 23:16:02.058 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
+2025-11-23 23:16:02.060 [http-nio-8080-exec-1] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
+2025-11-23 23:16:03.435 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据分类ID获取文章, categoryIds=[68dd359904f19209342ae39e]
+2025-11-23 23:16:03.435 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-23 23:16:03.439 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
+2025-11-23 23:16:03.441 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 1
+2025-11-23 23:16:03.441 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
+2025-11-23 23:16:03.441 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
+2025-11-23 23:16:03.441 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
+2025-11-23 23:16:03.443 [http-nio-8080-exec-3] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
