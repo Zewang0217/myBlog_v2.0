@@ -23,6 +23,13 @@ export const useComments = () => {
 
   // 获取文章评论列表
   const fetchComments = async (articleId: string) => {
+    // 检查articleId是否为空
+    if (!articleId || articleId.trim() === '') {
+      console.error('Invalid articleId:', articleId);
+      loading.value = false;
+      return { success: false, error: '文章ID无效' };
+    }
+
     loading.value = true
     error.value = null
     try {

@@ -1,12 +1,14 @@
 package org.Zewang.myBlog.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
@@ -112,6 +114,7 @@ public class Comment {
     private String userId;
     
     @Schema(description = "用户名")
+    @JsonProperty("author")
     private String username;
     
     @Schema(description = "评论内容")
@@ -124,6 +127,7 @@ public class Comment {
     private Integer status = 0;
     
     @Schema(description = "点赞数")
+    @JsonProperty("likeCount")
     private Integer likes = 0;
     
     @Schema(description = "创建时间")
@@ -137,4 +141,17 @@ public class Comment {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime updateTime;
+
+    // 回复列表，非数据库字段，用于前端展示嵌套结构
+    @Schema(description = "回复列表")
+    private transient List<Comment> replies;
+
+    // 回复列表的 getter 和 setter
+    public List<Comment> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(List<Comment> replies) {
+        this.replies = replies;
+    }
 }

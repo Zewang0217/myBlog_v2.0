@@ -20,6 +20,14 @@ public interface CommentRepository extends MongoRepository<Comment, String> {
      * @return 评论列表
      */
     List<Comment> findByArticleIdOrderByCreateTimeDesc(String articleId);
+
+    /**
+     * 根据文章ID和状态查询评论列表
+     * @param articleId 文章ID
+     * @param status 评论状态：0-正常，1-已删除
+     * @return 评论列表
+     */
+    List<Comment> findByArticleIdAndStatusOrderByCreateTimeDesc(String articleId, Integer status);
     
     /**
      * 根据文章ID和父评论ID查询评论列表

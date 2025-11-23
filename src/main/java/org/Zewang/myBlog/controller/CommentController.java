@@ -41,8 +41,8 @@ public class CommentController {
     
     // 创建评论
     @PostMapping
-    @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "创建评论", description = "创建新的文章评论（需要登录）")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "创建评论", description = "创建新的文章评论（仅管理员可操作）")
     @ApiResponses(value = {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(
             responseCode = "200",
@@ -95,8 +95,8 @@ public class CommentController {
     
     // 删除评论
     @DeleteMapping("/{id}")
-    @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "删除评论", description = "删除指定的评论（只有评论作者或管理员可操作）")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "删除评论", description = "删除指定的评论（仅管理员可操作）")
     @ApiResponses(value = {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(
             responseCode = "200",

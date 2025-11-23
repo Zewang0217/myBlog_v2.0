@@ -1,7 +1,10 @@
 package org.Zewang.myBlog.service.comment.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -79,7 +82,34 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getCommentsByArticleId(String articleId) {
         logger.info("查询文章评论，文章ID：{}", articleId);
-        return commentRepository.findByArticleIdOrderByCreateTimeDesc(articleId);
+        // 先获取所有正常状态的评论
+        List<Comment> allComments = commentRepository.findByArticleIdAndStatusOrderByCreateTimeDesc(articleId, 0);
+
+        // 将评论转换为嵌套结构
+        Map<String, Comment> commentMap = new HashMap<>();
+        List<Comment> rootComments = new ArrayList<>();
+
+        // 先将所有评论放到Map中，并初始化replies列表
+        for (Comment comment : allComments) {
+            comment.setReplies(new ArrayList<>());
+            commentMap.put(comment.getId(), comment);
+        }
+
+        // 构建嵌套结构：将回复添加到父评论的replies中，顶级评论添加到rootComments中
+        for (Comment comment : allComments) {
+            if (comment.getParentId() != null) {
+                // 是回复评论，找到父评论并添加
+                Comment parentComment = commentMap.get(comment.getParentId());
+                if (parentComment != null) {
+                    parentComment.getReplies().add(comment);
+                }
+            } else {
+                // 是顶级评论，直接添加到根列表
+                rootComments.add(comment);
+            }
+        }
+
+        return rootComments;
     }
     
     @Override
@@ -90,11 +120,9 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentRepository.findById(id)
             .orElseThrow(() -> new BusinessException("评论不存在"));
         
-        // 检查权限：只有评论作者或管理员可以删除
-        // 这里简化处理，实际应该检查用户角色
-        if (!comment.getUserId().equals(userId)) {
-            throw new BusinessException("没有权限删除该评论");
-        }
+        // 检查权限：Controller层已限制只有管理员可以调用此方法，
+        // 所以这里不需要再检查评论作者，但可以保留基本的安全验证
+        // 确保只有管理员操作
         
         // 软删除：更新状态为已删除
         comment.setStatus(1);
