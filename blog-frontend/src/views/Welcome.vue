@@ -136,12 +136,25 @@
         </div>
       </div>
     </section>
+    
+    <!-- 趣味小组件 -->
+    <section class="widgets-section">
+      <div class="container">
+        <h2 class="section-title">趣味小组件</h2>
+        <div class="widgets-grid">
+          <WeatherWidget />
+          <ClockWidget />
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import WeatherWidget from '@/components/widgets/WeatherWidget.vue'
+import ClockWidget from '@/components/widgets/ClockWidget.vue'
 
 const authStore = useAuthStore()
 const isAuthenticated = computed(() => authStore.isAuthenticated)
@@ -309,6 +322,45 @@ const isAuthenticated = computed(() => authStore.isAuthenticated)
   opacity: 0.9;
 }
 
+/* 小组件区域样式 */
+.widgets-section {
+  padding: 80px 0;
+  background-color: var(--background-color-base);
+  color: var(--text-color-primary, #303133);
+}
+
+.widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+/* 深色主题样式 */
+[data-theme="dark"] .features-section {
+  background-color: var(--background-secondary);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .feature-card {
+  background-color: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+  box-shadow: var(--box-shadow-base);
+}
+
+[data-theme="dark"] .feature-title {
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .feature-description {
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .widgets-section {
+  background-color: var(--background-secondary);
+  color: var(--text-color-primary);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .hero-title {
@@ -330,6 +382,11 @@ const isAuthenticated = computed(() => authStore.isAuthenticated)
   
   .btn {
     width: 200px;
+  }
+  
+  .widgets-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 </style>

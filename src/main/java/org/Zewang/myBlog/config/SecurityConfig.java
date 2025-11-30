@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .requestMatchers("/swagger-resources/**").permitAll()
                 .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/category").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/comments/article/**").permitAll()
                 .anyRequest().authenticated()
             );
 
