@@ -5,6 +5,18 @@
       <p class="upload-description">分享您的摄影作品，支持批量上传</p>
     </div>
 
+    <!-- 分类选择 -->
+    <div class="category-section">
+      <label for="photo-category" class="category-label">选择分类：</label>
+      <select id="photo-category" v-model="selectedCategory" class="category-select">
+        <option value="nature">自然风光</option>
+        <option value="portrait">人物肖像</option>
+        <option value="city">城市建筑</option>
+        <option value="street">街头摄影</option>
+        <option value="other">其他</option>
+      </select>
+    </div>
+
     <!-- 上传区域 -->
     <div class="upload-area" @drop="handleDrop" @dragover.prevent @dragenter.prevent>
       <div class="upload-content">
@@ -14,7 +26,7 @@
           <line x1="12" y1="3" x2="12" y2="15"/>
         </svg>
         <p class="upload-text">拖拽图片到此处或点击选择</p>
-        <p class="upload-hint">支持 JPG、PNG、GIF、WebP 格式，单张最大 10MB</p>
+        <p class="upload-hint">支持 JPG、PNG、GIF、WebP 格式，单张最大 100MB（自动压缩到5MB左右）</p>
         <p class="upload-hint">最多可上传 20 张图片</p>
       </div>
       <input
@@ -83,7 +95,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  'photos-uploaded': [photos: Array<{url: string, name: string}>]
+  'photos-uploaded': [photos: Array<{url: string, name: string, category: string}>]
   'upload-error': [error: string]
 }>()
 
@@ -99,10 +111,11 @@ const uploading = ref(false)
 const uploadProgress = ref<number[]>([])
 const uploadStatus = ref('')
 const error = ref('')
+const selectedCategory = ref('nature')
 
 // 配置
 const maxPhotos = props.maxPhotos || 20
-const maxSize = (props.maxSize || 10) * 1024 * 1024 // 转换为字节
+const maxSize = (props.maxSize || 100) * 1024 * 1024 // 转换为字节，默认100MB
 
 // 计算属性
 const totalCount = computed(() => photoPreviews.value.length)
@@ -231,7 +244,8 @@ const uploadPhotos = async () => {
         if (response.success && response.data) {
           uploadedPhotos.push({
             url: response.data.url,
-            name: photo.name
+            name: photo.name,
+            category: selectedCategory.value
           })
         } else {
           throw new Error(response.message || '上传失败')
@@ -550,6 +564,75 @@ const uploadPhotos = async () => {
   background: #a0a0a0;
   cursor: not-allowed;
   box-shadow: none;
+}
+
+.category-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.category-label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .category-label {
+  color: var(--text-color-primary);
+}
+
+.category-select {
+  padding: 10px 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  background: white;
+  color: #495057;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.category-select:focus {
+  outline: none;
+  border-color: #42b983;
+  box-shadow: 0 0 0 3px rgba(66, 185, 131, 0.1);
+}
+
+.category-select option {
+  background: white;
+  color: #495057;
+  padding: 10px;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .category-select {
+  background: var(--background-primary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .category-select:focus {
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+}
+
+[data-theme="dark"] .category-select option {
+  background: var(--background-primary);
+  color: var(--text-color-primary);
+  border: none;
+}
+
+[data-theme="dark"] .category-select option:hover {
+  background: var(--background-secondary);
+}
+
+[data-theme="dark"] .category-select option:checked {
+  background: var(--primary-color);
+  color: white;
 }
 
 .error-message {

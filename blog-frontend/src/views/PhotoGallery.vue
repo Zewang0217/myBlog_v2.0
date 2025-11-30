@@ -31,6 +31,31 @@
     <!-- 筛选和排序 -->
     <div class="filter-section">
       <div class="filter-controls">
+        <!-- 搜索框 -->
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input 
+            v-model="searchQuery" 
+            type="text" 
+            placeholder="搜索图片名称..." 
+            class="search-input"
+          />
+        </div>
+        
+        <!-- 分类筛选 -->
+        <select v-model="selectedCategory" class="category-select">
+          <option value="all">所有分类</option>
+          <option value="nature">自然风光</option>
+          <option value="portrait">人物肖像</option>
+          <option value="city">城市建筑</option>
+          <option value="street">街头摄影</option>
+          <option value="other">其他</option>
+        </select>
+        
+        <!-- 排序 -->
         <select v-model="sortBy" class="sort-select">
           <option value="newest">最新上传</option>
           <option value="oldest">最早上传</option>
@@ -58,6 +83,21 @@
               <rect x="3" y="3" width="18" height="8"/>
               <rect x="3" y="13" width="18" height="8"/>
             </svg>
+          </button>
+        </div>
+      </div>
+      
+      <!-- 标签筛选 -->
+      <div class="tag-filter" v-if="availableTags.length > 0">
+        <span class="filter-label">标签筛选:</span>
+        <div class="tag-list">
+          <button 
+            v-for="tag in availableTags" 
+            :key="tag"
+            :class="['tag-item', { active: selectedTags.includes(tag) }]"
+            @click="toggleTag(tag)"
+          >
+            {{ tag }}
           </button>
         </div>
       </div>
@@ -156,7 +196,7 @@
         <div class="modal-body">
           <PhotoUpload 
             :max-photos="20"
-            :max-size="10"
+            :max-size="100"
             @photos-uploaded="handlePhotosUploaded"
             @upload-error="handleUploadError"
           />
@@ -170,6 +210,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import PhotoUpload from '@/components/blog/PhotoUpload.vue'
+import { getPhotos } from '@/api/uploadService'
 
 // 定义图片接口
 interface Photo {
@@ -180,6 +221,8 @@ interface Photo {
   size: number
   width: number
   height: number
+  category: string
+  tags: string[]
 }
 
 // 状态管理
@@ -191,24 +234,69 @@ const selectedPhoto = ref<Photo | null>(null)
 const showUploadModal = ref(false)
 const sortBy = ref('newest')
 const viewMode = ref<'grid' | 'masonry'>('grid')
+const searchQuery = ref('')
+const selectedCategory = ref('all')
+const selectedTags = ref<string[]>([])
 
-// 计算属性 - 排序后的图片
+// 计算属性 - 可用标签
+const availableTags = computed(() => {
+  const tags = new Set<string>()
+  photos.value.forEach(photo => {
+    photo.tags.forEach(tag => tags.add(tag))
+  })
+  return Array.from(tags)
+})
+
+// 计算属性 - 筛选和排序后的图片
 const sortedPhotos = computed(() => {
-  const sorted = [...photos.value]
+  let filtered = [...photos.value]
   
+  // 搜索筛选
+  if (searchQuery.value.trim()) {
+    const query = searchQuery.value.toLowerCase().trim()
+    filtered = filtered.filter(photo => 
+      photo.name.toLowerCase().includes(query)
+    )
+  }
+  
+  // 分类筛选
+  if (selectedCategory.value !== 'all') {
+    filtered = filtered.filter(photo => 
+      photo.category === selectedCategory.value
+    )
+  }
+  
+  // 标签筛选
+  if (selectedTags.value.length > 0) {
+    filtered = filtered.filter(photo => 
+      selectedTags.value.every(tag => photo.tags.includes(tag))
+    )
+  }
+  
+  // 排序
   switch (sortBy.value) {
     case 'newest':
-      return sorted.sort((a, b) => new Date(b.uploadTime).getTime() - new Date(a.uploadTime).getTime())
+      return filtered.sort((a, b) => new Date(b.uploadTime).getTime() - new Date(a.uploadTime).getTime())
     case 'oldest':
-      return sorted.sort((a, b) => new Date(a.uploadTime).getTime() - new Date(b.uploadTime).getTime())
+      return filtered.sort((a, b) => new Date(a.uploadTime).getTime() - new Date(b.uploadTime).getTime())
     case 'name':
-      return sorted.sort((a, b) => a.name.localeCompare(b.name))
+      return filtered.sort((a, b) => a.name.localeCompare(b.name))
     case 'size':
-      return sorted.sort((a, b) => b.size - a.size)
+      return filtered.sort((a, b) => b.size - a.size)
     default:
-      return sorted
+      return filtered
   }
 })
+
+// 切换标签选择
+const toggleTag = (tag: string) => {
+  const index = selectedTags.value.indexOf(tag)
+  if (index > -1) {
+    selectedTags.value.splice(index, 1)
+  } else {
+    selectedTags.value.push(tag)
+  }
+}
 
 // 加载图片数据
 const loadPhotos = async () => {
@@ -216,70 +304,10 @@ const loadPhotos = async () => {
   error.value = ''
   
   try {
-    // 模拟API调用 - 实际项目中应该调用真实的API
-    // const response = await getPhotos()
-    // photos.value = response.data
-    
-    // 模拟数据
-    setTimeout(() => {
-      photos.value = [
-        {
-          id: '1',
-          name: '风景照片1.jpg',
-          url: 'https://picsum.photos/800/600?random=1',
-          uploadTime: '2024-01-15T10:30:00Z',
-          size: 2048000,
-          width: 800,
-          height: 600
-        },
-        {
-          id: '2',
-          name: '人物肖像2.jpg',
-          url: 'https://picsum.photos/600/800?random=2',
-          uploadTime: '2024-01-14T15:20:00Z',
-          size: 1536000,
-          width: 600,
-          height: 800
-        },
-        {
-          id: '3',
-          name: '城市夜景3.jpg',
-          url: 'https://picsum.photos/800/600?random=3',
-          uploadTime: '2024-01-13T20:15:00Z',
-          size: 2560000,
-          width: 800,
-          height: 600
-        },
-        {
-          id: '4',
-          name: '自然风光4.jpg',
-          url: 'https://picsum.photos/800/600?random=4',
-          uploadTime: '2024-01-12T08:45:00Z',
-          size: 1792000,
-          width: 800,
-          height: 600
-        },
-        {
-          id: '5',
-          name: '建筑摄影5.jpg',
-          url: 'https://picsum.photos/600/800?random=5',
-          uploadTime: '2024-01-11T14:30:00Z',
-          size: 3072000,
-          width: 600,
-          height: 800
-        },
-        {
-          id: '6',
-          name: '街头摄影6.jpg',
-          url: 'https://picsum.photos/800/600?random=6',
-          uploadTime: '2024-01-10T16:20:00Z',
-          size: 1280000,
-          width: 800,
-          height: 600
-        }
-      ]
-      loading.value = false
-    }, 1000)
+    // 调用真实的API获取图片列表
+    const photosList = await getPhotos()
+    photos.value = photosList
+    loading.value = false
   } catch (err) {
     error.value = '加载图片失败，请稍后重试'
     loading.value = false
@@ -317,19 +345,42 @@ const closePhotoModal = () => {
 }
 
 // 处理图片上传完成
-const handlePhotosUploaded = (uploadedPhotos: Array<{url: string, name: string}>) => {
+const handlePhotosUploaded = (uploadedPhotos: Array<{url: string, name: string, category: string}>) => {
   showUploadModal.value = false
   
   // 将新上传的图片添加到列表
-  const newPhotos: Photo[] = uploadedPhotos.map((photo, index) => ({
-    id: Date.now().toString() + index,
-    name: photo.name,
-    url: photo.url,
-    uploadTime: new Date().toISOString(),
-    size: 0, // 实际项目中应该从上传响应中获取
-    width: 800, // 实际项目中应该从上传响应中获取
-    height: 600 // 实际项目中应该从上传响应中获取
-  }))
+  const newPhotos: Photo[] = uploadedPhotos.map((photo, index) => {
+    // 根据分类自动生成标签
+    let tags: string[] = []
+    switch (photo.category) {
+      case 'nature':
+        tags = ['风景', '自然', '山水']
+        break
+      case 'portrait':
+        tags = ['人物', '肖像', '人像']
+        break
+      case 'city':
+        tags = ['城市', '建筑', '现代']
+        break
+      case 'street':
+        tags = ['街头', '人文', '生活']
+        break
+      default:
+        tags = ['其他']
+    }
+    
+    return {
+      id: Date.now().toString() + index,
+      name: photo.name,
+      url: photo.url,
+      uploadTime: new Date().toISOString(),
+      size: 0, // 实际项目中应该从上传响应中获取
+      width: 800, // 实际项目中应该从上传响应中获取
+      height: 600, // 实际项目中应该从上传响应中获取
+      category: photo.category,
+      tags: tags
+    }
+  })
   
   photos.value.unshift(...newPhotos)
   
@@ -497,11 +548,46 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.sort-select {
-  padding: 10px 15px;
+/* 搜索框样式 */
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 40px 12px 18px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  color: #495057;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #42b983;
+  box-shadow: 0 0 0 3px rgba(66, 185, 131, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
+/* 分类筛选样式 */
+.category-select {
+  padding: 12px 18px;
   border: 2px solid #e9ecef;
   border-radius: 8px;
   background: white;
@@ -509,17 +595,206 @@ onMounted(() => {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-weight: 500;
+  min-width: 150px;
+}
+
+.category-select:focus {
+  outline: none;
+  border-color: #42b983;
+  box-shadow: 0 0 0 3px rgba(66, 185, 131, 0.1);
+}
+
+.category-select option {
+  background: white;
+  color: #495057;
+  padding: 10px;
+  font-weight: 500;
+}
+
+/* 标签筛选样式 */
+.tag-filter {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.filter-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.95rem;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-item {
+  padding: 8px 16px;
+  border: 2px solid #e9ecef;
+  background: white;
+  color: #495057;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tag-item:hover {
+  border-color: #42b983;
+  color: #42b983;
+}
+
+.tag-item.active {
+  background: #42b983;
+  color: white;
+  border-color: #42b983;
+}
+
+/* 深色主题样式 */
+[data-theme="dark"] .search-input {
+  background: var(--background-primary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .search-input:focus {
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+}
+
+[data-theme="dark"] .search-icon {
+  color: var(--text-color-secondary);
+}
+
+/* 深色主题下的下拉列表样式 */
+[data-theme="dark"] .category-select,
+[data-theme="dark"] .sort-select {
+  background: var(--background-primary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .category-select:focus,
+[data-theme="dark"] .sort-select:focus {
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+}
+
+[data-theme="dark"] .category-select option,
+[data-theme="dark"] .sort-select option {
+  background: var(--background-primary);
+  color: var(--text-color-primary);
+  border: none;
+  padding: 10px;
+}
+
+[data-theme="dark"] .category-select option:hover,
+[data-theme="dark"] .sort-select option:hover {
+  background: var(--background-secondary);
+}
+
+[data-theme="dark"] .category-select option:checked,
+[data-theme="dark"] .sort-select option:checked {
+  background: var(--primary-color);
+  color: white;
+}
+
+[data-theme="dark"] .category-select {
+  background: var(--background-primary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .category-select:focus {
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+}
+
+[data-theme="dark"] .category-select option {
+  background: var(--background-primary);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .tag-filter {
+  border-top-color: var(--border-color-base);
+}
+
+[data-theme="dark"] .filter-label {
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .tag-item {
+  background: var(--background-primary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .tag-item:hover {
+  border-color: var(--primary-color-light);
+  color: var(--primary-color-light);
+}
+
+[data-theme="dark"] .tag-item.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.sort-select {
+  padding: 12px 18px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  background: white;
+  color: #495057;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  min-width: 150px;
 }
 
 .sort-select:focus {
   outline: none;
   border-color: #42b983;
+  box-shadow: 0 0 0 3px rgba(66, 185, 131, 0.1);
+}
+
+.sort-select option {
+  background: white;
+  color: #495057;
+  padding: 10px;
+  font-weight: 500;
 }
 
 [data-theme="dark"] .sort-select {
   background: var(--background-primary);
   border-color: var(--border-color-base);
   color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .sort-select:focus {
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+}
+
+[data-theme="dark"] .sort-select option {
+  background: var(--background-primary);
+  color: var(--text-color-primary);
+  border: none;
+}
+
+[data-theme="dark"] .sort-select option:hover {
+  background: var(--background-secondary);
+}
+
+[data-theme="dark"] .sort-select option:checked {
+  background: var(--primary-color);
+  color: white;
 }
 
 .view-toggle {

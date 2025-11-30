@@ -24,12 +24,13 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/api/file")
-@PreAuthorize("hasAnyRole('ADMIN')")
 public class FileController {
 
-    private static final String UPLOAD_DIR = "uploads/";
+    private static final String UPLOAD_DIR;
 
-    public FileController() {
+    static {
+        // 使用绝对路径，确保上传目录在应用程序根目录下
+        UPLOAD_DIR = System.getProperty("user.dir") + File.separator + "uploads" + File.separator;
         // 创建上传目录
         File uploadDir = new File(UPLOAD_DIR);
         if (!uploadDir.exists()) {
@@ -45,10 +46,10 @@ public class FileController {
                 return ApiResponse.error("文件不能为空");
             }
 
-            // 检查文件大小 (限制为10MB)
-            if (file.getSize() > 10 * 1024 * 1024) {
-                return ApiResponse.error("文件大小不能超过10MB");
-            }
+            // 检查文件大小 (限制为100MB)
+        if (file.getSize() > 100 * 1024 * 1024) {
+            return ApiResponse.error("文件大小不能超过100MB");
+        }
 
             // 获取文件信息
             String originalFilename = file.getOriginalFilename();
@@ -111,6 +112,65 @@ public class FileController {
             }
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+    
+    /**
+     * 获取所有上传的图片列表
+     */
+    @GetMapping("/list")
+    public ApiResponse<Map<String, Object>> getFileList() {
+        try {
+            File uploadDir = new File(UPLOAD_DIR);
+            if (!uploadDir.exists()) {
+                return ApiResponse.success(new HashMap<>());
+            }
+            
+            Map<String, Object> result = new HashMap<>();
+            
+            // 遍历上传目录下的所有文件
+            traverseUploadDir(uploadDir, result);
+            
+            return ApiResponse.success(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ApiResponse.error("获取文件列表失败: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * 遍历上传目录，获取所有文件信息
+     */
+    private void traverseUploadDir(File dir, Map<String, Object> result) {
+        File[] files = dir.listFiles();
+        if (files == null) {
+            return;
+        }
+        
+        for (File file : files) {
+            if (file.isDirectory()) {
+                // 递归遍历子目录
+                traverseUploadDir(file, result);
+            } else {
+                // 处理文件
+            String relativePath = file.getAbsolutePath().substring(UPLOAD_DIR.length());
+            // 将Windows反斜杠替换为URL正斜杠
+            String urlPath = relativePath.replace(File.separator, "/");
+            String datePath = relativePath.substring(0, relativePath.lastIndexOf(File.separator));
+            String filename = relativePath.substring(relativePath.lastIndexOf(File.separator) + 1);
+            
+            // 构建文件信息
+            Map<String, Object> fileInfo = new HashMap<>();
+            fileInfo.put("filename", filename);
+            fileInfo.put("originalName", filename);
+            fileInfo.put("size", file.length());
+            fileInfo.put("url", "/uploads/" + urlPath);
+            fileInfo.put("path", file.getAbsolutePath());
+            fileInfo.put("datePath", datePath);
+                
+                // 将文件信息添加到结果中
+                result.put(relativePath, fileInfo);
+            }
         }
     }
 }
