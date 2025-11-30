@@ -10,7 +10,7 @@
             <line x1="12" y1="3" x2="12" y2="15"/>
           </svg>
           <p class="upload-text">拖拽图片到此处或点击上传</p>
-          <p class="upload-hint">支持 JPG、PNG、GIF 格式，最大 5MB</p>
+          <p class="upload-hint">支持 JPG、PNG、GIF 格式，最大 40MB</p>
         </div>
         <input
           ref="fileInput"
@@ -173,9 +173,9 @@ const handleFile = (file: File) => {
     return
   }
 
-  // 验证文件大小 (5MB)
-  if (file.size > 5 * 1024 * 1024) {
-    error.value = '图片大小不能超过5MB'
+  // 验证文件大小 (40MB)
+  if (file.size > 40 * 1024 * 1024) {
+    error.value = '图片大小不能超过40MB'
     return
   }
 
@@ -189,40 +189,47 @@ const handleFile = (file: File) => {
     fileName.value = file.name
     fileSize.value = file.size
     selectedRandomImage.value = ''
+    
+    // 上传文件前进行压缩
+    compressImage(file)
+      .then(compressedFile => {
+        uploadFile(compressedFile)
+      })
+      .catch(err => {
+        console.error('压缩失败，使用原图上传:', err)
+        uploadFile(file)
+      })
   }
   reader.readAsDataURL(file)
-
-  // 上传文件
-  uploadFile(file)
 }
 
 // 上传文件到服务器
-const uploadFile = async (file: File) => {
-  uploading.value = true
-  uploadProgress.value = 0
-  uploadStatus.value = '正在上传...'
+  const uploadFile = async (file: File) => {
+    uploading.value = true
+    uploadProgress.value = 0
+    uploadStatus.value = '正在上传...'
 
-  try {
-    const formData = new FormData()
-    formData.append('file', file)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
 
-    // 模拟上传进度
-    const progressInterval = setInterval(() => {
-      if (uploadProgress.value < 90) {
-        uploadProgress.value += 10
-      }
-    }, 200)
+      // 模拟上传进度
+      const progressInterval = setInterval(() => {
+        if (uploadProgress.value < 90) {
+          uploadProgress.value += 10
+        }
+      }, 200)
 
-    const response = await apiClient.post('/api/file/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
+      const response = await apiClient.post('/api/file/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
 
-    clearInterval(progressInterval)
-    uploadProgress.value = 100
+      clearInterval(progressInterval)
+      uploadProgress.value = 100
 
-    if (response.data.code === 200) {
+      // 直接使用response.data，因为后端返回的是ApiResponse格式
       const fileUrl = response.data.data.url
       uploadStatus.value = '上传成功！'
       emit('update:modelValue', fileUrl)
@@ -232,15 +239,13 @@ const uploadFile = async (file: File) => {
         uploading.value = false
         uploadProgress.value = 0
       }, 1000)
-    } else {
-      throw new Error(response.data.message || '上传失败')
+    } catch (err: any) {
+      console.error('上传失败:', err)
+      error.value = err.response?.data?.message || err.message || '上传失败，请重试'
+      uploading.value = false
+      uploadProgress.value = 0
     }
-  } catch (err: any) {
-    error.value = err.message || '上传失败，请重试'
-    uploading.value = false
-    uploadProgress.value = 0
   }
-}
 
 // 删除图片
 const removeImage = () => {
@@ -258,6 +263,79 @@ const formatFileSize = (bytes: number): string => {
   const sizes = ['Bytes', 'KB', 'MB', 'GB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+}
+
+// 图片压缩函数
+const compressImage = (file: File): Promise<File> => {
+  return new Promise((resolve, reject) => {
+    // 如果文件小于1MB，不压缩
+    if (file.size < 1 * 1024 * 1024) {
+      resolve(file)
+      return
+    }
+    
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = (event) => {
+      const img = new Image()
+      img.src = event.target?.result as string
+      img.onload = () => {
+        // 创建canvas元素
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+        
+        if (!ctx) {
+          reject(new Error('无法获取canvas上下文'))
+          return
+        }
+        
+        // 计算压缩后的尺寸，保持宽高比
+        let width = img.width
+        let height = img.height
+        const maxWidth = 1920
+        const maxHeight = 1080
+        
+        if (width > maxWidth || height > maxHeight) {
+          const ratio = Math.min(maxWidth / width, maxHeight / height)
+          width = Math.floor(width * ratio)
+          height = Math.floor(height * ratio)
+        }
+        
+        // 设置canvas尺寸
+        canvas.width = width
+        canvas.height = height
+        
+        // 绘制压缩后的图像
+        ctx.drawImage(img, 0, 0, width, height)
+        
+        // 将canvas转换为blob
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              reject(new Error('无法创建blob'))
+              return
+            }
+            
+            // 创建压缩后的文件
+            const compressedFile = new File([blob], file.name, {
+              type: file.type,
+              lastModified: file.lastModified
+            })
+            
+            resolve(compressedFile)
+          },
+          file.type,
+          0.8 // 压缩质量，0-1之间
+        )
+      }
+      img.onerror = () => {
+        reject(new Error('图片加载失败'))
+      }
+    }
+    reader.onerror = () => {
+      reject(new Error('文件读取失败'))
+    }
+  })
 }
 
 // 监听modelValue变化
