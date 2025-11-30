@@ -758,6 +758,91 @@ onMounted(async () => {
   animation: explode 0.3s ease-in-out;
 }
 
+/* 深色主题样式 */
+[data-theme="dark"] .comment-section {
+  background-color: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+  box-shadow: var(--box-shadow-base);
+  --text-primary: var(--text-color-primary);
+  --text-secondary: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .comment-header {
+  border-bottom: 2px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .comment-form-container,
+[data-theme="dark"] .reply-form-container {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-textarea {
+  background-color: var(--background-primary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .form-input:focus,
+[data-theme="dark"] .form-textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(66, 185, 131, 0.3);
+}
+
+[data-theme="dark"] .btn-cancel {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .btn-cancel:hover {
+  background-color: var(--background-glass);
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .comment-error {
+  background-color: rgba(229, 57, 53, 0.1);
+  color: #f44336;
+  border: 1px solid rgba(229, 57, 53, 0.3);
+}
+
+[data-theme="dark"] .comment-item {
+  background-color: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .comment-item:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .replies-list {
+  border-left: 3px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .reply-item {
+  background-color: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .action-btn {
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .action-btn:hover {
+  background-color: rgba(129, 140, 248, 0.1);
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .like-btn.liked:hover {
+  background-color: rgba(255, 87, 34, 0.1);
+}
+
+[data-theme="dark"] .delete-btn:hover {
+  background-color: rgba(229, 57, 53, 0.1);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .comment-section {
