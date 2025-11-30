@@ -22,6 +22,9 @@ const searchQuery = ref('')
 const isSearchFocused = ref(false)
 const showSearchResults = ref(false)
 
+// 导航栏状态
+const isSideNavOpen = ref(true)
+
 const logout = () => {
   authStore.logout()
 }
@@ -54,6 +57,11 @@ const hideSearchResults = () => {
 // 移动端菜单状态
 const mobileMenuOpen = ref(false)
 
+// 切换侧边栏显示状态
+const toggleSideNav = () => {
+  isSideNavOpen.value = !isSideNavOpen.value
+}
+
 onMounted(() => {
   // 点击文档其他部分隐藏搜索结果
   document.addEventListener('click', (e) => {
@@ -72,13 +80,13 @@ onMounted(() => {
       <div class="container">
         <div class="header-content">
           <!-- 移动端菜单按钮 -->
-          <button class="mobile-menu-btn" @click="mobileMenuOpen = !mobileMenuOpen">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </button>
+        <button class="mobile-menu-btn" @click="toggleSideNav">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
           
           <h1 class="app-title">
             <RouterLink to="/" class="title-link">我的博客</RouterLink>
@@ -177,6 +185,9 @@ onMounted(() => {
             <li v-if="isAdmin" class="nav-item">
               <RouterLink to="/drafts" class="nav-link" active-class="active" @click="mobileMenuOpen = false">草稿箱</RouterLink>
             </li>
+            <li v-if="isAdmin" class="nav-item">
+              <RouterLink to="/admin/dashboard" class="nav-link" active-class="active" @click="mobileMenuOpen = false">仪表盘</RouterLink>
+            </li>
             <li class="nav-item">
               <RouterLink to="/categories" class="nav-link" active-class="active" @click="mobileMenuOpen = false">分类管理</RouterLink>
             </li>
@@ -191,31 +202,82 @@ onMounted(() => {
     <!-- 主要内容区域 -->
     <div class="app-main-container">
       <!-- 侧边导航栏 -->
-      <nav class="side-nav">
+      <nav class="side-nav" :class="{ 'side-nav-collapsed': !isSideNavOpen }">
         <ul class="nav-list">
           <li class="nav-item">
-            <RouterLink to="/" class="nav-link" active-class="active">首页</RouterLink>
+            <RouterLink to="/" class="nav-link" active-class="active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span class="nav-text">首页</span>
+            </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/articles" class="nav-link" active-class="active">文章</RouterLink>
+            <RouterLink to="/articles" class="nav-link" active-class="active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <span class="nav-text">文章</span>
+            </RouterLink>
           </li>
           <li v-if="isAuthenticated" class="nav-item">
-            <RouterLink to="/article/create" class="nav-link" active-class="active">撰写文章</RouterLink>
+            <RouterLink to="/article/create" class="nav-link" active-class="active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <span class="nav-text">撰写文章</span>
+            </RouterLink>
           </li>
           <li v-if="isAdmin" class="nav-item">
-            <RouterLink to="/drafts" class="nav-link" active-class="active">草稿箱</RouterLink>
+            <RouterLink to="/drafts" class="nav-link" active-class="active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span class="nav-text">草稿箱</span>
+            </RouterLink>
+          </li>
+          <li v-if="isAdmin" class="nav-item">
+            <RouterLink to="/admin/dashboard" class="nav-link" active-class="active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+              </svg>
+              <span class="nav-text">仪表盘</span>
+            </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/categories" class="nav-link" active-class="active">分类管理</RouterLink>
+            <RouterLink to="/categories" class="nav-link" active-class="active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span class="nav-text">分类管理</span>
+            </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/photos" class="nav-link" active-class="active">摄影相册</RouterLink>
+            <RouterLink to="/photos" class="nav-link" active-class="active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span class="nav-text">摄影相册</span>
+            </RouterLink>
           </li>
         </ul>
       </nav>
 
       <!-- 主内容区 -->
-      <main class="app-main">
+      <main class="app-main" :class="{ 'main-expanded': !isSideNavOpen }">
         <RouterView />
       </main>
     </div>
@@ -766,11 +828,71 @@ onMounted(() => {
   box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.03);
 }
 
+
+
+/* 导航图标样式 */
+.nav-icon {
+  margin-right: 12px;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+/* 导航文字样式 */
+.nav-text {
+  transition: all var(--transition-normal) ease;
+}
+
+/* 导航栏收起状态 */
+.side-nav-collapsed {
+  width: 80px;
+}
+
+.side-nav-collapsed .nav-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  margin: 0;
+}
+
+.side-nav-collapsed .nav-link {
+  justify-content: center;
+  padding: 14px 8px;
+}
+
+.side-nav-collapsed .nav-icon {
+  margin-right: 0;
+}
+
+/* 主内容区展开状态 */
+.main-expanded {
+  flex: 1;
+  transition: all var(--transition-normal) ease;
+}
+
 /* 主内容区 - 宽敞布局 */
 .app-main {
   flex: 1;
   padding: var(--spacing-extra-large);
   transition: all var(--transition-normal) ease;
+}
+
+/* 导航链接样式调整 */
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 14px 24px;
+  color: var(--text-color-regular);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-normal) ease;
+  border-left: 4px solid transparent;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  font-size: var(--font-size-base);
+  letter-spacing: 0.5px;
 }
 
 /* 大气风格的页脚 */
