@@ -155,7 +155,7 @@
 
       <!-- 文章封面图片 -->
       <div v-if="article?.coverImage" class="article-cover">
-        <img :src="article.coverImage" :alt="article.title" class="cover-image" />
+        <img v-lazy="article.coverImage" :alt="article.title" class="cover-image" />
       </div>
 
       <!-- 回到顶端按钮 -->

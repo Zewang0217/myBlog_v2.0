@@ -18,6 +18,7 @@ import java.util.Optional;
 @Repository
 public interface ArticleRepository extends MongoRepository<Article, String> {
     List<Article> findByStatus(ArticleStatus status);
+    long countByStatus(ArticleStatus status);
     List<Article> findByAuthor(String author);
     Optional<Article> findByTitle(String title);
     boolean existsByTitle(String title);
