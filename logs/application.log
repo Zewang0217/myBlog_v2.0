@@ -4785,3 +4785,375 @@ Unconditional classes:
 2025-11-30 21:24:43.437 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为整数: DRAFT
 2025-11-30 21:24:43.438 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将字符串转换为ArticleStatus: PUBLISHED
 2025-11-30 21:24:43.439 [http-nio-8080-exec-5] DEBUG o.Zewang.myBlog.config.MongoConfig - 尝试将整数转换为ArticleStatus: 0
+2025-11-30 22:27:08.414 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 33172 (D:\Zewang\PROJECTS\myBlog_v2\target\myBlog-0.0.1-SNAPSHOT.jar started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-11-30 22:27:08.419 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-11-30 22:27:08.421 [main] INFO  org.Zewang.myBlog.MyBlogApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-30 22:27:11.069 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-30 22:27:11.069 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-11-30 22:27:11.127 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-30 22:27:11.223 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-30 22:27:11.777 [main] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.8+12-LTS-250"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@6cc64028, com.mongodb.Jep395RecordCodecProvider@291a4791, com.mongodb.KotlinCodecProvider@5b1e88f]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
+2025-11-30 22:27:11.790 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器配置中...
+2025-11-30 22:27:11.801 [main] INFO  o.Zewang.myBlog.config.MongoConfig - MongoDB自定义转换器已配置，包含类型转换支持
+2025-11-30 22:27:11.867 [cluster-ClusterId{value='692c543f93f0227b76ca8683', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=61035200}
+2025-11-30 22:27:14.685 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 6.995 seconds (process running for 7.999)
+2025-11-30 22:42:46.873 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1600 (D:\Zewang\PROJECTS\myBlog_v2\target\myBlog-0.0.1-SNAPSHOT.jar started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-11-30 22:42:46.876 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-11-30 22:42:46.876 [main] INFO  org.Zewang.myBlog.MyBlogApplication - The following 1 profile is active: "prod"
+2025-11-30 22:42:48.204 [main] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Searching for mappers annotated with @Mapper
+2025-11-30 22:42:48.206 [main] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Using auto-configuration base package 'org.Zewang.myBlog'
+2025-11-30 22:42:48.536 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[org.Zewang.myBlog]' package. Please check your configuration.
+2025-11-30 22:42:49.388 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-30 22:42:49.389 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-11-30 22:42:49.447 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-30 22:42:49.621 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-30 22:42:49.841 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-30 22:42:49.911 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-11-30 22:42:49.964 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-11-30 22:42:50.310 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-30 22:42:50.642 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@534762ed
+2025-11-30 22:42:50.647 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-30 22:42:50.661 [main] WARN  o.h.e.j.e.i.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+org.hibernate.boot.registry.selector.spi.StrategySelectionException: Unable to resolve name [org.hibernate.community.dialect.SQLiteDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:154)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:236)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:189)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.constructDialect(DialectFactoryImpl.java:123)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:88)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$1.execute(JdbcEnvironmentInitiator.java:328)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$1.execute(JdbcEnvironmentInitiator.java:277)
+	at org.hibernate.jdbc.WorkExecutor.executeReturningWork(WorkExecutor.java:58)
+	at org.hibernate.jdbc.AbstractReturningWork.accept(AbstractReturningWork.java:34)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:70)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.Zewang.myBlog.MyBlogApplication.main(MyBlogApplication.java:15)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:91)
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:53)
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:58)
+Caused by: org.hibernate.boot.registry.classloading.spi.ClassLoadingException: Unable to load class [org.hibernate.community.dialect.SQLiteDialect]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:126)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:150)
+	... 50 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Could not load requested class : org.hibernate.community.dialect.SQLiteDialect
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:216)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:534)
+	at java.base/java.lang.Class.forName(Class.java:513)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:123)
+	... 51 common frames omitted
+Caused by: java.lang.Throwable: null
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:209)
+	... 57 common frames omitted
+	Suppressed: java.lang.ClassNotFoundException: org.hibernate.community.dialect.SQLiteDialect
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at org.springframework.boot.loader.net.protocol.jar.JarUrlClassLoader.loadClass(JarUrlClassLoader.java:104)
+		at org.springframework.boot.loader.launch.LaunchedClassLoader.loadClass(LaunchedClassLoader.java:91)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:206)
+		... 57 common frames omitted
+	Suppressed: java.lang.ClassNotFoundException: org.hibernate.community.dialect.SQLiteDialect
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at org.springframework.boot.loader.net.protocol.jar.JarUrlClassLoader.loadClass(JarUrlClassLoader.java:104)
+		at org.springframework.boot.loader.launch.LaunchedClassLoader.loadClass(LaunchedClassLoader.java:91)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:206)
+		... 57 common frames omitted
+	Suppressed: java.lang.ClassNotFoundException: org.hibernate.community.dialect.SQLiteDialect
+		at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+		at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:206)
+		... 57 common frames omitted
+2025-11-30 22:42:50.671 [main] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to resolve name [org.hibernate.community.dialect.SQLiteDialect] as strategy [org.hibernate.dialect.Dialect]
+2025-11-30 22:42:50.672 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to resolve name [org.hibernate.community.dialect.SQLiteDialect] as strategy [org.hibernate.dialect.Dialect]
+2025-11-30 22:42:50.674 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-11-30 22:42:50.677 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-11-30 22:42:50.681 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-11-30 22:42:50.709 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to resolve name [org.hibernate.community.dialect.SQLiteDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.Zewang.myBlog.MyBlogApplication.main(MyBlogApplication.java:15)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:91)
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:53)
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:58)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to resolve name [org.hibernate.community.dialect.SQLiteDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:276)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 21 common frames omitted
+Caused by: org.hibernate.boot.registry.selector.spi.StrategySelectionException: Unable to resolve name [org.hibernate.community.dialect.SQLiteDialect] as strategy [org.hibernate.dialect.Dialect]
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:154)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:236)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.resolveStrategy(StrategySelectorImpl.java:189)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.constructDialect(DialectFactoryImpl.java:123)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:88)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentWithDefaults(JdbcEnvironmentInitiator.java:143)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:348)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	... 36 common frames omitted
+Caused by: org.hibernate.boot.registry.classloading.spi.ClassLoadingException: Unable to load class [org.hibernate.community.dialect.SQLiteDialect]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:126)
+	at org.hibernate.boot.registry.selector.internal.StrategySelectorImpl.selectStrategyImplementor(StrategySelectorImpl.java:150)
+	... 46 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Could not load requested class : org.hibernate.community.dialect.SQLiteDialect
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:216)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:534)
+	at java.base/java.lang.Class.forName(Class.java:513)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:123)
+	... 47 common frames omitted
+Caused by: java.lang.Throwable: null
+	at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:209)
+	... 53 common frames omitted
+	Suppressed: java.lang.ClassNotFoundException: org.hibernate.community.dialect.SQLiteDialect
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at org.springframework.boot.loader.net.protocol.jar.JarUrlClassLoader.loadClass(JarUrlClassLoader.java:104)
+		at org.springframework.boot.loader.launch.LaunchedClassLoader.loadClass(LaunchedClassLoader.java:91)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:206)
+		... 53 common frames omitted
+	Suppressed: java.lang.ClassNotFoundException: org.hibernate.community.dialect.SQLiteDialect
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at org.springframework.boot.loader.net.protocol.jar.JarUrlClassLoader.loadClass(JarUrlClassLoader.java:104)
+		at org.springframework.boot.loader.launch.LaunchedClassLoader.loadClass(LaunchedClassLoader.java:91)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:206)
+		... 53 common frames omitted
+	Suppressed: java.lang.ClassNotFoundException: org.hibernate.community.dialect.SQLiteDialect
+		at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+		at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at org.hibernate.boot.registry.classloading.internal.AggregatedClassLoader.findClass(AggregatedClassLoader.java:206)
+		... 53 common frames omitted
+2025-11-30 22:43:38.331 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 56416 (D:\Zewang\PROJECTS\myBlog_v2\target\myBlog-0.0.1-SNAPSHOT.jar started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-11-30 22:43:38.333 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-11-30 22:43:38.334 [main] INFO  org.Zewang.myBlog.MyBlogApplication - The following 1 profile is active: "prod"
+2025-11-30 22:43:39.609 [main] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Searching for mappers annotated with @Mapper
+2025-11-30 22:43:39.609 [main] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Using auto-configuration base package 'org.Zewang.myBlog'
+2025-11-30 22:43:39.975 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[org.Zewang.myBlog]' package. Please check your configuration.
+2025-11-30 22:43:41.042 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-30 22:43:41.045 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-11-30 22:43:41.154 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-30 22:43:41.326 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-30 22:43:41.632 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-30 22:43:41.726 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-11-30 22:43:41.779 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-11-30 22:43:42.104 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-30 22:43:42.232 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@429e7914
+2025-11-30 22:43:42.236 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-30 22:43:42.443 [main] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: Could not determine recommended JdbcType for Java type 'org.Zewang.myBlog.model.Category'
+2025-11-30 22:43:42.444 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Could not determine recommended JdbcType for Java type 'org.Zewang.myBlog.model.Category'
+2025-11-30 22:43:42.444 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-11-30 22:43:42.451 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-11-30 22:43:42.454 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-11-30 22:43:42.486 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Could not determine recommended JdbcType for Java type 'org.Zewang.myBlog.model.Category'
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1234)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:952)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.Zewang.myBlog.MyBlogApplication.main(MyBlogApplication.java:15)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:91)
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:53)
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:58)
+Caused by: org.hibernate.type.descriptor.java.spi.JdbcTypeRecommendationException: Could not determine recommended JdbcType for Java type 'org.Zewang.myBlog.model.Category'
+	at org.hibernate.type.descriptor.java.spi.UnknownBasicJavaType.getRecommendedJdbcType(UnknownBasicJavaType.java:37)
+	at org.hibernate.type.descriptor.java.spi.BasicCollectionJavaType.getRecommendedJdbcType(BasicCollectionJavaType.java:73)
+	at org.hibernate.boot.model.process.internal.InferredBasicValueResolver.from(InferredBasicValueResolver.java:195)
+	at org.hibernate.mapping.BasicValue.resolution(BasicValue.java:642)
+	at org.hibernate.mapping.BasicValue.buildResolution(BasicValue.java:493)
+	at org.hibernate.mapping.BasicValue.resolve(BasicValue.java:345)
+	at org.hibernate.mapping.BasicValue.resolve(BasicValue.java:335)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.lambda$processValueResolvers$4(InFlightMetadataCollectorImpl.java:1800)
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1765)
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1743)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processValueResolvers(InFlightMetadataCollectorImpl.java:1799)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1785)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:332)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1432)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1503)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1833)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782)
+	... 21 common frames omitted
+2025-11-30 22:44:41.645 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Starting MyBlogApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 42144 (D:\Zewang\PROJECTS\myBlog_v2\target\myBlog-0.0.1-SNAPSHOT.jar started by zewan in D:\Zewang\PROJECTS\myBlog_v2)
+2025-11-30 22:44:41.647 [main] DEBUG org.Zewang.myBlog.MyBlogApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2025-11-30 22:44:41.648 [main] INFO  org.Zewang.myBlog.MyBlogApplication - The following 1 profile is active: "prod"
+2025-11-30 22:44:42.866 [main] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Searching for mappers annotated with @Mapper
+2025-11-30 22:44:42.866 [main] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Using auto-configuration base package 'org.Zewang.myBlog'
+2025-11-30 22:44:43.261 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[org.Zewang.myBlog]' package. Please check your configuration.
+2025-11-30 22:44:44.212 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-30 22:44:44.212 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-11-30 22:44:44.357 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-30 22:44:44.520 [main] DEBUG o.Z.m.config.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-30 22:44:44.808 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-30 22:44:44.911 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-11-30 22:44:44.998 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-11-30 22:44:45.404 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-30 22:44:45.571 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@258a8584
+2025-11-30 22:44:45.573 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-30 22:44:46.684 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-30 22:44:47.947 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-30 22:44:48.672 [main] DEBUG o.m.s.b.a.MybatisAutoConfiguration - Not found configuration for registering mapper bean using @MapperScan, MapperFactoryBean and MapperScannerConfigurer.
+2025-11-30 22:44:48.788 [main] DEBUG o.m.spring.SqlSessionFactoryBean - Property 'mapperLocations' was not specified.
+2025-11-30 22:44:49.235 [main] INFO  org.Zewang.myBlog.MyBlogApplication - Started MyBlogApplication in 8.246 seconds (process running for 8.907)
+2025-11-30 22:45:23.504 [http-nio-8080-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-30 22:45:24.248 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
+2025-11-30 22:45:24.250 [http-nio-8080-exec-6] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
+2025-11-30 22:45:24.252 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-30 22:45:30.971 [http-nio-8080-exec-3] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
+2025-11-30 22:46:55.523 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 创建文章, 标题: 测试文章
+2025-11-30 22:46:55.541 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 文章创建成功, ID: fa6de394-0693-438f-85eb-ce9f8ee24e75
+2025-11-30 22:46:56.863 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-30 22:46:56.863 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
+2025-11-30 22:46:56.864 [http-nio-8080-exec-5] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
+2025-11-30 22:47:00.133 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=fa6de394-0693-438f-85eb-ce9f8ee24e75
+2025-11-30 22:47:00.184 [http-nio-8080-exec-1] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：fa6de394-0693-438f-85eb-ce9f8ee24e75
+2025-11-30 22:47:11.516 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
+2025-11-30 22:47:11.518 [http-nio-8080-exec-2] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
+2025-11-30 22:47:11.518 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-30 22:47:12.394 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-30 22:47:13.513 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据
+2025-11-30 22:47:13.516 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据成功，共0个分类
+2025-11-30 22:47:13.517 [http-nio-8080-exec-7] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计总评论数
+2025-11-30 22:47:13.519 [http-nio-8080-exec-7] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计待审核评论数
+2025-11-30 22:47:13.579 [http-nio-8080-exec-3] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 获取最近的评论，限制数量：10
+2025-11-30 22:47:18.143 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据
+2025-11-30 22:47:18.151 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据成功，共0个分类
+2025-11-30 22:47:18.151 [http-nio-8080-exec-2] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计总评论数
+2025-11-30 22:47:18.153 [http-nio-8080-exec-2] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计待审核评论数
+2025-11-30 22:47:18.184 [http-nio-8080-exec-8] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 获取最近的评论，限制数量：10
+2025-11-30 22:47:19.057 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-30 22:47:19.057 [http-nio-8080-exec-5] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
+2025-11-30 22:47:19.057 [http-nio-8080-exec-9] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
+2025-11-30 22:47:20.336 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据
+2025-11-30 22:47:20.342 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据成功，共0个分类
+2025-11-30 22:47:20.342 [http-nio-8080-exec-7] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计总评论数
+2025-11-30 22:47:20.343 [http-nio-8080-exec-7] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计待审核评论数
+2025-11-30 22:47:20.375 [http-nio-8080-exec-6] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 获取最近的评论，限制数量：10
+2025-11-30 22:47:21.059 [http-nio-8080-exec-1] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 获取所有评论
+2025-11-30 22:47:23.143 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据
+2025-11-30 22:47:23.148 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据成功，共0个分类
+2025-11-30 22:47:23.150 [http-nio-8080-exec-4] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计总评论数
+2025-11-30 22:47:23.151 [http-nio-8080-exec-4] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计待审核评论数
+2025-11-30 22:47:23.186 [http-nio-8080-exec-2] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 获取最近的评论，限制数量：10
+2025-11-30 22:47:24.235 [http-nio-8080-exec-10] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-30 22:47:24.235 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
+2025-11-30 22:47:24.236 [http-nio-8080-exec-9] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
+2025-11-30 22:47:26.582 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 根据ID获取文章, id=fa6de394-0693-438f-85eb-ce9f8ee24e75
+2025-11-30 22:47:26.618 [http-nio-8080-exec-7] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 查询文章评论，文章ID：fa6de394-0693-438f-85eb-ce9f8ee24e75
+2025-11-30 22:47:41.288 [http-nio-8080-exec-6] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 创建评论，文章ID：fa6de394-0693-438f-85eb-ce9f8ee24e75, 用户ID：admin
+2025-11-30 22:47:46.566 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据
+2025-11-30 22:47:46.571 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据成功，共0个分类
+2025-11-30 22:47:46.573 [http-nio-8080-exec-3] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计总评论数
+2025-11-30 22:47:46.576 [http-nio-8080-exec-3] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计待审核评论数
+2025-11-30 22:47:46.609 [http-nio-8080-exec-1] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 获取最近的评论，限制数量：10
+2025-11-30 22:47:47.686 [http-nio-8080-exec-4] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 获取所有评论
+2025-11-30 22:47:58.584 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据
+2025-11-30 22:47:58.589 [http-nio-8080-exec-2] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取文章分类统计数据成功，共0个分类
+2025-11-30 22:47:58.589 [http-nio-8080-exec-2] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计总评论数
+2025-11-30 22:47:58.592 [http-nio-8080-exec-2] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 统计待审核评论数
+2025-11-30 22:47:58.631 [http-nio-8080-exec-10] INFO  o.Z.m.s.c.impl.CommentServiceImpl - 获取最近的评论，限制数量：10
+2025-11-30 22:47:59.464 [http-nio-8080-exec-8] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-30 22:48:01.122 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 发布文章，ID：fa6de394-0693-438f-85eb-ce9f8ee24e75
+2025-11-30 22:48:01.137 [http-nio-8080-exec-5] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 发布文章成功，ID：fa6de394-0693-438f-85eb-ce9f8ee24e75
+2025-11-30 22:48:01.155 [http-nio-8080-exec-7] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-30 22:48:03.217 [http-nio-8080-exec-6] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
+2025-11-30 22:48:03.621 [http-nio-8080-exec-4] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取所有文章
+2025-11-30 22:48:03.621 [http-nio-8080-exec-3] INFO  o.Z.m.s.a.impl.ArticleServiceImpl - 获取已发布的文章
+2025-11-30 22:48:03.621 [http-nio-8080-exec-1] INFO  o.Z.m.s.c.impl.CategoryServiceImpl - 获取所有分类
