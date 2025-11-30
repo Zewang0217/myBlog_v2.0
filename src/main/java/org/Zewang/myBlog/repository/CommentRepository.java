@@ -50,4 +50,17 @@ public interface CommentRepository extends MongoRepository<Comment, String> {
      * @return 评论数量
      */
     long countByArticleIdAndStatus(String articleId, Integer status);
+    
+    /**
+     * 获取最近的评论
+     * @param limit 限制数量
+     * @return 最近评论列表
+     */
+    List<Comment> findTop10ByOrderByCreateTimeDesc();
+    
+    /**
+     * 获取所有评论
+     * @return 所有评论列表
+     */
+    List<Comment> findAllByOrderByCreateTimeDesc();
 }

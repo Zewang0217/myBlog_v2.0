@@ -612,6 +612,61 @@ const saveCategory = async () => {
   border-color: #adb5bd;
 }
 
+/* 深色主题样式完善 */
+[data-theme="dark"] .category-card {
+  background-color: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+  box-shadow: var(--box-shadow-base);
+}
+
+[data-theme="dark"] .category-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .category-name {
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .category-description {
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: var(--background-glass);
+  border: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .modal-header {
+  border-bottom: 1px solid var(--border-color-base);
+}
+
+[data-theme="dark"] .modal-header h3 {
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .btn-refresh {
+  background-color: var(--background-secondary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .btn-refresh:hover {
+  background-color: var(--background-glass);
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .btn-cancel {
+  background-color: var(--background-secondary);
+  border-color: var(--border-color-base);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .btn-cancel:hover {
+  background-color: var(--background-glass);
+  border-color: var(--primary-color);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .category-manager {
