@@ -5,6 +5,7 @@ import org.Zewang.myBlog.dto.CreateArticleDTO;
 import org.Zewang.myBlog.model.Article;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -54,5 +55,16 @@ public interface ArticleService {
      * 检索文章
      */
     List<Article> searchArticles(String keyword);
+    
+    /**
+     * 统计方法
+     */
+    long countTotalArticles();
+    
+    long countPublishedArticles();
+    
+    long countDraftArticles();
+    
+    List<Map<String, Object>> getArticleCategoryStats();
 
 }

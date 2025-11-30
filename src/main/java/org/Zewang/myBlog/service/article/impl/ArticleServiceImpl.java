@@ -1,7 +1,9 @@
 package org.Zewang.myBlog.service.article.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -273,5 +275,54 @@ public class ArticleServiceImpl implements ArticleService {
             System.err.println("搜索文章失败, 关键词: " + keyword + ", 错误: " + e.getMessage());
             throw new BusinessException("搜索文章失败: " + e.getMessage());
         }
+    }
+
+    @Override
+    public long countTotalArticles() {
+        return articleRepository.count();
+    }
+
+    @Override
+    public long countPublishedArticles() {
+        return articleRepository.countByStatus(ArticleStatus.PUBLISHED);
+    }
+
+    @Override
+    public long countDraftArticles() {
+        return articleRepository.countByStatus(ArticleStatus.DRAFT);
+    }
+
+    @Override
+    public List<Map<String, Object>> getArticleCategoryStats() {
+        log.info("获取文章分类统计数据");
+        List<Map<String, Object>> stats = new ArrayList<>();
+        
+        try {
+            // 获取所有分类
+            List<Category> categories = categoryRepository.findAll();
+            // 获取所有文章
+            List<Article> articles = articleRepository.findAll();
+            
+            // 统计每个分类下的文章数量
+            for (Category category : categories) {
+                long count = articles.stream()
+                    .filter(article -> article.getCategories() != null)
+                    .filter(article -> article.getCategories().stream()
+                        .anyMatch(cat -> cat.getId().equals(category.getId())))
+                    .count();
+                
+                Map<String, Object> categoryStat = new HashMap<>();
+                categoryStat.put("category", category.getName());
+                categoryStat.put("count", count);
+                stats.add(categoryStat);
+            }
+            
+            log.info("获取文章分类统计数据成功，共{}个分类", stats.size());
+        } catch (Exception e) {
+            log.error("获取文章分类统计数据失败", e);
+            throw new BusinessException("获取文章分类统计数据失败: " + e.getMessage());
+        }
+        
+        return stats;
     }
 }
