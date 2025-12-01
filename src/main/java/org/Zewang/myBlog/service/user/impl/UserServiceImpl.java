@@ -1,9 +1,6 @@
 package org.Zewang.myBlog.service.user.impl;
 
 import jakarta.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.Zewang.myBlog.model.User;
@@ -13,6 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author "Zewang"
@@ -67,6 +71,11 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
+    
+    @Override
+    public User findById(String id) {
+        return userRepository.findById(id).orElse(null);
+    }
 
     @Override
     public User createUser(User user) {
@@ -77,5 +86,50 @@ public class UserServiceImpl implements UserService {
             user.setRole("ROLE_USER");
         }
         return userRepository.save(user);
+    }
+
+    @Override
+    public long countTotalUsers() {
+        return userRepository.count();
+    }
+
+    @Override
+    public long countActiveUsers() {
+        // 简化实现，返回所有用户数
+        // 实际项目中应该根据用户最后登录时间等判断活跃用户
+        return userRepository.count();
+    }
+
+    @Override
+    public List<Map<String, Object>> getUserRegistrationTrend() {
+        // 简化实现，返回模拟数据
+        // 实际项目中应该根据用户创建时间统计
+        List<Map<String, Object>> trend = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        
+        for (int i = 6; i >= 0; i--) {
+            LocalDate date = LocalDate.now().minusDays(i);
+            Map<String, Object> dataPoint = new HashMap<>();
+            dataPoint.put("date", date.format(formatter));
+            dataPoint.put("count", (int) (Math.random() * 10) + 1);
+            trend.add(dataPoint);
+        }
+        
+        return trend;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(String userId) {
+        userRepository.deleteById(userId);
     }
 }

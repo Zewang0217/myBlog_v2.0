@@ -42,7 +42,12 @@ public class SecurityConfig {
                 .requestMatchers("/v3/api-docs/**").permitAll()
                 .requestMatchers("/swagger-resources/**").permitAll()
                 .requestMatchers("/webjars/**").permitAll()
+                .requestMatchers("/uploads/**").permitAll()
+                .requestMatchers("/api/file/upload").permitAll()
+                .requestMatchers("/api/file/list").permitAll()
+                .requestMatchers("/api/file/view/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/category").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/comments/article/**").permitAll()
                 .anyRequest().authenticated()
             );
 

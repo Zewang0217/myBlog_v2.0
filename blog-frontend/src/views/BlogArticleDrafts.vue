@@ -317,4 +317,88 @@ onMounted(() => {
 .btn-secondary:hover {
   background-color: #e0e0e0;
 }
+/* 深色主题支持 */
+[data-theme="dark"] .drafts-container {
+  background-color: var(--bg-color);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .draft-item {
+  background-color: var(--bg-color-light);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .draft-item h3 {
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .draft-meta {
+  color: var(--text-color-regular);
+}
+
+[data-theme="dark"] .btn-edit {
+  background-color: var(--bg-color);
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .btn-edit:hover {
+  background-color: var(--border-color);
+}
+
+[data-theme="dark"] .btn-publish {
+  background-color: var(--success-color);
+  color: white;
+}
+
+[data-theme="dark"] .btn-publish:hover {
+  background-color: var(--success-color-dark);
+}
+
+[data-theme="dark"] .btn-delete {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+[data-theme="dark"] .btn-delete:hover {
+  background-color: var(--danger-color-dark);
+}
+
+[data-theme="dark"] .loading,
+[data-theme="dark"] .no-drafts {
+  color: var(--text-color-regular);
+}
+
+[data-theme="dark"] .error {
+  color: var(--danger-color);
+  background-color: var(--danger-color-light);
+  border: 1px solid var(--danger-color);
+}
+
+[data-theme="dark"] .retry-btn {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color-primary);
+}
+
+[data-theme="dark"] .retry-btn:hover {
+  background-color: var(--border-color);
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: var(--bg-color-light);
+  color: var(--text-color-primary);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .btn-secondary {
+  background-color: var(--bg-color);
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background-color: var(--border-color);
+}
 </style>

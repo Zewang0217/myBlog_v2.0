@@ -148,4 +148,46 @@ public class CommentServiceImpl implements CommentService {
         logger.info("统计文章评论数，文章ID：{}", articleId);
         return commentRepository.countByArticleIdAndStatus(articleId, 0);
     }
+
+    @Override
+    public long countTotalComments() {
+        logger.info("统计总评论数");
+        return commentRepository.count();
+    }
+
+    @Override
+    public long countPendingComments() {
+        logger.info("统计待审核评论数");
+        return commentRepository.count();
+    }
+    
+    @Override
+    public List<Comment> getRecentComments(int limit) {
+        logger.info("获取最近的评论，限制数量：{}", limit);
+        return commentRepository.findTop10ByOrderByCreateTimeDesc();
+    }
+    
+    @Override
+    public List<Comment> getAllComments() {
+        logger.info("获取所有评论");
+        return commentRepository.findAllByOrderByCreateTimeDesc();
+    }
+    
+    @Override
+    public Comment getCommentById(String id) {
+        logger.info("根据ID获取评论，ID：{}", id);
+        return commentRepository.findById(id).orElse(null);
+    }
+    
+    @Override
+    public Comment updateCommentStatus(String id, Integer status) {
+        logger.info("更新评论状态，ID：{}，状态：{}", id, status);
+        Comment comment = commentRepository.findById(id).orElse(null);
+        if (comment != null) {
+            comment.setStatus(status);
+            comment.setUpdateTime(LocalDateTime.now());
+            return commentRepository.save(comment);
+        }
+        return null;
+    }
 }

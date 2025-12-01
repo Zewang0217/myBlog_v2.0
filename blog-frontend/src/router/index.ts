@@ -13,11 +13,7 @@ const routes = [
     name: 'Login',
     component: () => import('@/views/Login.vue')
   },
-  {
-    path: '/register',
-    name: 'Register',
-    component: () => import('@/views/Register.vue')
-  },
+
   {
     path: '/articles',
     name: 'Articles',
@@ -59,6 +55,24 @@ const routes = [
     name: 'PhotoGallery',
     component: () => import('@/views/PhotoGallery.vue'),
     meta: { requiresAuth: false }
+  },
+  {
+    path: '/admin/dashboard',
+    name: 'AdminDashboard',
+    component: () => import('@/views/AdminDashboard.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true }
+  },
+  {
+    path: '/admin/users',
+    name: 'UserManager',
+    component: () => import('@/views/UserManager.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true }
+  },
+  {
+    path: '/admin/comments',
+    name: 'CommentManager',
+    component: () => import('@/views/CommentManager.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true }
   }
 ]
 

@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(__NEW_LINE__ find /mnt/d/zewang/Projects/myBlog_v2 -type f -name \"*.html\" -o -name \"*.css\" -o -name \"*.js\" -o -name \"*.vue\" -o -name \"*.react\" -o -name \"*.json\")",
+      "Bash(__NEW_LINE__ cd /mnt/d/zewang/Projects/myBlog_v2/blog-frontend)",
+      "Bash(__NEW_LINE__ cd /mnt/d/zewang/Projects/myBlog_v2)",
+      "Bash(__NEW_LINE__ git diff --name-only)",
+      "Bash(__NEW_LINE__ git diff src/main/java/org/Zewang/myBlog/controller/)",
+      "Bash(__NEW_LINE__ git status --porcelain)",
+      "Bash(__NEW_LINE__ ls -la src/main/java/org/Zewang/myBlog/controller/)",
+      "Bash(__NEW_LINE__ git diff src/main/java/org/Zewang/myBlog/controller/CommentController.java)",
+      "Bash(__NEW_LINE__ cat /mnt/d/zewang/Projects/myBlog_v2/src/main/java/org/Zewang/myBlog/config/SecurityConfig.java)",
+      "Bash(__NEW_LINE__ git diff src/main/java/org/Zewang/myBlog/controller/CommentController.java src/main/java/org/Zewang/myBlog/controller/LikeController.java src/main/java/org/Zewang/myBlog/service/comment/impl/CommentServiceImpl.java)",
+      "Bash(npm run dev)",
+      "Bash(__NEW_LINE__ cat /mnt/d/zewang/Projects/myBlog_v2/blog-frontend/src/components/blog/ArticleDetail.vue)",
+      "Bash(__NEW_LINE__ cat /mnt/d/zewang/Projects/myBlog_v2/blog-frontend/src/components/blog/CommentSection.vue)",
+      "Bash(__NEW_LINE__ kill 69c79a)",
+      "Bash(__NEW_LINE__ grep -A 3 -B 1 \"twitter\" /mnt/d/zewang/Projects/myBlog_v2/blog-frontend/src/components/blog/ArticleDetail.vue)",
+      "Bash(__NEW_LINE__ grep -A 15 \"share-btn.twitter\" /mnt/d/zewang/Projects/myBlog_v2/blog-frontend/src/components/blog/ArticleDetail.vue)",
+      "Bash(__NEW_LINE__ grep -i \"database\\|mongo\\|mysql\" /mnt/d/zewang/Projects/myBlog_v2/src/main/resources/application.yml)",
+      "Bash(__NEW_LINE__ cat /mnt/d/zewang/Projects/myBlog_v2/blog-frontend/src/components/blog/MarkdownEditor.vue)",
+      "Bash(__NEW_LINE__ grep -A 40 -B 5 \"fileUpload\" /mnt/d/zewang/Projects/myBlog_v2/blog-frontend/src/components/blog/MarkdownEditor.vue)",
+      "Bash(__NEW_LINE__ grep -A 40 \"const handleFileUpload\" /mnt/d/zewang/Projects/myBlog_v2/blog-frontend/src/components/blog/MarkdownEditor.vue)",
+      "Bash(__NEW_LINE__ grep -B 10 -A 10 \"403\" src/main/java/org/Zewang/myBlog/common/GlobalExceptionHandler.java)",
+      "Bash(__NEW_LINE__ cat /mnt/d/zewang/Projects/myBlog_v2/src/main/resources/application.yml)",
+      "Bash(__NEW_LINE__ grep -r \"cover\" /mnt/d/zewang/Projects/myBlog_v2/blog-frontend/src/components/blog/ --include=\"*.vue\")",
+      "Bash(__NEW_LINE__ grep -B 5 -A 20 \"ArticleImageUpload\" /mnt/d/zewang/Projects/myBlog_v2/blog-frontend/src/components/blog/ArticleCreate.vue)",
+      "Bash(curl:*)",
+      "Bash(cat:*)",
+      "Bash(DEPLOYMENT.md)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
