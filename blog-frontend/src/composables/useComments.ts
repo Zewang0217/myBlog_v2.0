@@ -87,7 +87,7 @@ export const useComments = () => {
                 commentList[i].replies!.push(response.data)
                 return true
               }
-              if (commentList[i].replies && findAndAddReply(commentList[i].replies)) {
+              if (commentList[i].replies && findAndAddReply(commentList[i].replies || [])) {
                 return true
               }
             }
@@ -139,7 +139,7 @@ export const useComments = () => {
           const findAndRemoveReply = (commentList: Comment[]) => {
             for (let i = 0; i < commentList.length; i++) {
               if (commentList[i].id === parentId && commentList[i].replies) {
-                commentList[i].replies = commentList[i].replies.filter(
+                commentList[i].replies = commentList[i].replies!.filter(
                   reply => reply.id !== commentId
                 )
                 return true

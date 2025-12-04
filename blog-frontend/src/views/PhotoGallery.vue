@@ -210,7 +210,6 @@
 import { ref, computed, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import PhotoUpload from '@/components/blog/PhotoUpload.vue'
-import { getPhotos } from '@/api/uploadService'
 
 // 定义图片接口
 interface Photo {
@@ -224,6 +223,120 @@ interface Photo {
   category: string
   tags: string[]
 }
+
+// 模拟图片数据
+const mockPhotos: Photo[] = [
+  {
+    id: '1',
+    name: '山脉日出',
+    url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 1).toISOString(),
+    size: 5 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'nature',
+    tags: ['风景', '自然', '山水', '日出']
+  },
+  {
+    id: '2',
+    name: '城市天际线',
+    url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString(),
+    size: 4.5 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'city',
+    tags: ['城市', '建筑', '现代', '天际线']
+  },
+  {
+    id: '3',
+    name: '人物肖像',
+    url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
+    size: 3.8 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'portrait',
+    tags: ['人物', '肖像', '人像', '艺术']
+  },
+  {
+    id: '4',
+    name: '街头艺术',
+    url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 4).toISOString(),
+    size: 4.2 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'street',
+    tags: ['街头', '人文', '生活', '艺术']
+  },
+  {
+    id: '5',
+    name: '海边日落',
+    url: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5).toISOString(),
+    size: 5.1 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'nature',
+    tags: ['风景', '自然', '海边', '日落']
+  },
+  {
+    id: '6',
+    name: '现代建筑',
+    url: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 6).toISOString(),
+    size: 4.8 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'city',
+    tags: ['城市', '建筑', '现代', '设计']
+  },
+  {
+    id: '7',
+    name: '森林小径',
+    url: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7).toISOString(),
+    size: 4.3 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'nature',
+    tags: ['风景', '自然', '森林', '小径']
+  },
+  {
+    id: '8',
+    name: '街头生活',
+    url: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 8).toISOString(),
+    size: 3.9 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'street',
+    tags: ['街头', '人文', '生活', '城市']
+  },
+  {
+    id: '9',
+    name: '雪山美景',
+    url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 9).toISOString(),
+    size: 5.2 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'nature',
+    tags: ['风景', '自然', '雪山', '高原']
+  },
+  {
+    id: '10',
+    name: '城市夜景',
+    url: 'https://images.unsplash.com/photo-1515169053792-24c6d9399939?w=800&h=600&fit=crop',
+    uploadTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10).toISOString(),
+    size: 4.7 * 1024 * 1024,
+    width: 800,
+    height: 600,
+    category: 'city',
+    tags: ['城市', '夜景', '灯光', '现代']
+  }
+]
 
 // 状态管理
 const authStore = useAuthStore()
@@ -298,15 +411,15 @@ const toggleTag = (tag: string) => {
   }
 }
 
-// 加载图片数据
+// 加载图片数据 - 使用模拟数据
 const loadPhotos = async () => {
   loading.value = true
   error.value = ''
   
   try {
-    // 调用真实的API获取图片列表
-    const photosList = await getPhotos()
-    photos.value = photosList
+    // 使用模拟数据替代API调用
+    await new Promise(resolve => setTimeout(resolve, 500)) // 模拟加载延迟
+    photos.value = mockPhotos
     loading.value = false
   } catch (err) {
     error.value = '加载图片失败，请稍后重试'
@@ -326,8 +439,7 @@ const deletePhoto = async (photoId: string) => {
   }
   
   try {
-    // 模拟API调用 - 实际项目中应该调用真实的API
-    // await deletePhoto(photoId)
+    // 从模拟数据中删除图片
     photos.value = photos.value.filter(photo => photo.id !== photoId)
   } catch (err) {
     alert('删除图片失败，请稍后重试')
@@ -344,7 +456,7 @@ const closePhotoModal = () => {
   selectedPhoto.value = null
 }
 
-// 处理图片上传完成
+// 处理图片上传完成 - 模拟上传
 const handlePhotosUploaded = (uploadedPhotos: Array<{url: string, name: string, category: string}>) => {
   showUploadModal.value = false
   
@@ -374,9 +486,9 @@ const handlePhotosUploaded = (uploadedPhotos: Array<{url: string, name: string, 
       name: photo.name,
       url: photo.url,
       uploadTime: new Date().toISOString(),
-      size: 0, // 实际项目中应该从上传响应中获取
-      width: 800, // 实际项目中应该从上传响应中获取
-      height: 600, // 实际项目中应该从上传响应中获取
+      size: 5 * 1024 * 1024, // 模拟压缩后的大小
+      width: 800,
+      height: 600,
       category: photo.category,
       tags: tags
     }
