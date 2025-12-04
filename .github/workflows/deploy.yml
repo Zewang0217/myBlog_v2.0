@@ -1,0 +1,143 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'adopt'
+        cache: maven
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: blog-frontend/package-lock.json
+
+    - name: Build backend
+      run: |
+        mvn clean package -DskipTests
+      env:
+        MAVEN_OPTS: -Dmaven.wagon.http.retryHandler.count=5
+
+    - name: Build frontend
+      run: |
+        cd blog-frontend
+        npm ci
+        npm run build
+
+    - name: Copy backend jar to server
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SERVER_PORT || 22 }}
+        source: ./target/myBlog-0.0.1-SNAPSHOT.jar
+        target: /home/${{ secrets.SERVER_USER }}/
+
+    - name: Copy frontend files to server
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SERVER_PORT || 22 }}
+        source: ./blog-frontend/dist/*
+        target: /var/www/html/
+
+    - name: Deploy to server
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SERVER_PORT || 22 }}
+        script: |
+          # Update system and install dependencies if needed
+          sudo apt-get update -y
+          
+          # Ensure Java is installed
+          if ! command -v java &> /dev/null; then
+            sudo apt-get install -y openjdk-21-jre-headless
+          fi
+          
+          # Ensure Nginx is installed
+          if ! command -v nginx &> /dev/null; then
+            sudo apt-get install -y nginx
+          fi
+          
+          # Stop old backend service if running
+          if pgrep -f "myBlog-0.0.1-SNAPSHOT.jar" > /dev/null; then
+            pkill -f "myBlog-0.0.1-SNAPSHOT.jar"
+            sleep 3
+          fi
+          
+          # Create necessary directories
+          sudo mkdir -p /var/www/html
+          
+          # Backup old jar if exists
+          if [ -f /home/${{ secrets.SERVER_USER }}/myBlog-0.0.1-SNAPSHOT.jar ]; then
+            mkdir -p /home/${{ secrets.SERVER_USER }}/old_files
+            mv /home/${{ secrets.SERVER_USER }}/myBlog-0.0.1-SNAPSHOT.jar /home/${{ secrets.SERVER_USER }}/old_files/
+          fi
+          
+          # Set proper permissions
+          sudo chown -R www-data:www-data /var/www/html/
+          sudo chmod -R 755 /var/www/html/
+          
+          # Start backend service
+          nohup java -jar /home/${{ secrets.SERVER_USER }}/myBlog-0.0.1-SNAPSHOT.jar > /home/${{ secrets.SERVER_USER }}/app.log 2>&1 &
+          
+          # Restart Nginx if needed (optional)
+          sudo systemctl restart nginx
+          
+          echo "Deployment completed successfully!"
+
+    - name: Verify deployment
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SERVER_PORT || 22 }}
+        script: |
+          echo "Checking backend service status..."
+          if pgrep -f "myBlog-0.0.1-SNAPSHOT.jar" > /dev/null; then
+            echo "✅ Backend service is running"
+          else
+            echo "❌ Backend service is not running"
+            exit 1
+          fi
+          
+          echo "Checking Nginx status..."
+          if systemctl is-active --quiet nginx; then
+            echo "✅ Nginx is running"
+          else
+            echo "❌ Nginx is not running"
+            exit 1
+          fi
+          
+          echo "Checking frontend files..."
+          if [ -f /var/www/html/index.html ]; then
+            echo "✅ Frontend files are present"
+          else
+            echo "❌ Frontend files are missing"
+            exit 1
+          fi
+          
+          echo "✅ All checks passed! Deployment is successful."

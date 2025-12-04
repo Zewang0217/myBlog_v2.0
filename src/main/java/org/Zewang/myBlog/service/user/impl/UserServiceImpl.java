@@ -125,6 +125,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
+        // 如果提供了新密码，加密后保存
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 

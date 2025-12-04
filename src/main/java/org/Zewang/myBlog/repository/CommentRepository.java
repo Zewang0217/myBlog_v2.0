@@ -2,7 +2,7 @@ package org.Zewang.myBlog.repository;
 
 import java.util.List;
 import org.Zewang.myBlog.model.Comment;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @email "Zewang0217@outlook.com"
  */
 @Repository
-public interface CommentRepository extends MongoRepository<Comment, String> {
+public interface CommentRepository extends JpaRepository<Comment, String> {
     
     /**
      * 根据文章ID查询评论列表

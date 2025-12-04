@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author "Zewang"
@@ -22,10 +22,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @Accessors(chain = true)
-@Document(collection = "comments")
+@Entity
+@Table(name = "comments")
 @Schema(description = "评论实体")
 public class Comment {
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Schema(description = "评论ID")
     private String id;
     

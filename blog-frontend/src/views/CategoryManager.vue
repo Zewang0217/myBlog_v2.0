@@ -185,7 +185,7 @@ const deleteCategory = async (id: string | number) => {
   if (!confirm('确定要删除这个分类吗？此操作不可恢复。')) return
   deletingCategory.value = true
   try {
-    await deleteCategoryApi(id)
+    await deleteCategoryApi(String(id))
     await fetchCategories()
   } catch (error) {
     console.error('删除分类失败:', error)

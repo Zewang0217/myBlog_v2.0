@@ -11,8 +11,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author "Zewang"
@@ -22,15 +22,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @date 2025/09/30 21:14
  */
 @Accessors(chain = true)
-@Document(collection = "categories")
+@Entity
+@Table(name = "categories")
 @Schema(description = "文章分类实体")
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.CLASS,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "@class"
-)
 public class Category {
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Schema(description = "分类ID")
     private String id;
 

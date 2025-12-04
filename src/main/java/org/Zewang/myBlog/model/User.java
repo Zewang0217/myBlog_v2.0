@@ -2,8 +2,8 @@ package org.Zewang.myBlog.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author "Zewang"
@@ -12,9 +12,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @email "Zewang0217@outlook.com"
  * @date 2025/09/28 17:57
  */
-@Document(collection = "users")
+@Entity
+@Table(name = "users")
 public class User {
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Schema(description = "用户ID")
     private String id;
 

@@ -220,7 +220,7 @@ const uploadPhotos = async () => {
   uploadStatus.value = '准备上传...'
 
   try {
-    const uploadedPhotos: Array<{url: string, name: string}> = []
+    const uploadedPhotos: Array<{url: string, name: string, category: string}> = []
     
     for (let i = 0; i < photoPreviews.value.length; i++) {
       const photo = photoPreviews.value[i]

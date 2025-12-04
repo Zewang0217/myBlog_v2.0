@@ -16,8 +16,8 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import org.Zewang.myBlog.model.enums.ArticleStatus;
@@ -30,15 +30,13 @@ import org.Zewang.myBlog.model.enums.ArticleStatus;
  * @date 2025/09/23 21:30
  */
 @Accessors(chain = true)
-@Document(collection = "articles")
+@Entity
+@Table(name = "articles")
 @Schema(description = "文章实体")
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.CLASS,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "@class"
-)
 public class Article {
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Schema(description = "文章ID")
     private String id;
 
@@ -75,6 +73,12 @@ public class Article {
     private Integer likeCount = 0;
 
     @Schema(description = "文章分类列表")
+    @ManyToMany
+    @JoinTable(
+        name = "article_category",
+        joinColumns = @JoinColumn(name = "article_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     private List<Category> categories;
     
     // Getters and Setters

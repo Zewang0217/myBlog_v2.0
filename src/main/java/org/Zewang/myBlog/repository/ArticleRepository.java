@@ -2,7 +2,7 @@ package org.Zewang.myBlog.repository;
 
 import org.Zewang.myBlog.model.Article;
 import org.Zewang.myBlog.model.enums.ArticleStatus;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Optional;
  * @version 1.0
  */
 @Repository
-public interface ArticleRepository extends MongoRepository<Article, String> {
+public interface ArticleRepository extends JpaRepository<Article, String> {
     List<Article> findByStatus(ArticleStatus status);
     long countByStatus(ArticleStatus status);
     List<Article> findByAuthor(String author);

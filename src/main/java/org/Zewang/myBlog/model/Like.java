@@ -9,8 +9,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author "Zewang"
@@ -20,11 +20,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @Accessors(chain = true)
-@Document(collection = "likes")
+@Entity
+@Table(name = "likes")
 @Schema(description = "点赞实体")
 public class Like {
     
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Schema(description = "点赞ID")
     private String id;
     
